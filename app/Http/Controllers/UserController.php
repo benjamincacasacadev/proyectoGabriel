@@ -35,7 +35,7 @@ class UserController extends Controller
         $usersactive = User::where('active',1)->count();
         $usersinactive = User::where('active',0)->count();
         $usersdelete = User::where('active',2)->count();
-        Session::put('item','6.');
+        Session::put('item','5.');
         return view('users.index', compact('usersactive','usersinactive','usersdelete','usersa'));
     }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
         $user = User::findOrFail(decode($cod));
 
         if($user->active != '2'){
-            Session::put('item','6.');
+            Session::put('item','5.');
             return view('users.show',compact('user'));
         }else{
             abort(404);
@@ -55,7 +55,7 @@ class UserController extends Controller
     public function create(){
         canPassAdminJefe();
         $roles = Role::get();
-        Session::put('item','6.');
+        Session::put('item','5.');
         return view('users.create',compact('roles'));
     }
 
@@ -133,7 +133,7 @@ class UserController extends Controller
         canPassAdminJefe();
         $user = User::findOrFail(decode($id));
         $roles = Role::get();
-        Session::put('item','6.');
+        Session::put('item','5.');
         return view('users.edit',compact('user','roles'));
     }
 
@@ -362,7 +362,7 @@ class UserController extends Controller
 
 
     public function perfil(){
-        Session::put('item','6.');
+        Session::put('item','5.');
         return view('users.profile');
     }
 

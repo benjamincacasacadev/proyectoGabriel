@@ -85,7 +85,7 @@
                         </div>
 
                         @php
-                            $array = ['0', '1.', '2.', '4.0:', '6.'];
+                            $array = ['0', '1.', '2.', '4.0:', '5.'];
                         @endphp
                         @if(!in_array($item,$array))
                             <div class="row mb-3">
