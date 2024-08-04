@@ -52,7 +52,6 @@
                 <strong class="card-title pl-2 font-weight-bold">DATOS PRINCIPALES</strong>
             </div>
 
-            <div class="card-status-top bg-yellow"></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-8">

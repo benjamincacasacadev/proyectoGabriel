@@ -154,7 +154,7 @@
                                     <label id="formulario--label">
                                         Formulario <a {!! $textPopoverHoraTrabajo !!}> <i class="fa fa-info-circle"></i></a>
                                     </label> <br>
-                                    <select name="formulario" class="form-control selector-formulario" style="width: 100%">
+                                    <select name="formulario" class="form-control selector-formulario" >
                                         <option value="" data-mail="Sin usuario">Seleccionar</option>
                                         @foreach($forms as $form)
                                             <option value="{!! code($form->id) !!}"> {{ $form->name }} </option>

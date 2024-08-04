@@ -18,13 +18,10 @@
 @extends ('layouts.admin', ['title_template' => "Perfil de Usuario"])
 
 @section('contenidoHeader')
-    <div class="col-auto">
-        <div class="page-pretitle">
-            {{nameEmpresa()}}
+    <div class="col">
+        <div class="overview-wrap">
+            <h2 class="title-1">Perfil de usuario</h2>
         </div>
-        <h1 class="titulomod">
-            <b>Perfil de usuario:</b> {{ userFullName(userId()) }}
-        </h1>
     </div>
 @endsection
 
@@ -32,13 +29,13 @@
 @php  $swfirma = isset($_GET['swfirma']) ? $_GET['swfirma'] : ""; @endphp
     {!!Form::model(auth()->user(),['route'=>['updateprofile', auth()->user()->id],'method'=>'POST','files'=>true,'id'=>'formProfile' ]) !!}
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
                 <div class="container d-flex h-100">
                     <div class="row justify-content-center align-self-center">
-                        <img id="imgAvatar" class="avatar-rounded cambiar_avatar" src="{{ imageRouteAvatar(auth()->user()->avatar,0) }}" title="Presione para cambiar su imagen de avatar<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Modificar perfil</b></i>" data-toggle="tooltip"/>
-                        <img id="imgNone" class="avatar-rounded cambiar_avatar" src="{{ '/storage/avatar0.png?'.rand() }}" style="display:none" title="Presione para cambiar su imagen de avatar<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Modificar perfil</b></i>" data-toggle="tooltip" />
-                        @if (auth()->user()->avatar!='avatar0.png')
-                            <div class="text-center" style="margin-top:10px">
+                        <img id="imgAvatar" class="avatar-rounded cambiar_avatar" src="{{ imageRouteAvatar(auth()->user()->avatar,0) }}" title="Presione para cambiar su imagen de avatar<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Modificar perfil</b></i>" data-toggle="tooltip" data-html="true"/>
+                        <img id="imgNone" class="avatar-rounded cambiar_avatar" src="{{ '/storage/avatar0.png?'.rand() }}" style="display:none" title="Presione para cambiar su imagen de avatar<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Modificar perfil</b></i>" data-toggle="tooltip" data-html="true"/>
+                        @if (auth()->user()->avatar != 'avatar0.png')
+                            <div class="text-center mt-2">
                                 <label class="cursor-pointer">
                                     <input type="checkbox" name="checkAvatar" class="checkAvatar" value="1"> <b><i> Quitar imagen </i></b>
                                 </label>
@@ -50,8 +47,10 @@
 
             <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-                    <div class="card-status-top bg-primary"></div>
-
+                    <div class="card-header">
+                        <i class="fa fa-user"></i>
+                        <strong class="card-title pl-2 font-weight-bold">DATOS PRINCIPALES</strong>
+                    </div>
                     <div class="card-body">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
@@ -66,7 +65,7 @@
                         </div>
                         {{-- Cambiar contraseña --}}
                         <div style="margin-bottom:15px">
-                            <a href='#' id="showps" class="text-primary"> <i class="fas fa-key" id="iconpass"></i> <b id="titlepass">Clic para cambiar contraseña</b></a>
+                            <a href='#' id="showps" class="text-primarydark"> <i class="fas fa-key" id="iconpass"></i> <b id="titlepass">Clic para cambiar contraseña</b></a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2" id="changeps" style="display: none">
                             <div class="card">
@@ -155,12 +154,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label id="email--label">* Email:</label>
-                                    <div class="input-icon">
-                                        <span class="input-icon-addon">
-                                        <i class="fas fa-at fa-sm"></i>
-                                        </span>
-                                        <input type="text" class="form-control" value="{{auth()->user()->email}}" name="email">
-                                    </div>
+                                    <input type="text" class="form-control" value="{{auth()->user()->email}}" name="email">
                                     <span id="email-error" class="text-red"></span>
                                 </div>
                             </div>
@@ -174,7 +168,7 @@
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <button type="submit" class="btn btn-primary text-center btn-pill btn-lg" name="btnSubmit">Modificar perfil</button>
+                            <button type="submit" class="au-btn au-btn--submit font-weight-bold" name="btnSubmit">Modificar perfil</button>
                         </div>
                     </div>
                 </div>
@@ -187,11 +181,9 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
-                <div class="card-status-top bg-yellow"></div>
                 <div class="card-header">
-                    <h3 class="card-title pull-left text-yellow ">
-                        <b>IMAGEN Ó CAPTURA DE FIRMA </b>
-                    </h3>
+                    <i class="fa fa-signature"></i>
+                    <strong class="card-title pl-2 font-weight-bold">IMAGEN Ó CAPTURA DE FIRMA</strong>
                 </div>
 
                 <div class="row mx-4 mt-2">
@@ -222,7 +214,9 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('modals')
     {{-- Modal Imagen de Firma --}}
     <div class="modal modalPrimary fade" id="modalImagenFirma" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg" role="document">
@@ -238,10 +232,19 @@
                             <img id="imageFirma" style="max-height: 600px">
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btnCancFirma" data-dismiss="modal">Cancelar</button>
-                    <input type="button" class="btn btn-yellow pull-right" id="guardarfirma" value="Guardar firma">
+
+                    <div class="w-100 mt-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-1">
+                                <a class="au-btn btn-outline-secondary border border-secondary text-center btnCancFirma cropButtons" data-dismiss="modal">
+                                    Cancelar
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <input type="button" class="au-btn au-btn--submit font-weight-bold pull-right cropButtons" id="guardarfirma" value="Guardar firma" >
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,22 +262,28 @@
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 
                 </div>
-                <div class="modal-body">
+                <div class="modal-body me-2">
                     <div class="img-container">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <img id="imagAv" style="max-height: 600px">
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
-                        <button type="button" class="btn btn-ghost-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                        <input type="button" class="btn btn-primary pull-right" id="btnGuardarAvatar" value="Guardar imagen" >
+                    <div class="w-100 mt-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-1">
+                                <a class="au-btn btn-outline-secondary border border-secondary text-center cropButtons" data-dismiss="modal">
+                                    Cancelar
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <input type="button" class="au-btn au-btn--submit font-weight-bold pull-right cropButtons" id="btnGuardarAvatar" value="Guardar imagen" >
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -297,6 +306,20 @@
                 $("#titlepass").text("Cancelar cambio de contraseña");
                 $("#iconpass").removeClass('fa-key').addClass("fa-times");
             }
+        });
+
+        $(document).ready(function() {
+            function updateButtonClasses() {
+                if ($(window).width() < 768) {
+                    $('.cropButtons').addClass('w-100');
+                } else {
+                    $('.cropButtons').removeClass('w-100');
+                }
+            }
+
+            // Ejecuta la función al cargar la página y al redimensionar la ventana
+            updateButtonClasses();
+            $(window).resize(updateButtonClasses);
         });
 
         $(document).ready(function(){

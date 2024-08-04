@@ -34,13 +34,13 @@
 @section ('contenido')
     <!-- INDICADORES DE USUARIO -->
     <div class="row">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersactive == 1 ? '' : 's';
                 $es = $usersactive == 1 ? '' : 'es';
                 $info = 'Operador'.$es.' '.'activo'.$s;
             @endphp
-            <div class="statistic__item text-success">
+            <div class="statistic__item text-success" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersactive}}</h3>
                 <b class="desc text-success">{{$info}}</b>
                 <div class="icon ">
@@ -48,13 +48,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersinactive == 1 ? '' : 's';
                 $es = $usersinactive == 1 ? '' : 'es';
                 $info = 'Operador'.$es.' '.'inactivo'.$s;
             @endphp
-            <div class="statistic__item text-yellow">
+            <div class="statistic__item text-yellow" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersinactive}}</h3>
                 <b class="desc text-yellow">{{$info}}</b>
                 <div class="icon">
@@ -62,13 +62,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersdelete == 1 ? '' : 's';
                 $es = $usersdelete == 1 ? '' : 'es';
                 $info = 'Operador'.$es.' '.'eliminado'.$s;
             @endphp
-            <div class="statistic__item text-danger">
+            <div class="statistic__item text-danger" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersdelete}}</h3>
                 <b class="desc text-danger">{{$info}}</b>
                 <div class="icon">

@@ -45,7 +45,7 @@
                 <br><br>
 
                 <table id="tablaEjemplo" style="width: 100%; border-collapse: collapse; border-spacing: 0;" >
-                    <tr style="background-color: #F7A600; color:white">
+                    <tr style="background-color: #365cad; color:white">
                         <th class="text-center" width="5%">Nº</th>
                         <th class="text-center" width="30%">Nombre</th>
                         <th class="text-center" width="10%">E-mail</th>

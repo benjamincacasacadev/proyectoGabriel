@@ -45,6 +45,9 @@
         position: relative;
         bottom: 800px !important;
     }
+    .select2-container{
+        width: 100% !important;
+    }
 </style>
 
 <style>

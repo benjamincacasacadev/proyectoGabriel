@@ -5,20 +5,14 @@
             <div class="header-wrap2">
                 <div class="logo d-block d-lg-none">
                     <a href="#">
-                        <img src="{{ asset('logo.png') }}" class="white-image w-50" alt="CoolAdmin" />
+                        <img src="{{ asset('logo-white.png') }}" class="w-50" alt="CoolAdmin" />
                     </a>
                 </div>
                 <div class="header-button2">
-                    <div class="header-button-item js-item-menu">
-                        <i class="zmdi zmdi-search"></i>
-                        <div class="search-dropdown js-dropdown">
-                            <form action="">
-                                <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />
-                                <span class="search-dropdown__icon">
-                                    <i class="zmdi zmdi-search"></i>
-                                </span>
-                            </form>
-                        </div>
+                    <div class="header-button-item">
+                        <a class="bntCerrarSesion cursor-pointer" data-toggle="tooltip" title="Cerrar sesión">
+                            <i class="fa fa-power-off text-md"></i>
+                        </a>
                     </div>
                     <div class="header-button-item has-noti js-item-menu">
                         <i class="zmdi zmdi-notifications"></i>
@@ -104,16 +98,16 @@
 <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
     <div class="logo">
         <a href="#">
-            <img src="{{ asset('logo.png') }}" alt="Cool Admin" />
+            <img src="{{ asset('logo-white') }}" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar2__content js-scrollbar2">
         <div class="account2">
             <div class="image img-cir img-120">
-                <img src="{{ asset('avatar.png') }}" alt="John Doe" />
+                <img src="{{ asset('avatar.png') }}" alt="{{ Auth::user()->name." ".Auth::user()->ap_paterno }} " />
             </div>
-            <h4 class="name">john doe</h4>
-            <a href="#">Sign out</a>
+            <h4 class="name">{{ Auth::user()->name." ".Auth::user()->ap_paterno }}</h4>
+            <a href="/perfil_usuario" class="cursor-pointer font-weight-bold text-primary">Ver perfil de usuario</a>
         </div>
         <nav class="navbar-sidebar2">
             @include('layouts.sections.menuList')

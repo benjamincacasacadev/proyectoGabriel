@@ -137,6 +137,10 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('modals')
     {{-- Modal Crear --}}
     <div class="modal modalPrimary fade modal-slide-in-right" aria-hidden="true" role="dialog"  id="modalCreate" data-backdrop="static">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -170,7 +174,6 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
 <script>
     modalAjax("modalCreate","modalCreate","modal-body");
