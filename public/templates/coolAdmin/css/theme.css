@@ -4211,7 +4211,6 @@ section {
 
 .table-earning tbody tr:hover td {
     color: #555;
-    cursor: pointer;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -14656,6 +14655,10 @@ section {
 }
 
 .text-danger {
+    color: #d63939 !important
+}
+
+.text-red {
     color: #d63939 !important
 }
 

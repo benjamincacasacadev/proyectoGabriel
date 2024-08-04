@@ -1,24 +1,5 @@
 @section('extracss')
-<style></style>
 <style>
-    .info-box {
-        min-height: 60px;
-    }
-    .info-box-icon {
-        height: 60px; line-height: 50px;
-    }
-    .info-box-content {
-        padding-top: 5px; padding-bottom: 5px;
-    }
-    @media  (max-width: 1000px){
-        #botonesexport{ text-align: center }
-    }
-    .icon-tabler {
-        width: 25px;
-        height: 25px;
-        stroke-width: 1.25;
-        margin-bottom:5px;
-    }
     table#tablaUsuarios th{
         font-size:12px;
     }
@@ -34,48 +15,12 @@
         border: 2px solid #fff;
         border-radius: 50%;
     }
-    .card-stamp {
-        --stamp-size:7rem;
-        position:absolute;
-        top:0;
-        right:0;
-        width:calc(var(--stamp-size) * 1);
-        height:calc(var(--stamp-size) * 1);
-        max-height:100%;
-        border-top-right-radius:4px;
-        opacity:.2;
-        overflow:hidden;
-        pointer-events:none
-    }
-    .card-stamp-lg {
-        --stamp-size: 13rem
-    }
-    .card-stamp-icon {
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        border-radius:100rem;
-        color: #FFFFFF;
-        width:calc(var(--stamp-size) * 1);
-        height:calc(var(--stamp-size) * 1);
-        position:relative;
-        top:calc(var(--stamp-size) * -.25);
-        right:calc(var(--stamp-size) * -.25);
-        font-size:calc(var(--stamp-size) * .75);
-        transform:rotate(10deg)
-    }
-    .card-stamp-icon .icon {
-        stroke-width:2;
-        width:calc(var(--stamp-size) * .75);
-        height:calc(var(--stamp-size) * .75)
-    }
 </style>
 @endsection
 
-@extends ('layouts.admin', ['title_template' => "Usuarios"])
+@extends ('layouts.admin', ['title_template' => "Operadores"])
 
 @section ('contenidoHeader')
-
 <div class="col">
     <div class="overview-wrap">
         <h2 class="title-1">Operadores</h2>
@@ -92,7 +37,8 @@
         <div class="col-md-6 col-lg-4">
             @php
                 $s = $usersactive == 1 ? '' : 's';
-                $info = 'Usuario'.$s.' '.'activo'.$s;
+                $es = $usersactive == 1 ? '' : 'es';
+                $info = 'Operador'.$es.' '.'activo'.$s;
             @endphp
             <div class="statistic__item text-success">
                 <h3 class="number">{{$usersactive}}</h3>
@@ -105,7 +51,8 @@
         <div class="col-md-6 col-lg-4">
             @php
                 $s = $usersinactive == 1 ? '' : 's';
-                $info = 'Usuario'.$s.' '.'inactivo'.$s;
+                $es = $usersinactive == 1 ? '' : 'es';
+                $info = 'Operador'.$es.' '.'inactivo'.$s;
             @endphp
             <div class="statistic__item text-yellow">
                 <h3 class="number">{{$usersinactive}}</h3>
@@ -118,7 +65,8 @@
         <div class="col-md-6 col-lg-4">
             @php
                 $s = $usersdelete == 1 ? '' : 's';
-                $info = 'Usuario'.$s.' '.'eliminado'.$s;
+                $es = $usersdelete == 1 ? '' : 'es';
+                $info = 'Operador'.$es.' '.'eliminado'.$s;
             @endphp
             <div class="statistic__item text-danger">
                 <h3 class="number">{{$usersdelete}}</h3>
@@ -208,37 +156,23 @@
                                         </td>
                                         <td >{{ $user->rolUser->name }}</td>
                                         <td>
-                                            <span class="form-operations" data-toggle="popoverOper" tabindex="0"
-                                                data-content=
-                                                    '<a href="/users/{{code($user->id)}}/edit" title="Editar">
-                                                        <svg class="icon text-muted iconhover" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
-                                                        &nbsp;<span class="text-muted">Editar</span>
-                                                    </a><br>
-                                                    @if($user->id != userId())
-                                                        @if ($user->active==1)
-                                                            <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Desactivar">
-                                                                <svg class="icon text-red iconhover" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h10v6a3 3 0 0 1 -3 3h-4a3 3 0 0 1 -3 -3v-6" /><line x1="9" y1="3" x2="9" y2="7" /><line x1="15" y1="3" x2="15" y2="7" /><path d="M12 16v2a2 2 0 0 0 2 2h3" /></svg>
-                                                                &nbsp;<span class="text-red">Desactivar</span>
-                                                            </a><br>
-                                                        @else
-                                                            <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Activar">
-                                                                <svg class="icon text-green iconhover" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h10v6a3 3 0 0 1 -3 3h-4a3 3 0 0 1 -3 -3v-6" /><line x1="9" y1="3" x2="9" y2="7" /><line x1="15" y1="3" x2="15" y2="7" /><path d="M12 16v2a2 2 0 0 0 2 2h3" /></svg>
-                                                                &nbsp;<span class="text-green">Activar</span>
-                                                            </a><br>
-                                                        @endif
-                                                    @endif
-                                                    @if($user->id != userId())
-                                                        <a rel="modalEliminar" style="cursor:pointer" href="/users/modalDelete/{{code($user->id)}}" data-toggle="tooltip" data-placement="top" title="Eliminar" >
-                                                            <svg class="icon text-muted iconhover" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                            &nbsp;<span class="text-muted">Eliminar</span>
-                                                        </a><br>
-                                                    @endif
-                                                '>
-                                                <svg class="icon text-muted btnoper" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                    <circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /><circle cx="12" cy="5" r="1" />
-                                                </svg>
-                                            <span>
+                                            <i class="fa fa-edit text-primarydark" title="Editar"></i>
+                                            @if($user->id != userId())
+                                                @if ($user->active == 1)
+                                                    {{-- <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Desactivar">
+                                                        <i class="fa fa-plug text-yellow" title="Desactivar"></i>
+                                                    </a> --}}
+                                                    <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#modalCambioEstado">
+                                                        Small
+                                                    </button>
+
+                                                @else
+                                                    <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Activar">
+                                                        <i class="fa fa-plug text-success" title="Activar"></i>
+                                                    </a>
+                                                @endif
+                                            @endif
+                                            <i class="fa fa-trash-alt text-red" title="Eliminar"></i>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -265,9 +199,39 @@
     </div>
 
     {{-- Modal Cambio Estado --}}
-    <div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
+    {{-- <div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="modal fade" id="modalCambioEstado" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+
+
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Small Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain
+                        zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus Dolichohippus. The latter
+                        resembles an ass, to which it is closely related, while the former two are more horse-like. All three belong to the
+                        genus Equus, along with other living equids.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -281,16 +245,10 @@
             'paging'      : true,
             'lengthChange': true,
             'searching'   : true,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : true,
             'autoWidth'   : false,
-            "order": [[ 0, "desc" ]],
             "pageLength": 25,
-            "columnDefs": [ {
-                "orderable": false, //5
-                    "targets": ["_all"] ,
-            } ],
-
             "drawCallback": function () {
                 $('[data-toggle="popoverOper"]').popover({
                     html: true,

@@ -5,32 +5,16 @@
 
 @endsection
 @section ('contenidoHeader')
+
 <div class="col">
-    <div class="page-pretitle">
-        Samaritan's Purse
+    <div class="overview-wrap">
+        <h2 class="title-1">Crear operador</h2>
+        <a href="/users" title="Nuevo usuario" class="au-btn au-btn-icon btn-outline-secondary border border-secondary font-weight-bold">
+            <i class="fa fa-list-ul"></i> Ver usuarios
+        </a>
     </div>
-    <h2 class="page-title">
-        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 11h6m-3 -3v6" /></svg>
-        &nbsp;Registrar nuevo usuario
-    </h2>
 </div>
 
-<div class="col-auto ms-auto d-print-none">
-    <div class="btn-list">
-        @if (Gate::check('roles.index'))
-            <a href="/roles" class="btn btn-outline-secondary">
-                <b><svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="15" cy="15" r="4" /><path d="M18.5 18.5l2.5 2.5" /><path d="M4 6h16" /><path d="M4 12h4" /><path d="M4 18h4" /></svg>
-                Ver roles</b>
-            </a>
-        @endif
-        @if (Gate::check('users.index'))
-            <a href="/users" class="btn btn-outline-secondary">
-                <b><svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
-                Ver usuarios</b>
-            </a>
-        @endif
-    </div>
-</div>
 @endsection
 @section ('contenido')
 <div class="col-12">
@@ -39,7 +23,7 @@
             {!! Form::open(array('route' => 'users.store','method'=>'POST', 'onsubmit'=>'btnSubmit.disabled = true; return true;','id'=>'formCreateUsuarios')) !!}
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <label id="username--label">* Nombre de usuario:</label> &ensp;<small class="form-text text-yellow font-weight-bold">** Con el cual accederá al sistema</small>
+                        <label id="username--label">* Nombre de usuario: &nbsp;<i class="text-sm text-primarydark">** Con el cual accederá al sistema</i></label>
                         <input class="form-control" placeholder="Nombre de usuario" id="name_usr" name="username">
                         <span id="validar" class="font-weight-bold" style="text-align:right"></span> <br>
                         <span id="username-error" class="text-red"></span>
@@ -89,12 +73,10 @@
                 </div>
 
                 <div class="pull-right" id="registrar">
-                    <button type="submit" class="btn btn-yellow" name="btnSubmit">Registrar</button>
+                    <button type="submit" class="au-btn au-btn--submit font-weight-bold" name="btnSubmit">Registrar</button>
                 </div>
                 <div class="pull-right" id="msgerror" style="display: none">
-                    <span class="help-block">
-                        <strong>El nombre de usuario debe ser único</strong>
-                    </span>
+                    <strong>El nombre de usuario debe ser único</strong>
                 </div>
             {!! Form::close() !!}
         </div>
