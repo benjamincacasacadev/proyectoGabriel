@@ -201,9 +201,9 @@ font-family: FontAwesome, Arial, Verdana, sans-serif;
 
 .modalPrimary .modal-header {
 padding:9px 15px;
-border-top:3px solid #F7A600;
+border-top:3px solid #365cad;
 /* border-bottom:1px solid #206bc4; */
-color: #F7A600;
+color: #365cad;
 /* background-color: #DDEAF9; */
 /* background: -webkit-gradient(linear,left top,right top,from(#CBDFF7),to(#ffffff));
 background: linear-gradient(180deg,#CBDFF7,#ffffff); */
@@ -229,8 +229,8 @@ border-top-right-radius: 5px;
 
 .modalCyan .modal-header {
 padding:9px 15px;
-border-top:3px solid #F7A600;
-color: #F7A600;
+border-top:3px solid #365cad;
+color: #365cad;
 -webkit-border-top-left-radius: 5px;
 -webkit-border-top-right-radius: 5px;
 -moz-border-radius-topleft: 5px;
@@ -266,8 +266,8 @@ border-top-right-radius: 5px;
 z-index: 3;
 color: #fff !important;
 cursor: default;
-background-color: #F7A600;
-border-color: #F7A600;
+background-color: #365cad;
+border-color: #365cad;
 }
 
 .paginate_button > a {

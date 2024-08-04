@@ -23,34 +23,7 @@
     @endif
     <link rel="shortcut icon" href="{{asset('favicon.ico?r='.rand())}}" />
     @include('layouts.assets.css')
-    <style>
-        a.scroll-top {
-            display: none;
-            width: 40px;
-            height: 50px;
-            position: fixed;
-            z-index: 1000;
-            bottom: 50px;
-            right: 30px;
-            padding-right:20px;
-            font-size: 25px;
-            border-radius: 3px !important;
-            text-align: center;
-        }
-        a.scroll-top i {
-            position: relative;
-            top: 5px;
-            left: 2px;
-            padding-bottom:20px;
-        }
-        @media  (max-width: 1203px){
-            a.scroll-top i {
-                position: relative;
-                top: 5px;
-                padding-left:5px;
-            }
-        }
-    </style>
+
 
     @yield('extracss')
     @stack('extracss')
@@ -59,7 +32,7 @@
         $item = \Session::get('item');
     @endphp
 </head>
-<body class="animsition">
+<body class="">
     @auth
     <div id="contenedor_carga">
         <div id="loader-container">
@@ -87,7 +60,7 @@
                         @php
                             $array = ['0', '1.', '2.', '4.0:', '5.'];
                         @endphp
-                        @if(!in_array($item,$array))
+                        @if(!in_array($item, $array))
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <div class="card">

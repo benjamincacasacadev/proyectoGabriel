@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     public function getName(){
-        return '<a href="/users/show/'.code($this->id).'" target="_blank" class="text-yellowdark font-weight-bold">'.$this->fullName.'</a>';
+        return '<a href="/users/show/'.code($this->id).'" target="_blank" class="text-primarydark font-weight-bold">'.$this->fullName.'</a>';
     }
 
     // =====================================================================

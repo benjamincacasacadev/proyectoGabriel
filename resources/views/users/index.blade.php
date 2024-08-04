@@ -19,10 +19,10 @@
         stroke-width: 1.25;
         margin-bottom:5px;
     }
-    table#tabla_usr th{
+    table#tablaUsuarios th{
         font-size:12px;
     }
-    table#tabla_usr td{
+    table#tablaUsuarios td{
         font-size: 13px;
     }
     .avatar-status {
@@ -77,26 +77,10 @@
 @section ('contenidoHeader')
 
 <div class="col">
-    <div class="page-pretitle">
-        {{ nameEmpresa() }}
-    </div>
-    <h1 class="titulomod">
-        <svg class="icon icon-tabler" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-        </svg>
-        Usuarios
-    </h1>
-</div>
-
-<div class="col-auto ms-auto d-print-none">
-    <div class="btn-list">
-        <a href="/users/create" title="Nuevo usuario">
-            <button class="btn btn btn-yellow btn-pill" >
-                <i class="fa fa-plus fa-md" ></i> &nbsp;
-                <span class="d-none d-sm-inline-block">
-                    Usuario
-                </span>
-            </button>
+    <div class="overview-wrap">
+        <h2 class="title-1">Operadores</h2>
+        <a href="/users/create" title="Nuevo usuario" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
+            <i class="zmdi zmdi-plus"></i> Usuario
         </a>
     </div>
 </div>
@@ -104,68 +88,55 @@
 
 @section ('contenido')
     <!-- INDICADORES DE USUARIO -->
-    <div class="row mt-3">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-1">
-            <div class="card">
-                <div class="card-stamp">
-                    <div class="card-stamp-icon bg-success">
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 11l2 2l4 -4" /></svg>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @php
-                        $s = $usersactive == 1 ? '' : 's';
-                        $info = 'Usuario'.$s.' '.'activo'.$s;
-                    @endphp
-                    <h2 class="card-title text-success" style="font-size:23px">{{$usersactive}}</h2>
-                    <p class="text-success" style="font-size:18px">{{$info}}</p>
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            @php
+                $s = $usersactive == 1 ? '' : 's';
+                $info = 'Usuario'.$s.' '.'activo'.$s;
+            @endphp
+            <div class="statistic__item text-success">
+                <h3 class="number">{{$usersactive}}</h3>
+                <b class="desc text-success">{{$info}}</b>
+                <div class="icon ">
+                    <i class="fa fa-user-plus text-success"></i>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-1">
-            <div class="card">
-                <div class="card-stamp">
-                    <div class="card-stamp-icon bg-yellow">
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.274 10.291a4 4 0 1 0 -5.554 -5.58m-.548 3.453a4.01 4.01 0 0 0 2.62 2.65" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 1.147 .167m2.685 2.681a4 4 0 0 1 .168 1.152v2" /><line x1="3" y1="3" x2="21" y2="21" /></svg>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @php
-                        $s = $usersinactive == 1 ? '' : 's';
-                        $info = 'Usuario'.$s.' '.'inactivo'.$s;
-                    @endphp
-                    <h2 class="card-title text-yellow" style="font-size:23px">{{$usersinactive}}</h2>
-                    <p class="text-yellow" style="font-size:18px">{{$info}}</p>
+        <div class="col-md-6 col-lg-4">
+            @php
+                $s = $usersinactive == 1 ? '' : 's';
+                $info = 'Usuario'.$s.' '.'inactivo'.$s;
+            @endphp
+            <div class="statistic__item text-yellow">
+                <h3 class="number">{{$usersinactive}}</h3>
+                <b class="desc text-yellow">{{$info}}</b>
+                <div class="icon">
+                    <i class="fa fa-user text-yellow"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-1">
-            <div class="card">
-                <div class="card-stamp">
-                    <div class="card-stamp-icon bg-red">
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M17 9l4 4m0 -4l-4 4" /></svg>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @php
-                        $s = $usersdelete == 1 ? '' : 's';
-                        $info = 'Usuario'.$s.' '.'eliminado'.$s;
-                    @endphp
-                    <h2 class="card-title text-red" style="font-size:23px">{{$usersdelete}}</h2>
-                    <p class="text-red" style="font-size:18px">{{$info}}</p>
+        <div class="col-md-6 col-lg-4">
+            @php
+                $s = $usersdelete == 1 ? '' : 's';
+                $info = 'Usuario'.$s.' '.'eliminado'.$s;
+            @endphp
+            <div class="statistic__item text-danger">
+                <h3 class="number">{{$usersdelete}}</h3>
+                <b class="desc text-danger">{{$info}}</b>
+                <div class="icon">
+                    <i class="fa fa-user-minus text-danger"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     {{-- REPORTES --}}
                     <div class="row mb-2">
-                        <div class="container text-right">
+                        <div class="container-fluid text-right">
                             <div class="form-group">
                                 <button type="button" class="btn btn-outline-danger border border-danger pull-right mb-2 exportUser" id="pdf" title="Exportar PDF" style="width:242px;">
                                     <i class="fas fa-file-pdf fa-lg" ></i> &nbsp;
@@ -176,7 +147,7 @@
                             </div>
                         </div>
 
-                        <div class="container text-right">
+                        <div class="container-fluid text-right">
                             <div class="form-group">
                                 <button class="btn btn-outline-success border border-success pull-right exportUser" type="button" id="excel" style="width:242px;">
                                     <i class="fas fa-file-excel fa-lg " id="icon"> </i> &nbsp;&nbsp;
@@ -188,13 +159,13 @@
                         </div>
                     </div>
                     {{-- TABLA DE DATOS --}}
-                    <div class="table-responsive">
-                        <table class="table table-vcenter table-center table-sm table-hover" id="tabla_usr">
+                    <div class="table-responsive ">
+                        <table class="table table-vcenter table-center table-hover table-earning" id="tablaUsuarios">
                             <thead>
                                 <tr>
-                                    <th width="5%" style="color:transparent !important"></th>
+                                    <th width="5%" style="color:transparent !important;"></th>
                                     <th class="hidden"></th>
-                                    <th width="20%">NOMBRE(S)</th>
+                                    <th width="20%" class="font-weight-bold">NOMBRE(S)</th>
                                     <th width="20%">E-MAIL</th>
                                     <th width="10%">ESTADO</th>
                                     <th width="10%">ROL</th>
@@ -219,9 +190,9 @@
                                     <tr>
                                         <td>
                                             <center>
-                                            <span class="avatar avatar-sm avatar-rounded" style="background-image: url({{ imageRouteAvatar($user->avatar,1) }}); ">
-                                                <span class="@if( $user->id == userId() ) avatar-status bg-success @endif"></span>
-                                            </span>
+                                                <span class="avatar avatar--small avatar-rounded" style="background-image: url({{ imageRouteAvatar($user->avatar,1) }}); ">
+                                                    <span class="@if( $user->id == userId() ) avatar-status bg-success @endif"></span>
+                                                </span>
                                             </center>
                                         </td>
                                         <td class="hidden">{{ code($user->id)}}</td>
@@ -305,7 +276,7 @@
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
-        var table = $('#tabla_usr').DataTable({
+        var table = $('#tablaUsuarios').DataTable({
             'mark'        : true,
             'paging'      : true,
             'lengthChange': true,

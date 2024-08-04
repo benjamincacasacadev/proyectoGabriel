@@ -8,7 +8,7 @@
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
-        border: 5px solid #F7A600;
+        border: 5px solid #365cad;
         border-radius: 50%;
         -webkit-animation: borderScale 1s infinite ease-in-out;
         animation: borderScale 1s infinite ease-in-out;
@@ -22,7 +22,7 @@
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
-        color: #F7A600 !important;
+        color: #365cad !important;
     }
 
     @-webkit-keyframes borderScale {
@@ -30,7 +30,7 @@
         border: 5px solid white;
         }
         50% {
-        border: 25px solid #F7A600;
+        border: 25px solid #365cad;
         }
         100% {
         border: 5px solid white;
@@ -42,7 +42,7 @@
             border: 5px solid white;
         }
         50% {
-            border: 25px solid #F7A600;
+            border: 25px solid #365cad;
         }
         100% {
             border: 5px solid white;
