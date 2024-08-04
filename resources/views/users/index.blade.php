@@ -156,23 +156,23 @@
                                         </td>
                                         <td >{{ $user->rolUser->name }}</td>
                                         <td>
-                                            <i class="fa fa-edit text-primarydark" title="Editar"></i>
+                                            <a type="button" class="btn btn-outline-primary btn-sm" href="/users/{{code($user->id)}}/edit" title="Editar">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                             @if($user->id != userId())
                                                 @if ($user->active == 1)
-                                                    {{-- <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Desactivar">
-                                                        <i class="fa fa-plug text-yellow" title="Desactivar"></i>
-                                                    </a> --}}
-                                                    <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#modalCambioEstado">
-                                                        Small
-                                                    </button>
-
+                                                    <a class="btn btn-outline-yellow btn-sm" rel="modalCambioEstado" href="/users/modalCambEstado/{{code($user->id)}}" title="Desactivar">
+                                                        <i class="fa fa-plug"></i>
+                                                    </a>
                                                 @else
-                                                    <a rel="modalCambioEstado" style="cursor:pointer" href="/users/modalCambEstado/{{code($user->id)}}" title="Activar">
-                                                        <i class="fa fa-plug text-success" title="Activar"></i>
+                                                    <a class="btn btn-outline-success btn-sm" rel="modalCambioEstado" href="/users/modalCambEstado/{{code($user->id)}}" title="Activar">
+                                                        <i class="fa fa-plug"></i>
                                                     </a>
                                                 @endif
+                                                <a class="btn btn-outline-danger btn-sm" rel="modalEliminar" href="/users/modalDelete/{{code($user->id)}}" title="Eliminar">
+                                                    <i class="fa fa-trash-alt"></i>
+                                                </a>
                                             @endif
-                                            <i class="fa fa-trash-alt text-red" title="Eliminar"></i>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -190,6 +190,9 @@
         </div>
     </div>
 
+
+@endsection
+@section('modals')
     {{-- Modal Eliminar --}}
     <div class="modal modal-danger fade" aria-hidden="true" role="dialog" id="modalEliminar" data-backdrop="static">
         <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -199,43 +202,12 @@
     </div>
 
     {{-- Modal Cambio Estado --}}
-    {{-- <div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
+    <div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
             </div>
         </div>
-    </div> --}}
-
-    <div class="modal fade" id="modalCambioEstado" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-
-
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="smallmodalLabel">Small Modal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain
-                        zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus Dolichohippus. The latter
-                        resembles an ass, to which it is closely related, while the former two are more horse-like. All three belong to the
-                        genus Equus, along with other living equids.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Confirm</button>
-                </div>
-
-
-            </div>
-        </div>
     </div>
-
 @endsection
 @section('scripts')
 <script type="text/javascript">

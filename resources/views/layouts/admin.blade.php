@@ -47,7 +47,6 @@
         <div class="page-container2">
             @include('layouts.sections.header')
 
-
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -73,12 +72,12 @@
                         @else
                             @yield('contenido')
                         @endif
-
-
                         @include('layouts.sections.footer')
                     </div>
                 </div>
             </div>
+
+            @yield('modals')
         </div>
     </div>
 

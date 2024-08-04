@@ -486,6 +486,14 @@ section {
     background: #4272d7;
 }
 
+.au-btn--yellow {
+    background: #f7a600;
+}
+
+.au-btn--yellow:hover {
+    background: #d98c00;
+}
+
 .au-btn--green {
     background: #63c76a;
 }
@@ -14926,9 +14934,13 @@ a.badge {
 }
 
 .bg-green {
-    background: #2fb344
+    background: #2fb344 !important;
 }
 
 .bg-red {
     background: #d63939
+}
+
+.bg-yellow {
+    background: #F7A600 !important;
 }

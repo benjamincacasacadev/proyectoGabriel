@@ -170,9 +170,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Carga la ventana de confirmacion para
-     */
     public function modalCambioEstado($id){
         canPassAdminJefe();
         $users = User::findOrFail(decode($id));
