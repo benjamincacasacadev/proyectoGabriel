@@ -24,8 +24,8 @@
 <div class="col">
     <div class="overview-wrap">
         <h2 class="title-1">Operadores</h2>
-        <a href="/users/create" title="Nuevo usuario" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
-            <i class="zmdi zmdi-plus"></i> Usuario
+        <a href="/users/create" title="Nuevo operador" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
+            <i class="zmdi zmdi-plus"></i> OPERADOR
         </a>
     </div>
 </div>
