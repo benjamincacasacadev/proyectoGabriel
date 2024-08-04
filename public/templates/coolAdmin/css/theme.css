@@ -14988,3 +14988,30 @@ a.badge {
 .btn-close-white {
     filter: invert(1) grayscale(100%) brightness(200%)
 }
+
+.form-help {
+    display: inline-flex;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    font-size: .75rem;
+    color: #365cad;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgba(135, 142, 151, .1);
+    border-radius: 50%;
+    transition: .3s background-color, .3s color
+}
+
+.form-help:hover,
+.form-help[aria-describedby] {
+    color: #fff;
+    background: #365cad
+}

@@ -66,21 +66,20 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-5 col-lg-5 col-sm-12">
-                    <img class="img-rounded" style="max-width: 40%; margin-left: auto; margin-right: auto; display: block;" src="{{ imageRouteAvatar($user->avatar,0) }}">
+            <div class="row align-items-center">
+                <div class="col-md-5 col-lg-5 col-sm-12 d-flex justify-content-center">
+                    <img class="img-rounded" style="max-width: 40%;border-radius: 5%" src="{{ imageRouteAvatar($user->avatar,0) }}">
                 </div>
-                <div class=" col-md-7 col-lg-7 col-sm-12">
-                    <table class="table table-lg table-responsive" >
+                <div class="col-md-7 col-lg-7 col-sm-12">
+                    <table class="table table-lg table-responsive">
                         <tr>
                             <td class="font-weight-bold">Nombre</td>
-                            <td>{{userFullName($user->id)}}</td>
+                            <td>{{ $user->fullName }}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Nombre de usuario</td>
                             <td>{{$user->username}}</td>
                         </tr>
-
                         <tr>
                             <td class="font-weight-bold">E-mail</td>
                             <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
@@ -92,7 +91,7 @@
                         <tr>
                             <td class="font-weight-bold">Rol:</td>
                             <td>
-                                <label class="badge badge-info p-2 font-weight-bold">
+                                <label class="badge badge-info font-weight-bold">
                                     {{$user->rolUser->name}}
                                 </label>
                             </td>
@@ -100,53 +99,43 @@
                         <tr>
                             <td class="font-weight-bold">Estado</td>
                             <td>@if ( $user->active==1 )
-                                <span class="badge badge-pill bg-green p-2 font-weight-bold">ACTIVO</span>
+                                <span class="badge badge-pill bg-green font-weight-bold">ACTIVO</span>
                                 @else
-                                <span class="badge badge-pill bg-red p-2 font-weight-bold">INACTIVO</span>
+                                <span class="badge badge-pill bg-red font-weight-bold">INACTIVO</span>
                                 @endif</td>
                             <td>
                         </tr>
                     </table>
                 </div>
-
             </div>
+
 
             {{--//========================================================================================
             *                                    Fin de la información                                  *
             //========================================================================================--}}
             <div class="row justify-content-md-center" style="margin-top:20px">
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <a href="/users/{{ code($user->id)}}/edit">
-                        <button class="btn btn-ghost-primary btn-lg border border-primary" >
-                            <i class="fas fa-edit fa-md"></i> &nbsp;&nbsp;
-                            <span > Editar </span>
-                        </button>
+                    <a type="button" class="btn btn-outline-primarydark btn-lg" href="/users/{{code($user->id)}}/edit" title="Editar">
+                        <i class="fa fa-edit"></i> Editar
                     </a>
                 </div>
                 @if($user->id != userId())
                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                        <a rel="modalCambioEstado" href="/users/modalCambEstado/{{code($user->id)}}" data-step="5" data-intro="Presionando este botón abrirá una nueva ventana de confirmación para Activar o Desactivar el usuario.">
-                            @if ($user->active==1)
-                                <button class="btn btn-ghost-yellow btn-lg border border-yellow">
-                                    <i class="fas fa-plug fa-md"></i> &nbsp;&nbsp;
-                                    <span> Desactivar </span>
-                                </button>
-                            @else
-                                <button class="btn btn-ghost-info btn-lg border border-info">
-                                    <i class="fas fa-plug fa-md"></i> &nbsp;&nbsp;
-                                    <span> Activar </span>
-                                </button>
-                            @endif
-                        </a>
+                        @if ($user->active == 1)
+                            <a class="btn btn-outline-yellow btn-lg" rel="modalCambioEstado" href="/users/modalCambEstado/{{code($user->id)}}" title="Desactivar">
+                                <i class="fa fa-plug"></i> Desactivar
+                            </a>
+                        @else
+                            <a class="btn btn-outline-success btn-lg" rel="modalCambioEstado" href="/users/modalCambEstado/{{code($user->id)}}" title="Activar">
+                                <i class="fa fa-plug"></i> Activar
+                            </a>
+                        @endif
                     </div>
                 @endif
                 @if($user->id != userId())
                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                        <a rel="modalEliminar" href="/users/modalDelete/{{code($user->id)}}" data-step="6" data-intro="Presionando este botón abrirá una nueva ventana de confirmación para Eliminar el usuario.">
-                            <button class="btn btn-ghost-danger btn-lg border border-danger">
-                                <i class="fa fa-trash-alt fa-md"></i> &nbsp;&nbsp;
-                                <span> Eliminar </span>
-                            </button>
+                        <a class="btn btn-outline-danger btn-lg" rel="modalEliminar" href="/users/modalDelete/{{code($user->id)}}" title="Eliminar">
+                            <i class="fa fa-trash-alt"></i> Eliminar
                         </a>
                     </div>
                 @endif
@@ -154,23 +143,23 @@
         </div>
     </div>
 </div>
-
-
-{{-- Modal Eliminar --}}
-<div class="modal modal-danger fade" aria-hidden="true" role="dialog" id="modalEliminar" data-backdrop="static">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
+@endsection
+@section('modals')
+    {{-- Modal Eliminar --}}
+    <div class="modal modal-danger fade" aria-hidden="true" role="dialog" id="modalEliminar" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-</div>
 
-{{-- Modal Cambio Estado --}}
-<div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
+    {{-- Modal Cambio Estado --}}
+    <div class="modal  fade" aria-hidden="true" role="dialog" id="modalCambioEstado" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-</div>
 
 @endsection
 @section('scripts')

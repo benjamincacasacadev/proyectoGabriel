@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class UsersExport implements FromView, WithEvents, WithDrawings
 {
+    public $usuarios;
     public function drawings(){
         $drawing = new Drawing();
         $drawing->setName('Logo');

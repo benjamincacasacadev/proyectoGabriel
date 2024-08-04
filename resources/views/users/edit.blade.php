@@ -20,24 +20,10 @@
 
 @section('contenidoHeader')
 <div class="col">
-    <div class="page-pretitle">
-        {{nameEmpresa()}}
-    </div>
-    <h1 class="titulomod">
-        <svg class="icon icon-tabler" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><line x1="19" y1="7" x2="19" y2="10" /><line x1="19" y1="14" x2="19" y2="14.01" /></svg>
-        Editar usuario
-    </h1>
-</div>
-
-<div class="col-auto ms-auto d-print-none">
-    <div class="btn-list">
-        <a href="/users" class="btn btn-outline-secondary" title="Ver todos los usuarios">
-            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-            </svg>
-            <span class="d-none d-sm-inline-block">
-                Ver usuarios
-            </span>
+    <div class="overview-wrap">
+        <h2 class="title-1">Editar operador</h2>
+        <a href="/users" title="Nuevo usuario" class="au-btn au-btn-icon btn-outline-secondary border border-secondary font-weight-bold">
+            <i class="fa fa-list-ul"></i> Ver operadores
         </a>
     </div>
 </div>
@@ -60,11 +46,12 @@
 {!!Form::model($user,['route'=>['users.update', code($user->id)],'method'=>'POST','files'=>true,'id'=>'formEditUser'] ) !!}
     <div class="offset-lg-1 col-lg-10 offset-md-0 col-md-12 col-sm-12 col-xs-12 ">
         <div class="card animated zoomIn">
+
             <div class="card-header">
-                <h3 class="card-title pull-left text-yellow ">
-                    <b>DATOS PRINCIPALES</b>
-                </h3>
+                <i class="fa fa-user"></i>
+                <strong class="card-title pl-2 font-weight-bold">DATOS PRINCIPALES</strong>
             </div>
+
             <div class="card-status-top bg-yellow"></div>
             <div class="card-body">
                 <div class="row">
@@ -73,7 +60,7 @@
                         <input class="form-control" type="text" value="{{$user->username}}" name="username">
                         <span id="username-error" class="text-red"></span>
                         <div class="my-3">
-                            <a id="showps" class="text-yellow cursor-pointer"> <i class="fas fa-key" id="iconpass"></i> <b id="titlepass">Clic para cambiar contraseña</b></a>
+                            <a id="showps" class="text-primarydark cursor-pointer"> <i class="fas fa-key" id="iconpass"></i> <b id="titlepass">Clic para cambiar contraseña</b></a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="changeps" style="display: none">
                             <div class="card">
@@ -129,7 +116,7 @@
                         <span class="form-help" data-toggle='popover' data-trigger='hover' data-content='<span style="font-size: 11px;" >Puede hacer clic sobra la imagen de avatar para cambiarla.<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Actualizar datos</b></i> </span>' data-original-title='<span style="font-size: 12px; font-weight: bold ">Información</span>'>
                             ?
                         </span>
-                        <img class="avatar-rounded cambiar_avatar" src="{{ imageRouteAvatar($user->avatar,1) }}" title="Presione para cambiar su imagen de avatar.<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Actualizar datos</b></i>" style="width:185px; height:185px; margin-left: auto; margin-right: auto; margin-top: -20px; display: block; " title="Presione para cambiar su imagen de avatar" data-toggle="tooltip" />
+                        <img class="avatar-rounded cambiar_avatar" src="{{ imageRouteAvatar($user->avatar,1) }}" title="Presione para cambiar su imagen de avatar.<br><i>Antes de seguir asegúrese de guardar los datos que fueron modificados presionando <b>Actualizar datos</b></i>" style="width:185px; height:185px; margin-left: auto; margin-right: auto; margin-top: -20px; display: block; " title="Presione para cambiar su imagen de avatar" data-toggle="tooltip" data-html="true" />
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -189,43 +176,40 @@
         </div>
     </div>
 
-    <div class="row mt-3 text-center">
-        <div>
-            <button class="btn btn-yellow btn-pill btn-lg font-weight-bold" name="btnSubmitEdit">Actualizar datos</button>
-        </div>
+    <div class="text-center mt-3">
+        <button type="submit" class="au-btn au-btn--submit font-weight-bold" name="btnSubmitEdit">Actualizar datos</button>
     </div>
 
 
 {!! Form::close() !!}
 
-{{-- Modal AVATAR --}}
-<input type="file" name="image" class="image" accept="image/*" id="inputImageAvatar" style="display:none">
-<div class="modal modalPrimary fade modal-slide-in-right" aria-hidden="true" role="dialog"  id="modalAvatar" data-backdrop="static">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">
-                    Cambiar Avatar
-                </h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-
-            </div>
-            <div class="modal-body">
-                <div class="img-container">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <img id="imagAv" style="max-height: 600px">
+@endsection
+@section('modals')
+    {{-- Modal AVATAR --}}
+    <input type="file" name="image" class="image" accept="image/*" id="inputImageAvatar" style="display:none">
+    <div class="modal modalPrimary fade modal-slide-in-right" aria-hidden="true" role="dialog"  id="modalAvatar" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">
+                        Cambiar avatar
+                    </h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <img id="imagAv" style="max-height: 600px">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
+                        <button type="button" class="btn btn-ghost-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                        <input type="button" class="btn btn-yellow pull-right" id="btnGuardarAvatar" value="Guardar imagen">
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
-                    <button type="button" class="btn btn-ghost-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                    <input type="button" class="btn btn-yellow pull-right" id="btnGuardarAvatar" value="Guardar imagen">
-                </div>
             </div>
-
         </div>
     </div>
-</div>
-
 @endsection
 
 @section('scripts')

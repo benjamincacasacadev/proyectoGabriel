@@ -28,17 +28,17 @@ $colorBordeDelagado = '000000';
 $colorBordeGrueso = '000000';
 //==========> FILA NOMBRE DE LA EMPRESA Y LOGO
 $colorLetraNombreEmpresa = '000000';
-$colorFondoNombreEmpresa = 'F2D69D';
+$colorFondoNombreEmpresa = 'C5D4F7';
 //==========> FILA TÍTULO
 $colorLetraTitulo = '3F3F3F';
-$colorFondoTituloArriba = 'F2D69D';
+$colorFondoTituloArriba = 'C5D4F7';
 $colorFondoTituloMedio = 'ffffff';
 $colorFondoTituloAbajo = 'ffffff';
 //==========> FILA LUGAR Y/O FECHA
 $colorLetraLugarFecha = '555555';
 //==========> FILA CABECERA DE TÍTULOS DE LA TABLA
 $colorLetraTablaCabecera = 'ffffff';
-$fondoTablaCabecera = 'f6b532';
+$fondoTablaCabecera = '365cad';
 //==========> FILAS y COLUMNAS DEL CUERPO DE LA TABLA
 $fondoCuerpoClaro = 'ffffff';
 $fondoCuerpoOscuro = 'f6f6f6';

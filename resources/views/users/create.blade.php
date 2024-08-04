@@ -10,7 +10,7 @@
     <div class="overview-wrap">
         <h2 class="title-1">Crear operador</h2>
         <a href="/users" title="Nuevo usuario" class="au-btn au-btn-icon btn-outline-secondary border border-secondary font-weight-bold">
-            <i class="fa fa-list-ul"></i> Ver usuarios
+            <i class="fa fa-list-ul"></i> Ver operadores
         </a>
     </div>
 </div>
