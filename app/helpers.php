@@ -117,32 +117,35 @@ function purify($val){
     return \Purify::clean($val);
 }
 
+
+
 function datosRegistro($type){
     $titulo = $type == 'edit' ? 'Modificado por' : 'Registrado por';
     $fecha = $type == 'edit' ? 'Fecha de modificación' : 'Fecha de registro';
-    return  '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="form-group">
-                    <label>'.$titulo.'</label> <br>
-                    <div class="input-icon">
-                        <span class="input-icon-addon">
-                            <i id="iconForm" class="fas fa-user"></i>
-                        </span>
-                        <input class="form-control input-incon cursor-not-allowed" value="'.userFullName(userId()).'" disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="form-group">
-                    <label>'.$fecha.'</label> <br>
-                    <div class="input-icon">
-                        <span class="input-icon-addon">
-                            <i id="iconForm" class="far fa-calendar-alt"></i>
-                        </span>
-                        <input class="form-control input-incon cursor-not-allowed" type="text" value="'.date("d/m/Y").'" disabled>
-                    </div>
-                </div>
-            </div>';
 
+    return
+    '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <label>'.$titulo.'</label> <br>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <input class="form-control input-incon cursor-not-allowed" value="'.userFullName(userId()).'" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <label>'.$fecha.'</label> <br>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                <input class="form-control input-incon cursor-not-allowed" value="'.date("d/m/Y").'" disabled>
+            </div>
+        </div>
+    </div>';
 }
 
 function generateCode($maximo,$code,$letter,$cant_letras,$zero){

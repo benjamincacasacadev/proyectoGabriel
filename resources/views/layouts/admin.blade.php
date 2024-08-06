@@ -10,16 +10,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="Seg Tech AMPER" />
-    <meta name="description" content="Seg Tech AMPER" />
-    <meta name="author" content="Benjamin Cacasaca" />
+    <meta name="keywords" content="Proyecto UAB" />
+    <meta name="description" content="Proyecto UAB" />
+    <meta name="author" content="Gabriel Mamani" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
     @if (!empty($title_template))
         <title>{{ $title_template }}</title>
     @else
-        <title>Seg Tech AMPER</title>
+        <title>Proyecto UAB</title>
     @endif
     <link rel="shortcut icon" href="{{asset('favicon.ico?r='.rand())}}" />
     @include('layouts.assets.css')

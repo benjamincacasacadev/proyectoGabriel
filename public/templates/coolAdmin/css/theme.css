@@ -14825,8 +14825,8 @@ a.avatar {
 }
 
 .avatar-upload:hover {
-    border-color: #F7A600;
-    color: #F7A600;
+    border-color: #365cad;
+    color: #365cad;
     text-decoration: none
 }
 
@@ -14886,7 +14886,7 @@ a.badge {
 }
 
 .bg-primary {
-    background-color: #F7A600 !important
+    background-color: #365cad !important
 }
 
 .bg-secondary {

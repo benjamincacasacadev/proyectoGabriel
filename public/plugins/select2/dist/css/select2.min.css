@@ -260,8 +260,8 @@
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #F7A600;
-    border: 1px solid #F7A600;
+    background-color: #365cad;
+    border: 1px solid #365cad;
     border-radius: 4px;
     cursor: default;
     float: left;
@@ -388,7 +388,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #F7A600;
+    background-color: #365cad;
     color: white
 }
 

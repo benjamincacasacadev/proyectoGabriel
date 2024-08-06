@@ -209,8 +209,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
     color: var(--fc-button-text-color, #fff);
     background-color: #1e2b37;
     background-color: var(--fc-button-hover-bg-color, #1e2b37);
-    border-color: #F7A600;
-    border-color: var(--fc-button-hover-border-color, #F7A600);
+    border-color: #365cad;
+    border-color: var(--fc-button-hover-border-color, #365cad);
   }
 .fc .fc-button-primary:disabled { /* not DRY */
     color: #fff;
@@ -227,8 +227,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
   .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #F7A600;
-    background-color: var(--fc-button-active-bg-color, #F7A600);
+    background-color: #365cad;
+    background-color: var(--fc-button-active-bg-color, #365cad);
     border-color: #151e27;
     border-color: var(--fc-button-active-border-color, #151e27);
   }

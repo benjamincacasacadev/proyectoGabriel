@@ -5,7 +5,7 @@
     <div class="menu-sidebar2__content js-scrollbar1">
         <div class="account2">
             <div class="image img-cir img-120">
-                <img src="{{ asset('avatar.png') }}" alt="{{ Auth::user()->name." ".Auth::user()->ap_paterno }} " />
+                <img src="{{ imageRouteAvatar(Auth::user()->avatar, 1) }}" alt="{{ Auth::user()->name." ".Auth::user()->ap_paterno }} " />
             </div>
             <h4 class="name text-center">{{ Auth::user()->name." ".Auth::user()->ap_paterno }} </h4>
             <a href="/perfil_usuario" class="cursor-pointer font-weight-bold text-primary">Ver perfil de usuario</a>

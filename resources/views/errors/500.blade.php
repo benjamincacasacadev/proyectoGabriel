@@ -245,8 +245,8 @@
         <div class="error">
             <h1>500</h1>
             <h3>Pagina inactiva</h3>
-            <p>Disculpe las molestias, estamos realizando algunas tareas de mantenimiento en este momento. Volveremos a estar en línea
-                ¡Dentro de poco!
+            <p>
+                Estamos realizando trabajos de mantenimiento para mejorar el servicio. Por favor, regresa en unos momentos. ¡Gracias por tu paciencia!
             </p>
         </div>
         <div class="stack-container">

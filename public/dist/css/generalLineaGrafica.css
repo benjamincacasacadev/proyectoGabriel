@@ -37,7 +37,7 @@ div.plancue ul li:hover, div.clienteList ul li:hover {
     text-transform:capitalize;
     display:block;
     color:#ffffff !important;
-    background:#f7a600;
+    background:#365cad;
     -webkit-border-radius:3px;
     border-radius:3px;
     width: 100%;
@@ -113,17 +113,17 @@ body:not(.modal-open){
 /* ESTILOS MOSTRAR OCULTAR COLUMNA DATATABLE */
 button.dt-button.buttons-columnVisibility.active {
     color: #fff !important;
-    background-color: #f7a600 !important;
-    border-color: #f7a600 !important;
+    background-color: #365cad !important;
+    border-color: #365cad !important;
     border-radius: 5px;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
 button.dt-button.buttons-columnVisibility{
-    color: #f7a600 !important;
+    color: #365cad !important;
     background-color: transparent !important;
     background-image: none !important;
-    border-color: #f7a600 !important;
+    border-color: #365cad !important;
     border-radius: 5px;
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -136,13 +136,13 @@ button.btncolvis{
 }
 
 button.ejbutton{
-    border-color: #f7a600 !important;
+    border-color: #365cad !important;
     background: #D9EDF7 !important;
-    color: #f7a600;
+    color: #365cad;
     font-weight: bold;
 }
 button.ejbutton.active {
-    background: #f7a600 !important;
+    background: #365cad !important;
     color: #D9EDF7;
 }
 

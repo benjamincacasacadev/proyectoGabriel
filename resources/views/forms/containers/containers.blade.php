@@ -2,7 +2,7 @@
 @section('extracss')
 <style>
     .step-item.active {
-        color: #f7a600;
+        color: #365cad;
         font-size: 15px;
         font-weight: bold;
     }

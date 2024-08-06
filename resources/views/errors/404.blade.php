@@ -101,7 +101,7 @@
 @endsection
 
 @section ('contenido')
-<div class="row">
+<div class="">
 	<div id="notfound">
 		<div class="notfound">
 			<div class="notfound-404">

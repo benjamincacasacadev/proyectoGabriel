@@ -1,19 +1,19 @@
 @section('extracss')
 <style>
     .btn-outline-primary-dotted {
-        color: #f7a600 !important;
+        color: #365cad !important;
         background-color: transparent;
         background-image: none;
-        border-color: #f7a600;
+        border-color: #365cad;
         width: 250px;
         border-style: dashed;
         border-width: 2px;
-        border-color: #f7a600;
+        border-color: #365cad;
     }
 
     .btn-outline-primary-dotted:hover {
         color: #eee !important;
-        background-color: #f7a600;
+        background-color: #365cad;
         border-color: #eee;
     }
     .divAccesos{
