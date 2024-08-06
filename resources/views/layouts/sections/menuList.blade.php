@@ -7,26 +7,25 @@
 
     <li class=" {{ strstr($item,'.',true) == '1' ? 'active font-weight-bold' : '' }} ">
         <a href="/">
-            <i class="fas fa-city"></i>Regionales
+            <i class="fas fa-list-alt"></i>Novedades
         </a>
     </li>
-
 
     <li class=" {{ strstr($item,'.',true) == '2' ? 'active font-weight-bold' : '' }} ">
-        <a href="/">
-            <i class="fas fa-car-side"></i>Vehículos
-        </a>
-    </li>
-
-    <li class=" {{ strstr($item,'.',true) == '3' ? 'active font-weight-bold' : '' }} ">
         <a href="/">
             <i class="fas fa-list-ul"></i>Cuentas
         </a>
     </li>
 
-    <li class=" {{ strstr($item,'.',true) == '4' ? 'active font-weight-bold' : '' }} ">
+    <li class=" {{ strstr($item,'.',true) == '3' ? 'active font-weight-bold' : '' }} ">
         <a href="/">
-            <i class="fas fa-list-alt"></i>Novedades
+            <i class="fas fa-car-side"></i>Vehículos
+        </a>
+    </li>
+
+    <li class=" {{ strstr($item,'.',true) == '4' ? 'active font-weight-bold' : '' }} ">
+        <a href="/regionales">
+            <i class="fas fa-city"></i>Regionales
         </a>
     </li>
 

@@ -30,6 +30,38 @@ Route::post('/validar_user','UserController@validarUsername')->name('users.valid
 Route::post('/userfirma', 'UserController@uploadFirmaImagen')->name('users.firma');
 
 // ========================================================================================
+//                                      REGIONALES
+// ========================================================================================
+Route::get('/regionales', 'RegionalesController@index')->name('regionales.index');
+Route::get('/regionales/modalCreate', 'RegionalesController@modalCreate')->name('regionales.createmodal');
+Route::post('/store_regionales', 'RegionalesController@store')->name('regionales.store');
+Route::get('/regionales/modalEdit/{id}', 'RegionalesController@modalEdit')->name('regionales.editmodal');
+Route::post('/regionales/update/{id}', 'RegionalesController@update')->name('regionales.update');
+Route::get('/regionales/modalDelete/{id}', 'RegionalesController@modalDelete')->name('regionales.deletemodal');
+Route::post('/regionales/delete/{id}','RegionalesController@destroy')->name('regionales.destroy');
+Route::get('/regionales/estado/{id}/{estado}', 'RegionalesController@changeEstado')->name('regionales.cambioEstado');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ========================================================================================
 //                                      CLIENTES
 // ========================================================================================
 Route::get('/clients', 'ClientsController@index')->name('clients.index');

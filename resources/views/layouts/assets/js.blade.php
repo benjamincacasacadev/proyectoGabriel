@@ -4,7 +4,6 @@
 
 <script src="{{asset('/templates/coolAdmin/libsCool/slick/slick.min.js')}}"></script>
 <script src="{{asset('/templates/coolAdmin/libsCool/wow/wow.min.js')}}"></script>
-<script src="{{asset('/templates/coolAdmin/libsCool/animsition/animsition.min.js')}}"></script>
 <script src="{{asset('/templates/coolAdmin/libsCool/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
 <script src="{{asset('/templates/coolAdmin/libsCool/counter-up/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('/templates/coolAdmin/libsCool/counter-up/jquery.counterup.min.js')}}"></script>
@@ -85,35 +84,6 @@
                 });
             });
         }
-        // ===========================================================================================
-        //                            FUNCION AUTOCOMPLETE
-        // ===========================================================================================
-        function showAutocompleteList(inputid,divlistid,route){
-            $('#'+inputid).keyup(function () {
-                var querys = $(this).val();
-                if (querys != '') {
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url: route,
-                        method: "POST",
-                        data: {querys: querys, _token: _token},
-                        success: function (data) {
-                            $('#'+divlistid).show();
-                            $('#'+divlistid).html(data);
-                        }
-                    });
-                } else  $('#'+divlistid).hide();
-            });
-            $(document).on('click', '#licuen', function () {
-                $('#'+inputid).val($(this).text());
-                $('#'+divlistid).hide();
-            });
-            $(document).mouseup(function(e){ // Ocultar div al hacer clic fuera de la lista
-                var container = $('#'+divlistid);
-                if (!container.is(e.target) && container.has(e.target).length === 0)    container.hide();
-            });
-        }
-
 
         // ===========================================================================================
         //                                  FUNCIONES PARA DATATABLE
@@ -132,51 +102,6 @@
                             'Espere un momento...'+
                         '</div>';
             return espere;
-        }
-
-        //Funcion para evitar jalar texto en campos de busqueda de datatables por ajax
-        $(".nopegar").on("drop", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            var id = $(this).attr('id');
-            $('#'+id).attr('data-toggle','popover');
-            $('#'+id).attr('data-trigger','manual');
-            $('#'+id).attr('data-content','<span class="text-red font-weight-bold"><center><i class="fa fa-ban"></i> La acción no se puede realizar.<br>Por favor escríba el texto</center></span>');
-            $('#'+id).attr('data-placement','top');
-            $('#'+id).attr('data-html','true');
-            $('#'+id).attr('data-container','body');
-            $('#'+id).popover('show');
-            setTimeout(function(){
-                $('#'+id).popover('hide');
-                $('#'+id).removeAttr('data-toggle');
-                $('#'+id).removeAttr('data-trigger');
-            }, 2000)
-
-        });
-        //Funcion para evitar copiar texto en campos de busqueda de datatables por ajax
-        $('.nopegar').on('paste', function(e) {
-            var valor = e.originalEvent.clipboardData.getData('Text');
-            var id = $(this).attr('id');
-            if ( noPegar(valor,id,'top') == 1) e.preventDefault();
-        });
-        function noPegar(valor,id,position){
-            var regex = /^[a-zA-Z0-9ñáéíóúÁÉÍÓÚ!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/? ]*$/;
-            if(regex.test(valor) == false) {
-                $('#'+id).attr('data-toggle','popover');
-                $('#'+id).attr('data-trigger','manual');
-                $('#'+id).attr('data-content','<span class="text-red font-weight-bold"><center><i class="fa fa-ban"></i> El texto no puede ser copiado.<br>Por favor escríbalo</center></span>');
-                $('#'+id).attr('data-placement',position);
-                $('#'+id).attr('data-html','true');
-                $('#'+id).attr('data-container','body');
-                $('#'+id).popover('show');
-                setTimeout(function(){
-                    $('#'+id).popover('hide');
-                    $('#'+id).removeAttr('data-toggle');
-                    $('#'+id).removeAttr('data-trigger');
-                }, 2000)
-                return 1;
-            }else return 0;
         }
 
         // funcion para evitar realizar peticiones por cada letra que se escriba al filtrar

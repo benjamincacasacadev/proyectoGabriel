@@ -2661,10 +2661,10 @@ fieldset:disabled a.btn {
     pointer-events: none
 }
 
-.btn-primary {
+.btn-primarydark {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff
+    background-color: #365cad;
+    border-color: #365cad
 }
 
 .btn-primary:hover {

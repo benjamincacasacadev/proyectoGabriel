@@ -114,7 +114,7 @@
                                     <th width="20%">E-MAIL</th>
                                     <th width="10%">ESTADO</th>
                                     <th width="10%">ROL</th>
-                                    <th width="3%">OP.</th>
+                                    <th width="3%">OPC.</th>
                                 </tr>
                             </thead>
 
@@ -122,10 +122,10 @@
                                 <tr class="filters">
                                     <td></td>
                                     <td class="hidden"></td>
-                                    <td><input style="width: 100%;font-size:10px" id="user0" class="form-control nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
-                                    <td><input style="width: 100%;font-size:10px" id="user1" class="form-control nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="emailb"/></td>
-                                    <td><input style="width: 100%;font-size:10px" id="user2" class="form-control nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="estadob"/></td>
-                                    <td><input style="width: 100%;font-size:10px" id="user3" class="form-control nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="rolb"/></td>
+                                    <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
+                                    <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="emailb"/></td>
+                                    <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="estadob"/></td>
+                                    <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="rolb"/></td>
                                     <td></td>
                                 </tr>
                             </thead>
@@ -208,6 +208,9 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
+    modalAjax("modalEliminar","modalEliminar","modal-content");
+    modalAjax("modalCambioEstado","modalCambioEstado","modal-content");
+
     $(document).ready(function () {
         var table = $('#tablaUsuarios').DataTable({
             'mark'        : true,
@@ -227,31 +230,6 @@
                     delay: {
                         "hide": 200
                     }
-                });
-
-                modalAjax("modalEliminar","modalEliminar","modal-content");
-                modalAjax("modalCambioEstado","modalCambioEstado","modal-content");
-                $('.inputSearchDT').on('paste', function(e) {
-                    var valor = e.originalEvent.clipboardData.getData('Text');
-                    var id = $(this).attr('id');
-                    if ( noPegar(valor,id,'top') == 1) e.preventDefault();
-                });
-                $('.inputSearchDT').on('drop', function(e) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    var id = $(this).attr('id');
-                    $('#'+id).attr('data-toggle','popover');
-                    $('#'+id).attr('data-trigger','manual');
-                    $('#'+id).attr('data-content','<span class="text-red font-weight-bold"><center><i class="fa fa-ban"></i> La acción no se puede realizar.<br>Por favor escríba el texto</center></span>');
-                    $('#'+id).attr('data-placement','top');
-                    $('#'+id).attr('data-html','true');
-                    $('#'+id).attr('data-container','body');
-                    $('#'+id).popover('show');
-                    setTimeout(function(){
-                        $('#'+id).popover('hide');
-                        $('#'+id).removeAttr('data-toggle');
-                        $('#'+id).removeAttr('data-trigger');
-                    }, 2000)
                 });
             }
         });

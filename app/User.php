@@ -48,16 +48,12 @@ class User extends Authenticatable
         return $this->belongsTo(Roles::class, 'role_id');
     }
 
-    public function pivotUsers(){
-        return $this->belongsToMany(WorkOrders::class,'user_work_orders','user_id','work_orders_id');
-    }
-
     // =====================================================================
     //                          FUNCIONES
     // =====================================================================
 
     public function getFullNameAttribute(){
-        return $this->name.' '.$this->ap_paterno.' '.$this->ap_materno;
+        return trim($this->name.' '.$this->ap_paterno.' '.$this->ap_materno);
     }
 
     public function getName(){
