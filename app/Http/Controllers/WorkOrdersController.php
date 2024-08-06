@@ -662,7 +662,7 @@ class WorkOrdersController extends Controller
 
         $workorder = WorkOrders::findOrFail($idrep);
         // Informes en revision solo pueden ser editados por los que tengan permiso de validar informes
-        $swValidate = permisoAdminJefe() || permisoTecnico();
+        $swValidate = permisoAdministrador() || permisoOperador();
 
         $archivos = $workorder->attachesReport;
 

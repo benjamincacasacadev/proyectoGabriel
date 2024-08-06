@@ -33,7 +33,7 @@
             Ingresos
         </h1>
     </div>
-    @if (permisoAdminJefe())
+    @if (permisoAdministrador())
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
             <button type="button" class="btn btn-pill btn-primary" id="add_income">
@@ -76,7 +76,7 @@
                 <th width="10%"># Detalles</th>
                 <th width="15%">Observación</th>
                 <th width="15%">Estado</th>
-                @if(permisoAdminJefe())
+                @if(permisoAdministrador())
                     <th width="8%">Op.</th>
                 @endif
             </tr>
@@ -89,7 +89,7 @@
                 <td></td>
                 <td><input style="width: 100%;font-size:10px" id="income3" class="form-control font-weight-bold nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="obsb"/></td>
                 <td></td>
-                @if(permisoAdminJefe())
+                @if(permisoAdministrador())
                     <td></td>
                 @endif
             </tr>
@@ -198,7 +198,7 @@
                 {"data": "cant"},
                 {"data": "observation"},
                 {"data": "state"},
-                @if (permisoAdminJefe())
+                @if (permisoAdministrador())
                     {"data": "operations"},
                 @endif
             ],

@@ -78,7 +78,7 @@
         <div class="col-lg-6">
             <address style="font-size: 10px; text-align: right">
                 @if ($outcome->state == 1)
-                    @if (permisoAdminJefe())
+                    @if (permisoAdministrador())
                         <a rel="modalState" href="/outcomes/statemodal/{{ code($outcome->id) }}" class="btn btn-outline-orange border border-orange font-weight-bold" title="Cambiar estado (Autorizar ó anular)">
                             <svg class="icon icon-tabler icon-tabler-replace" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

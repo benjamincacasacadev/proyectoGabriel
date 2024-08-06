@@ -23,7 +23,7 @@
             Clientes
         </h1>
     </div>
-    @if (permisoAdminJefe())
+    @if (permisoAdministrador())
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
             <a href="clients/modalCreate" rel="modalCreate" title="Nuevo cliente">
@@ -51,7 +51,7 @@
                     <th width="15%" style="text-align: center !important">Dirección</th>
                     <th width="15%" style="text-align: center !important">Datos de contacto</th>
                     <th width="10%">Estado</th>
-                    @if (permisoAdminJefe())
+                    @if (permisoAdministrador())
                         <th width="3%">OP.</th>
                     @endif
                 </tr>
@@ -79,7 +79,7 @@
                             <option value="0">Inactivos</option>
                         </select>
                     </td>
-                    @if (permisoAdminJefe())
+                    @if (permisoAdministrador())
                         <td></td>
                     @endif
                 </tr>
@@ -168,7 +168,7 @@
                 {"data": "direccion", "className": "left"},
                 {"data": "datosContacto", "className": "left"},
                 {"data": "estado"},
-                @if (permisoAdminJefe())
+                @if (permisoAdministrador())
                     {"data": "operations"},
                 @endif
             ],

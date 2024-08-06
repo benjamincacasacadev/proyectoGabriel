@@ -34,7 +34,7 @@
                 <tr>
                     <th width="10%">ESTADO</th>
                     <th width="10%">ESTADO 2 </th>
-                    @if (permisoAdminJefe())
+                    @if (permisoAdministrador())
                         <th width="3%">OP.</th>
                     @endif
                 </tr>
@@ -50,7 +50,7 @@
                             <option value="0">Inactivos</option>
                         </select>
                     </td>
-                    @if (permisoAdminJefe())
+                    @if (permisoAdministrador())
                         <td></td>
                     @endif
                 </tr>

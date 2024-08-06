@@ -840,7 +840,7 @@
 
                                         {{-- SI EL INFORME ESTA EN REVISION --}}
                                         @if ($workorder->estado == 'R')
-                                            @if ( permisoAdminJefe() )
+                                            @if ( permisoAdministrador() )
                                                 <div class="text-center" style="margin-bottom:15px">
                                                     <button type="button" id="botonRechazar" class="btn btn-outline-danger border border-danger" style="font-size: 18px;">
                                                         RECHAZAR INFORME

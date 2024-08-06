@@ -18,14 +18,14 @@
 </style>
 @endsection
 
-@extends ('layouts.admin', ['title_template' => "Operadores"])
+@extends ('layouts.admin', ['title_template' => "Usuarios"])
 
 @section ('contenidoHeader')
 <div class="col">
     <div class="overview-wrap">
-        <h2 class="title-1">Operadores</h2>
-        <a href="/users/create" title="Nuevo operador" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
-            <i class="zmdi zmdi-plus"></i> OPERADOR
+        <h2 class="title-1">Usuarios</h2>
+        <a href="/users/create" title="Nuevo usuario" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
+            <i class="zmdi zmdi-plus"></i> USUARIO
         </a>
     </div>
 </div>
@@ -37,8 +37,7 @@
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersactive == 1 ? '' : 's';
-                $es = $usersactive == 1 ? '' : 'es';
-                $info = 'Operador'.$es.' '.'activo'.$s;
+                $info = 'Usuario'.$s.' '.'activo'.$s;
             @endphp
             <div class="statistic__item text-success" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersactive}}</h3>
@@ -51,8 +50,7 @@
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersinactive == 1 ? '' : 's';
-                $es = $usersinactive == 1 ? '' : 'es';
-                $info = 'Operador'.$es.' '.'inactivo'.$s;
+                $info = 'Usuario'.$s.' '.'inactivo'.$s;
             @endphp
             <div class="statistic__item text-yellow" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersinactive}}</h3>
@@ -65,8 +63,7 @@
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
             @php
                 $s = $usersdelete == 1 ? '' : 's';
-                $es = $usersdelete == 1 ? '' : 'es';
-                $info = 'Operador'.$es.' '.'eliminado'.$s;
+                $info = 'Usuario'.$s.' '.'eliminado'.$s;
             @endphp
             <div class="statistic__item text-danger" style="min-height: 100px !important;">
                 <h3 class="number">{{$usersdelete}}</h3>

@@ -43,7 +43,7 @@
             Activos
         </h1>
     </div>
-    @if (permisoAdminJefe())
+    @if (permisoAdministrador())
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
             <a href="assets/modalCreate" rel="modalCreate" title="Nuevo activo" type="button" class="btn btn-pill btn-primary">
@@ -74,7 +74,7 @@
                         <th width="8%">Nº de serie</th>
                         <th width="13%" style="text-align: center !important">Datos del activo</th>
                         <th width="5%">Estado</th>
-                        @if (permisoAdminJefe())
+                        @if (permisoAdministrador())
                             <th width="3%">OP.</th>
                         @endif
                     </tr>
@@ -125,7 +125,7 @@
                                 <option value="0">Inactivos</option>
                             </select>
                         </td>
-                        @if (permisoAdminJefe())
+                        @if (permisoAdministrador())
                             <td></td>
                         @endif
                     </tr>
@@ -221,7 +221,7 @@
                 {"data": "serie"},
                 {"data": "datosContacto", "className": "left"},
                 {"data": "estado"},
-                @if (permisoAdminJefe())
+                @if (permisoAdministrador())
                     {"data": "operations"},
                 @endif
             ],

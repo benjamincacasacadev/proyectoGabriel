@@ -51,7 +51,7 @@
 
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
-            @if (permisoAdminJefe())
+            @if (permisoAdministrador())
                 <a href="/inventory/createmodal" rel="modalCreate" class="btn btn-pill btn-yellow">
                     <i class="fa fa-plus" ></i> &nbsp;
                     <span class="d-none d-sm-inline-block">
@@ -98,7 +98,7 @@
                         <th width="10%">Cantidad mínima</th>
                         <th width="15%">Unidad</th>
                         <th width="15%">Estado</th>
-                        @if (permisoAdminJefe())
+                        @if (permisoAdministrador())
                             <th width="8%">Op.</th>
                         @endif
                     </tr>
@@ -112,7 +112,7 @@
                         <td><input style="width: 100%;font-size:10px" id="inven4" class="form-control font-weight-bold nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="cantminb"/></td>
                         <td><input style="width: 100%;font-size:10px" id="inven5" class="form-control font-weight-bold nopegar" type="text" placeholder="🔍 &nbsp;Buscar" name="unidadb"/></td>
                         <td></td>
-                        @if (permisoAdminJefe())
+                        @if (permisoAdministrador())
                             <td></td>
                         @endif
                     </tr>
@@ -216,7 +216,7 @@
                 {"data": "min_cant"},
                 {"data": "unit"},
                 {"data": "state"},
-                @if (permisoAdminJefe())
+                @if (permisoAdministrador())
                     {"data": "operations"},
                 @endif
             ],

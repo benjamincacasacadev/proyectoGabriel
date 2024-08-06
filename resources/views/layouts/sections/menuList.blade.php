@@ -32,7 +32,7 @@
 
     <li class=" {{ strstr($item,'.',true) == '5' ? 'active font-weight-bold' : '' }} ">
         <a href="/users">
-            <i class="fas fa-user"></i>Operadores
+            <i class="fas fa-user"></i>Usuarios
         </a>
     </li>
 

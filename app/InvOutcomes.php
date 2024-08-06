@@ -44,7 +44,7 @@ class InvOutcomes extends Model
                 '<div class="p-2 text-center form-control-sm vermas text-orange">
                     <i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;'.$val.'
                 </div>';
-                if(permisoAdminJefe()){
+                if(permisoAdministrador()){
                     $fin =
                     '<div class="p-2 text-center form-control-sm vermas">
                         <a href="/outcomes/statemodal/'.code($this->id).'" class="text-orange" title="Cambiar Estado" rel="modalState">
@@ -72,7 +72,7 @@ class InvOutcomes extends Model
     }
 
     public function getOperations(){
-        if (!permisoAdminJefe()){
+        if (!permisoAdministrador()){
             return '';
         }
         if($this->state != 1){
@@ -106,7 +106,7 @@ class InvOutcomes extends Model
     //                                         SCOPES
     // =============================================================================================
     public function scopePermisoVerOTs($query){
-        if(!permisoAdminJefe()){
+        if(!permisoAdministrador()){
             $query->whereHas('workorders.pivotWO', function($q) {
                 $q->where('user_id', userId());
             });

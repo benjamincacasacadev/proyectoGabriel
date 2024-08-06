@@ -266,7 +266,7 @@ class WorkOrders extends Model
 
     public function getOperations(){
         $operaciones = '';
-        if ($this->estado == 'P' && permisoAdminJefe()){
+        if ($this->estado == 'P' && permisoAdministrador()){
             $operaciones=
             '<span class="form-operations" data-toggle="popoverOper" tabindex="0"
                 data-content=
@@ -295,7 +295,7 @@ class WorkOrders extends Model
     }
 
     public function getCanEditAttribute(){
-        return $this->estado == 'P' && permisoAdminJefe();
+        return $this->estado == 'P' && permisoAdministrador();
     }
 
     //  Accessor para obtener el tiempo de inicio de un ot
@@ -351,7 +351,7 @@ class WorkOrders extends Model
     // ======================================================================================================
 
     public function scopePermisoVer($query){
-        if(!permisoAdminJefe()){
+        if(!permisoAdministrador()){
             $query->whereHas('pivotWO', function($q) {
                 $q->where('user_id', userId());
             });

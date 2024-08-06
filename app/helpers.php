@@ -210,34 +210,22 @@ function fechaLiteral($fecha = false){
     return $dias[date('N', strtotime($fecha))] . " " . date('j', strtotime($fecha)) . " de " . $meses[date('n', strtotime($fecha))] . " de " . date('Y', strtotime($fecha));
 }
 
-function permisoAdmin(){
-    return roleId() == 1;
-}
-
-function permisoJefe(){
+function permisoOperador(){
     return roleId() == 2;
 }
 
-function permisoTecnico(){
-    return roleId() == 4;
-}
-
-function permisoVeedor(){
-    return roleId() == 3 || roleId() == 4;
-}
-
-function permisoAdminJefe(){
-    return roleId() == 1 || roleId() == 2;
+function permisoAdministrador(){
+    return roleId() == 1;
 }
 
 function canPassAdminJefe(){
-    if(!permisoAdminJefe()){
+    if(!permisoAdministrador()){
         return abort(403);
     }
 }
 
 function permisoAdminOTs($workId, $ajax = false){
-    if(!permisoAdminJefe()){
+    if(!permisoAdministrador()){
         $checkTech = DB::table('user_work_orders')->select('user_id')->where('work_orders_id',$workId)->where('user_id',userId())->count();
         if($checkTech != 1){
             if($ajax){

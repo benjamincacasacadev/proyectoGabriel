@@ -178,7 +178,7 @@
             </div>
             <div class="card-body">
                 @php $routeAttach = storage_path('app/public/inventory/'.$item->attach); @endphp
-                @if (permisoAdminJefe())
+                @if (permisoAdministrador())
                     {{Form::Open(array('action'=>array('InventoryController@updateImage',code($item->id)),'method'=>'POST','autocomplete'=>'off','id'=>'formAttachItems'))}}
                         <div class="row">
                             <div class="text-center" id="divImageAttach">
