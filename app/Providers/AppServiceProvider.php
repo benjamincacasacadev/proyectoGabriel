@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Inventory;
-use App\InvIncomesDetails;
-use App\InvOutcomesDetails;
-use App\InvTransfers;
+use App\User;
+use App\Vehiculos;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -33,10 +31,8 @@ class AppServiceProvider extends ServiceProvider
         //  Mapeo para polimorfismo
         Relation::morphMap([
             // Inventario
-            'A0' => Inventory::class,
-            'A1' => InvIncomesDetails::class,
-            'A2' => InvOutcomesDetails::class,
-            'A3' => InvTransfers::class,
+            'A0' => User::class,
+            'A1' => Vehiculos::class,
         ]);
     }
 }
