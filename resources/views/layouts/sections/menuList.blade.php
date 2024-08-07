@@ -12,7 +12,7 @@
     </li>
 
     <li class=" {{ strstr($item,'.',true) == '2' ? 'active font-weight-bold' : '' }} ">
-        <a href="/">
+        <a href="/cuentas">
             <i class="fas fa-list-ul"></i>Cuentas
         </a>
     </li>

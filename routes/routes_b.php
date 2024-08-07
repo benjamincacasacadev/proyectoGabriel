@@ -42,7 +42,18 @@ Route::post('/regionales/delete/{id}','RegionalesController@destroy')->name('reg
 Route::get('/regionales/estado/{id}/{estado}', 'RegionalesController@changeEstado')->name('regionales.cambioEstado');
 
 
-
+// ========================================================================================
+//                                      REGIONALES
+// ========================================================================================
+Route::get('/cuentas', 'CuentasController@index')->name('cuentas.index');
+Route::post('/table_cuentas', 'CuentasController@tableCuentas')->name('cuentas.table');
+Route::get('/cuentas/modalCreate', 'CuentasController@modalCreate')->name('cuentas.createmodal');
+Route::post('/store_cuentas', 'CuentasController@store')->name('cuentas.store');
+Route::get('/cuentas/modalEdit/{id}', 'CuentasController@modalEdit')->name('cuentas.editmodal');
+Route::post('/cuentas/update/{id}', 'CuentasController@update')->name('cuentas.update');
+Route::get('/cuentas/modalDelete/{id}', 'CuentasController@modalDelete')->name('cuentas.deletemodal');
+Route::post('/cuentas/delete/{id}','CuentasController@destroy')->name('cuentas.destroy');
+Route::get('/cuentas/estado/{id}/{estado}', 'CuentasController@changeEstado')->name('cuentas.cambioEstado');
 
 
 

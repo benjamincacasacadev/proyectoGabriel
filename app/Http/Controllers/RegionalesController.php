@@ -53,25 +53,6 @@ class RegionalesController extends Controller
         return  \Response::json(['success' => '1']);
     }
 
-    public function validarFormulario(Request $request, $id = ''){
-        $edit = $id != '' ? 'edit' : '';
-
-        $nombre = 'nombre'.$edit;
-        $departamento = 'departamento'.$edit;
-
-        $reglasArray = [
-            $nombre => 'bail|required|min:2|max:100',
-            $departamento => 'required',
-        ];
-
-        $aliasArray = [
-            $nombre => '<b>Nombre de regional</b>',
-            $departamento => '<b>Departamento</b>',
-        ];
-
-        return $request->validate($reglasArray, [], $aliasArray);
-    }
-
     public function modalDelete($id){
         canPassAdminJefe();
         $regional = Regionales::findOrFail(decode($id));
@@ -98,12 +79,31 @@ class RegionalesController extends Controller
         if ($estado == 1) {
             $regional->estado = '0';
             $regional->update();
-            $flasher->addFlash('warning', 'Desactivada correctamente', 'Regional '.$regional->nombre);
+            $flasher->addFlash('warning', 'Desactivada correctamente', 'Regional '.$regional->nombre_regional);
         } else {
             $regional->estado = '1';
             $regional->update();
-            $flasher->addFlash('success', 'Activada correctamente', 'Regional '.$regional->nombre);
+            $flasher->addFlash('success', 'Activada correctamente', 'Regional '.$regional->nombre_regional);
         }
         return redirect()->route('regionales.index');
+    }
+
+    public function validarFormulario(Request $request, $id = ''){
+        $edit = $id != '' ? 'edit' : '';
+
+        $nombre = 'nombre'.$edit;
+        $departamento = 'departamento'.$edit;
+
+        $reglasArray = [
+            $nombre => 'bail|required|min:2|max:100',
+            $departamento => 'required',
+        ];
+
+        $aliasArray = [
+            $nombre => '<b>Nombre de regional</b>',
+            $departamento => '<b>Departamento</b>',
+        ];
+
+        return $request->validate($reglasArray, [], $aliasArray);
     }
 }

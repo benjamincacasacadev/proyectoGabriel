@@ -142,32 +142,6 @@
                     .draw();
             } );
         });
-
-        // input search para el pdf
-        $( "input[type='search']" ).focusout(function () {
-            $("#searchDT").val(table.search());
-        });
-
-        //Exportación en Excel
-        $(".exportUser").click(function () {
-            var val = $(this).attr('id');
-            $("#tipo").val(val);
-            //Obtenemos los resultados del filtrado del datatable para enviar los índices para generar el export
-            var resultado=table.rows( {order:'applied', search:'applied'} ).data();
-            var idsExport=[];
-            $.each(resultado, function( indice, fila ) {
-                idsExport[indice]=fila[1];
-            });
-            $('#idsExport').val(idsExport);
-            console.log(idsExport);
-            $('#btnGenerarExport').click();
-
-        });
-
-        // funcion para ajecutar el export pdf
-        $('#exportPdf').click(function () {
-            $('#formExport').submit();
-        });
     });
 </script>
 @endsection

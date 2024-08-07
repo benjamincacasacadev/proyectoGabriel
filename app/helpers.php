@@ -148,8 +148,17 @@ function datosRegistro($type){
     </div>';
 }
 
+/**
+ * Devuelve el codigo generado
+ * @param $maximo El registro máximo Ejm: OV000234
+ * @param $code Es el inicial Ejm: OV000001
+ * @param $letter La letra(s) que corresponden al código Ejm: OV
+ * @param $cant_letras La cantidad de letras que debe tener el código Ejm: 2
+ * @param $zero La cantidad de digitos (en muchos casos ceros) con la cual se debe completar el código Ejm: 6
+ * @return $cod Codigo final Ejm: OV000235
+ */
 function generateCode($maximo,$code,$letter,$cant_letras,$zero){
-    if($maximo==null){
+    if($maximo == null){
         $cod = $code;
     }else{
         $cont = substr($maximo, $cant_letras);
@@ -339,18 +348,20 @@ function generarCorreoGmail($nombreCompleto) {
 
 function listaDepartamentos(){
     $departamentos = [
-        'LP' => 'La Paz',
-        'CB' => 'Cochabamba',
-        'SC' => 'Santa Cruz',
-        'OR' => 'Oruro',
-        'PT' => 'Potosí',
-        'CH' => 'Chuquisaca',
-        'TJ' => 'Tarija',
-        'BN' => 'Beni',
-        'PD' => 'Pando'
+        '1' => 'La Paz',
+        '2' => 'Santa Cruz',
+        '3' => 'Tarija',
+        '4' => 'El Alto',
+        '5' => 'Potosí',
+        '6' => 'Cochabamba',
+        '7' => 'Oruro',
+        '8' => 'Chuquisaca',
+        '9' => 'Beni',
+        '10' => 'Pando'
     ];
 
     asort($departamentos);
 
     return $departamentos;
 }
+

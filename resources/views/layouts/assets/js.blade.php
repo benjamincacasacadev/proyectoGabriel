@@ -106,34 +106,38 @@
 
         // funcion para evitar realizar peticiones por cada letra que se escriba al filtrar
         // bloqueo de acciones al cambiar de pagina y de tamaño de tabla
-        function filterInputDT(table){
-            var dtTimer;
-            table.columns().eq(0).each(function (colIdx) {
-                $('input', $('.filters td')[colIdx]).on('keyup', function () {
-                    clearTimeout(dtTimer);
-                    var searchField = this.value;
-                    dtTimer = setTimeout(function(){
-                        table.column(colIdx).search(searchField).draw();
-                    }, 1000);
-                });
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
 
-                $('select', $('.filters td')[colIdx]).on('change', function () {
-                    clearTimeout(dtTimer);
+        function filterInputDT(table) {
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', $('.filters td')[colIdx]).on('keyup', debounce(function () {
+                    var searchField = this.value;
+                    console.log(searchField);
+                    table.column(colIdx).search(searchField).draw();
+                }, 1000));
+
+                $('select', $('.filters td')[colIdx]).on('change', debounce(function () {
                     var searchField = this.value;
                     console.log(this.value);
-                    dtTimer = setTimeout(function(){
-                        table.column(colIdx).search(searchField).draw();
-                    }, 1000);
-                });
+                    table.column(colIdx).search(searchField).draw();
+                }, 1000));
             });
 
             // BLOQUEAR PAGINADO
-            table.on( 'page.dt', function () {
+            table.on('page.dt', function () {
                 $(".dataTables_paginate").children().hide();
                 $(".dataTables_paginate").append(espereDT());
             });
+
             // BLOQUEAR TAMAÑO
-            table.on( 'length.dt', function ( ) {
+            table.on('length.dt', function () {
                 $(".dataTables_length").children().hide();
                 $(".dataTables_length").append(espereDT());
             });

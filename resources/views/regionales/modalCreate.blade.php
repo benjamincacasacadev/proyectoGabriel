@@ -15,8 +15,8 @@
             <label id="departamento--label">* Departamento</label>
             <select name="departamento" class="form-control form-select selector-modal" style="width: 100%">
                 <option value="">Seleccione una opción</option>
-                @foreach (listaDepartamentos() as $sigla => $departamento)
-                    <option value="{{ $sigla }}">{{ $departamento }}</option>
+                @foreach (listaDepartamentos() as $key => $departamento)
+                    <option value="{{ $key }}">{{ $departamento }}</option>
                 @endforeach
             </select>
             <span id="departamento-error" class="text-red"></span>

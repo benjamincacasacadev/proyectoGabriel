@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h5 class="modal-title font-weight-bold text-primarydark">
         <i class="fa fa-plus"></i>
-        Editar regional {{ $regional->nombre }}
+        Editar regional {{ $regional->nombre_regional }}
     </h5>
     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 </div>
@@ -24,11 +24,11 @@
                     <label id="departamentoedit--label">* Departamento</label>
                     <select name="departamentoedit" class="form-control form-select selector-modal" style="width: 100%">
                         <option value="">Seleccione una opción</option>
-                        @foreach (listaDepartamentos() as $sigla => $departamento)
-                            @if ($regional->departamento == $sigla)
-                                <option value="{{ $sigla }}" selected>{{ $departamento }}</option>
+                        @foreach (listaDepartamentos() as $key => $departamento)
+                            @if ($regional->departamento == $key)
+                                <option value="{{ $key }}" selected>{{ $departamento }}</option>
                             @else
-                                <option value="{{ $sigla }}">{{ $departamento }}</option>
+                                <option value="{{ $key }}">{{ $departamento }}</option>
                             @endif
                         @endforeach
                     </select>
