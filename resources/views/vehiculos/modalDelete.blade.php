@@ -1,14 +1,14 @@
-{{Form::open(array('action'=>array('RegionalesController@destroy',code($regional->id)),'method'=>'post', 'onsubmit'=>'botonEliminar.disabled = true; return true;'))}}
+{{Form::open(array('action'=>array('VehiculosController@destroy',code($vehiculo->id)),'method'=>'post', 'onsubmit'=>'botonEliminar.disabled = true; return true;'))}}
     <div class="modal-status @if($cantAsociados > 0) bg-yellow @else bg-red @endif"></div>
     <div class="modal-body text-center py-4 px-4">
-        {{-- SI LA REGIONAL TIENE REGISTROS ASOCIADOS NO PERMITIR ELIMINAR REGISTRO --}}
+        {{-- SI EL VEHICULO TIENE REGISTROS ASOCIADOS NO PERMITIR ELIMINAR REGISTRO --}}
         @if($cantAsociados > 0)
             <svg class="icon mb-2 text-yellow icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
             </svg>
-            <h6>No puede eliminar la regional <b>{{ $regional->nombre_regional }}</b> </h6>
+            <h6>No puede eliminar el vehículo <b>{{ $vehiculo->nombre_vehiculo }}</b> </h6>
             <div class="text-muted">
-                La regional tiene {{ $cantAsociados }} registro(s) asociados.
+                El vehículo tiene {{ $cantAsociados }} registro(s) asociados.
             </div>
         @else
             <svg class="icon mb-2 text-danger icon-lg" style="" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -16,7 +16,7 @@
             </svg>
             <h5 class="font-weight-bold">¿Está seguro?</h5>
             <div class="text-muted">
-                ¿Está seguro de eliminar la regional <b>{{ $regional->nombre_regional }}</b>?
+                ¿Está seguro de eliminar el vehículo <b>{{ $vehiculo->nombre_vehiculo }}</b>?
             </div>
         @endif
     </div>

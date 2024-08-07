@@ -18,7 +18,7 @@
     </li>
 
     <li class=" {{ strstr($item,'.',true) == '3' ? 'active font-weight-bold' : '' }} ">
-        <a href="/">
+        <a href="/vehiculos">
             <i class="fas fa-car-side"></i>Vehículos
         </a>
     </li>

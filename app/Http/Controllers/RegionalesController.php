@@ -9,7 +9,7 @@ use Flasher\Prime\FlasherInterface;
 class RegionalesController extends Controller
 {
     public function index(){
-        $regionales = Regionales::get();
+        $regionales = Regionales::orderBy('id','desc')->get();
         Session::put('item','4.');
         return view('regionales.index', compact('regionales'));
     }

@@ -43,7 +43,7 @@ Route::get('/regionales/estado/{id}/{estado}', 'RegionalesController@changeEstad
 
 
 // ========================================================================================
-//                                      REGIONALES
+//                                      CUENTAS
 // ========================================================================================
 Route::get('/cuentas', 'CuentasController@index')->name('cuentas.index');
 Route::post('/table_cuentas', 'CuentasController@tableCuentas')->name('cuentas.table');
@@ -54,6 +54,20 @@ Route::post('/cuentas/update/{id}', 'CuentasController@update')->name('cuentas.u
 Route::get('/cuentas/modalDelete/{id}', 'CuentasController@modalDelete')->name('cuentas.deletemodal');
 Route::post('/cuentas/delete/{id}','CuentasController@destroy')->name('cuentas.destroy');
 Route::get('/cuentas/estado/{id}/{estado}', 'CuentasController@changeEstado')->name('cuentas.cambioEstado');
+
+
+// ========================================================================================
+//                                      VEHICULOS
+// ========================================================================================
+Route::get('/vehiculos', 'VehiculosController@index')->name('vehiculos.index');
+Route::post('/table_vehiculos', 'VehiculosController@tableVehiculos')->name('vehiculos.table');
+Route::get('/vehiculos/modalCreate', 'VehiculosController@modalCreate')->name('vehiculos.createmodal');
+Route::post('/store_vehiculos', 'VehiculosController@store')->name('vehiculos.store');
+Route::get('/vehiculos/modalEdit/{id}', 'VehiculosController@modalEdit')->name('vehiculos.editmodal');
+Route::post('/vehiculos/update/{id}', 'VehiculosController@update')->name('vehiculos.update');
+Route::get('/vehiculos/modalDelete/{id}', 'VehiculosController@modalDelete')->name('vehiculos.deletemodal');
+Route::post('/vehiculos/delete/{id}','VehiculosController@destroy')->name('vehiculos.destroy');
+Route::get('/vehiculos/estado/{id}/{estado}', 'VehiculosController@changeEstado')->name('vehiculos.cambioEstado');
 
 
 

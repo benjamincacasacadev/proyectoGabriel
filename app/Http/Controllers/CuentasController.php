@@ -11,9 +11,8 @@ class CuentasController extends Controller
 {
     public function index(Request $request){
         $selectDepartamento = $request->selectDepartamento ?? '';
-        $cuentas = Cuentas::get();
         Session::put('item','2.');
-        return view('cuentas.index', compact('cuentas','selectDepartamento'));
+        return view('cuentas.index', compact('selectDepartamento'));
     }
 
     public function tableCuentas(Request $request){
@@ -32,13 +31,12 @@ class CuentasController extends Controller
         $cuentas = $cuentas
         ->offset($start)
         ->limit($limit)
-        ->orderBy('id','desc')
+        ->orderBy('cod','desc')
         ->get();
-
 
         $data = array();
         foreach ($cuentas as $cuenta){
-            $nestedData['cod'] = $cuenta->cod;
+            $nestedData['cod'] = '<b>'.$cuenta->cod.'</b>';
             $nestedData['nombre'] = $cuenta->nombre_cuenta;
             $nestedData['regional'] = $cuenta->regional->nombre_regional;
             $nestedData['departamento'] = $cuenta->regional->nameCiudad();
@@ -146,7 +144,6 @@ class CuentasController extends Controller
         return redirect()->route('cuentas.index');
     }
 
-
     public function validarFormulario(Request $request, $id = ''){
         $edit = $id != '' ? 'edit' : '';
 
@@ -159,7 +156,7 @@ class CuentasController extends Controller
         ];
 
         $aliasArray = [
-            $nombre => '<b>Nombre de regional</b>',
+            $nombre => '<b>Nombre de cuenta</b>',
             $regional => '<b>Departamento</b>',
         ];
 

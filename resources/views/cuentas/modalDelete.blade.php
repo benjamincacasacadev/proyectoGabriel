@@ -16,7 +16,7 @@
             </svg>
             <h5 class="font-weight-bold">¿Está seguro?</h5>
             <div class="text-muted">
-                ¿Está seguro de de eliminar la cuenta <b>{{ $cuenta->nombre_cuenta }}</b>?
+                ¿Está seguro de eliminar la cuenta <b>{{ $cuenta->nombre_cuenta }}</b>?
             </div>
         @endif
     </div>
