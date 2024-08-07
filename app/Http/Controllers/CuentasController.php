@@ -31,7 +31,7 @@ class CuentasController extends Controller
         $cuentas = $cuentas
         ->offset($start)
         ->limit($limit)
-        ->orderBy('cod','desc')
+        ->orderBy('id','desc')
         ->get();
 
         $data = array();
