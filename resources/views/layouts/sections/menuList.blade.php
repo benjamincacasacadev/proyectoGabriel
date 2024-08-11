@@ -23,7 +23,7 @@
         </a>
         <ul class="list-unstyled navbar__sub-list js-sub-list" style="@if($activeMenuCuentasPadre) display:block @endif">
             <li class="{{ strstr($item,':',true) == '2.0' ? 'active font-weight-bold' : '' }}">
-                <a href="/cuentas">
+                <a href="/clientes">
                     <i class="fas fa-table"></i>Clientes
                 </a>
             </li>

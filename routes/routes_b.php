@@ -39,6 +39,19 @@ Route::get('/regionales/estado/{id}/{estado}', 'RegionalesController@changeEstad
 
 
 // ========================================================================================
+//                                      CLIENTES
+// ========================================================================================
+Route::get('/clientes', 'ClientesController@index')->name('clientes.index');
+Route::post('/table_clientes', 'ClientesController@tableClientes')->name('clientes.table');
+Route::get('/clientes/estado/{id}/{estado}', 'ClientesController@changeEstado')->name('clientes.cambioEstado');
+Route::get('/clientes/modalCreate', 'ClientesController@modalCreate')->name('clienteS.createmodal');
+Route::post('/store_clientes', 'ClientesController@store')->name('clientes.store');
+Route::get('/clientes/modalEdit/{id}', 'ClientesController@modalEdit')->name('clientes.editmodal');
+Route::post('/clientes/update/{id}', 'ClientesController@update')->name('clientes.update');
+Route::get('/clientes/modalDelete/{id}', 'ClientesController@modalDelete')->name('clientes.deletemodal');
+Route::post('/clientes/delete/{id}','ClientesController@destroy')->name('clientes.destroy');
+
+// ========================================================================================
 //                                      CUENTAS
 // ========================================================================================
 Route::get('/cuentas', 'CuentasController@index')->name('cuentas.index');
