@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ContactosCuentas;
 use App\Cuentas;
 use App\Regionales;
 use Illuminate\Http\Request;
@@ -15,6 +16,12 @@ class CuentasController extends Controller
         return view('cuentas.index', compact('selectDepartamento'));
     }
 
+    public function show($id){
+        $cuenta = Cuentas::findOrFail(decode($id));
+        $contactos = ContactosCuentas::where('cuenta_id', $cuenta->id)->orderBy('id','desc')->get();
+        return view('cuentas.show', compact('cuenta','contactos'));
+    }
+
     public function tableCuentas(Request $request){
         $totalData = Cuentas::count();
         $totalFiltered = $totalData;
@@ -24,7 +31,8 @@ class CuentasController extends Controller
         $cuentas = Cuentas::
         Cod($request->input('columns.0.search.value'))
         ->Nombre($request->input('columns.1.search.value'))
-        ->Regional($request->input('columns.2.search.value'))
+        ->Cliente($request->input('columns.2.search.value'))
+        ->Regional($request->input('columns.3.search.value'))
         ->Departamento($request->departamento);
 
         $totalFiltered = $cuentas->count();
@@ -36,8 +44,9 @@ class CuentasController extends Controller
 
         $data = array();
         foreach ($cuentas as $cuenta){
-            $nestedData['cod'] = '<b>'.$cuenta->cod.'</b>';
+            $nestedData['cod'] = $cuenta->getCodLink();
             $nestedData['nombre'] = $cuenta->nombre_cuenta;
+            $nestedData['cliente'] = $cuenta->cliente->nombre;
             $nestedData['regional'] = $cuenta->regional->nombre_regional;
             $nestedData['departamento'] = $cuenta->regional->nameCiudad();
             $nestedData['estado'] = $cuenta->getEstadoHTML();

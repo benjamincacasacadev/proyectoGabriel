@@ -58,20 +58,11 @@
                             <tr>
                                 <th width="10%">CÓDIGO</th>
                                 <th width="20%">NOMBRE DE CUENTA</th>
-                                <th width="20%">REGIONAL</th>
+                                <th width="20%">CLIENTE</th>
+                                <th width="10%">REGIONAL</th>
                                 <th width="20%">DEPARTAMENTO</th>
                                 <th width="10%">ESTADO</th>
                                 <th width="3%">OPC.</th>
-                            </tr>
-                        </thead>
-
-                        <thead role="row">
-                            <tr class="filters">
-                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="codb"/></td>
-                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
-                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         </thead>
 
@@ -162,6 +153,7 @@
             "columns": [
                 {"data": "cod"},
                 {"data": "nombre"},
+                {"data": "cliente"},
                 {"data": "regional"},
                 {"data": "departamento"},
                 {"data": "estado"},

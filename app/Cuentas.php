@@ -13,9 +13,17 @@ class Cuentas extends Model
         return $this->belongsTo(Regionales::class, 'regional_id');
     }
 
+    public function cliente(){
+        return $this->belongsTo(Clientes::class, 'cliente_id');
+    }
+
     // =====================================================================
     //                          FUNCIONES
     // =====================================================================
+    public function getCodLink(){
+        return '<a href="/cuentas/show/'.code($this->id).'" class="font-weight-bold">'.$this->cod.'</a>';
+    }
+
     public function getEstadoHTML(){
         if($this->estado == '1'){
             $html =
@@ -57,6 +65,14 @@ class Cuentas extends Model
     public function scopeNombre($query, $val){
         if ($val != ''){
             $query->where('nombre_cuenta', 'like', "%{$val}%");
+        }
+    }
+
+    public function scopeCliente($query, $val){
+        if ($val != '') {
+            $query->whereHas('cliente', function ($q1) use ($val) {
+                $q1->where('nombre', 'like', "%{$val}%");
+            });
         }
     }
 

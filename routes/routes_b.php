@@ -55,6 +55,7 @@ Route::post('/clientes/delete/{id}','ClientesController@destroy')->name('cliente
 //                                      CUENTAS
 // ========================================================================================
 Route::get('/cuentas', 'CuentasController@index')->name('cuentas.index');
+Route::get('/cuentas/show/{id}', 'CuentasController@show')->name('cuentas.show');
 Route::post('/table_cuentas', 'CuentasController@tableCuentas')->name('cuentas.table');
 Route::get('/cuentas/modalCreate', 'CuentasController@modalCreate')->name('cuentas.createmodal');
 Route::post('/store_cuentas', 'CuentasController@store')->name('cuentas.store');
@@ -63,6 +64,17 @@ Route::post('/cuentas/update/{id}', 'CuentasController@update')->name('cuentas.u
 Route::get('/cuentas/modalDelete/{id}', 'CuentasController@modalDelete')->name('cuentas.deletemodal');
 Route::post('/cuentas/delete/{id}','CuentasController@destroy')->name('cuentas.destroy');
 Route::get('/cuentas/estado/{id}/{estado}', 'CuentasController@changeEstado')->name('cuentas.cambioEstado');
+
+// ========================================================================================
+//                                      CONTACTOS
+// ========================================================================================
+Route::get('/contactos', 'ContactosCuentasController@index')->name('contactos.index');
+Route::get('/contactos/modalCreate/{cuentaId}', 'ContactosCuentasController@modalCreate')->name('contactos.createmodal');
+Route::post('/store_contactos', 'ContactosCuentasController@store')->name('contactos.store');
+Route::get('/contactos/modalEdit/{id}', 'ContactosCuentasController@modalEdit')->name('contactos.editmodal');
+Route::post('/contactos/update/{id}', 'ContactosCuentasController@update')->name('contactos.update');
+Route::get('/contactos/modalDelete/{id}', 'ContactosCuentasController@modalDelete')->name('contactos.deletemodal');
+Route::post('/contactos/delete/{id}','ContactosCuentasController@destroy')->name('contactos.destroy');
 
 // ========================================================================================
 //                                      VEHICULOS
@@ -89,3 +101,29 @@ Route::post('/novedades/update/{id}', 'NovedadesController@update')->name('noved
 Route::get('/novedades/modalDelete/{id}', 'NovedadesController@modalDelete')->name('novedades.deletemodal');
 Route::post('/novedades/delete/{id}','NovedadesController@destroy')->name('novedades.destroy');
 Route::get('/novedades/estado/{id}/{estado}', 'NovedadesController@changeEstado')->name('novedades.cambioEstado');
+
+Route::get('/createClientsX', function () {
+    abort(403);
+
+    $nombres_contacto = array("Juan Pérez","María Rodríguez","Carlos García","Ana Martínez","Luis López","Laura Hernández","Diego González","Sofía Díaz","Pedro Sánchez","Elena Ramírez","Miguel Gómez","Lucía Torres","Alejandro Vásquez","Paula Castro","José Morales","Valentina Álvarez","Javier Ruiz","Camila Herrera","Fernando Ortiz","Isabel Cruz");
+
+    $numeros_celular_bolivia = array("61234567","72345678","63456789","74567890","65678901","76789012","67890123","78901234","69012345","70123456","61234567","72345678","63456789","74567890","65678901","76789012","67890123","78901234","69012345","70123456");
+
+    $cargos_empresa = array("Gerente de Ventas","Analista de Marketing","Jefe de Recursos Humanos","Desarrollador de Software","Director Financiero","Especialista en Soporte Técnico","Coordinador de Proyectos","Ejecutivo de Cuentas","Diseñador Gráfico","Técnico de Mantenimiento","Consultor de Negocios","Analista de Datos","Ingeniero de Producción","Asistente Administrativo","Especialista en Logística","Asesor Legal","Arquitecto de Sistemas","Investigador de Mercado","Analista de Calidad","Coordinador de Eventos");
+
+    $cuentas = \App\Cuentas::get();
+    foreach ($cuentas as $cuenta) {
+        $i = rand(0, 19);
+        $nombreContacto = $nombres_contacto[$i];
+        $emailContacto = generarCorreoGmail($nombreContacto);
+        $client = new \App\ContactosCuentas();
+        $client->cuenta_id = $cuenta->id;
+        $client->nombre_contacto = $nombreContacto;
+        $client->cargo_contacto = $cargos_empresa[$i];
+        $client->celular_contacto = $numeros_celular_bolivia[$i];
+        $client->email_contacto = $emailContacto;
+        $client->save();
+    }
+
+    dd("FIdwqqwdN");
+});
