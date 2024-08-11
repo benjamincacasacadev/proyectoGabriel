@@ -11,7 +11,7 @@ class CuentasController extends Controller
 {
     public function index(Request $request){
         $selectDepartamento = $request->selectDepartamento ?? '';
-        Session::put('item','2.');
+        Session::put('item','2.1:');
         return view('cuentas.index', compact('selectDepartamento'));
     }
 

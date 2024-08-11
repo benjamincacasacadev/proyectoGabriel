@@ -57,7 +57,7 @@
                         </div>
 
                         @php
-                            $array = ['0', '1.', '2.','3.', '4.0:', '5.'];
+                            $array = ['0', '1.', '2.1:', '3.', '5.'];
                         @endphp
                         @if(!in_array($item, $array))
                             <div class="row mb-3">

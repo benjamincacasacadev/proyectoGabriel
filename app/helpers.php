@@ -233,19 +233,6 @@ function canPassAdminJefe(){
     }
 }
 
-function permisoAdminOTs($workId, $ajax = false){
-    if(!permisoAdministrador()){
-        $checkTech = DB::table('user_work_orders')->select('user_id')->where('work_orders_id',$workId)->where('user_id',userId())->count();
-        if($checkTech != 1){
-            if($ajax){
-                return 'ajax';
-            }else{
-                abort(403);
-            }
-        }
-    }
-}
-
 function limpiarTexto($texto,$type){
     if($type == 's2'){
         $find = array('â','ê','î','ô','û','ã','õ','ç');
@@ -317,18 +304,10 @@ function sliderImg(){
 }
 
 function monedaVal($valor){
-    $numero=floatval(str_replace(",","",$valor));
+    $numero = floatval(str_replace(",","",$valor));
     return $numero;
 }
 
-function getAlmacenes(){
-    return [
-        1 => 'Edificio Arcadia',
-        2 => 'El Alto',
-        3 => 'Gramadal',
-        4 => 'Edifico técnico',
-    ];
-}
 
 function generarCorreoGmail($nombreCompleto) {
     // Convertir el nombre completo a minúsculas y eliminar espacios
@@ -346,6 +325,9 @@ function generarCorreoGmail($nombreCompleto) {
     return $correoElectronico;
 }
 
+// ============================================================================
+// Listas de parametros del sistema
+// ============================================================================
 function listaDepartamentos(){
     $departamentos = [
         '1' => 'La Paz',
@@ -364,4 +346,33 @@ function listaDepartamentos(){
 
     return $departamentos;
 }
+
+
+function listaAmbitos(){
+    $ambitos = [
+        '1' => 'Seguridad física',
+        '2' => 'Seguridad electrónica',
+        '3' => 'Vehículos',
+    ];
+
+    asort($ambitos);
+
+    return $ambitos;
+}
+
+function listaEventos(){
+    $ambitos = [
+        '1' => 'Activación de alarma',
+        '2' => 'Movimiento fuera de horario',
+        '3' => 'Cierre remoto',
+        '4' => 'Asignación de llaves',
+        '5' => 'Control remoto de vehículo',
+        '6' => 'Movimiento de vehículo fuera de horario',
+    ];
+
+    asort($ambitos);
+
+    return $ambitos;
+}
+
 

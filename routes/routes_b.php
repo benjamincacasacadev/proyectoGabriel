@@ -63,3 +63,16 @@ Route::post('/vehiculos/update/{id}', 'VehiculosController@update')->name('vehic
 Route::get('/vehiculos/modalDelete/{id}', 'VehiculosController@modalDelete')->name('vehiculos.deletemodal');
 Route::post('/vehiculos/delete/{id}','VehiculosController@destroy')->name('vehiculos.destroy');
 Route::get('/vehiculos/estado/{id}/{estado}', 'VehiculosController@changeEstado')->name('vehiculos.cambioEstado');
+
+// ========================================================================================
+//                                      NOVEDADES
+// ========================================================================================
+Route::get('/novedades', 'NovedadesController@index')->name('novedades.index');
+Route::post('/table_novedades', 'NovedadesController@tableNovedades')->name('novedades.table');
+Route::get('/novedades/modalCreate', 'NovedadesController@modalCreate')->name('novedades.createmodal');
+Route::post('/store_novedades', 'NovedadesController@store')->name('novedades.store');
+Route::get('/novedades/modalEdit/{id}', 'NovedadesController@modalEdit')->name('novedades.editmodal');
+Route::post('/novedades/update/{id}', 'NovedadesController@update')->name('novedades.update');
+Route::get('/novedades/modalDelete/{id}', 'NovedadesController@modalDelete')->name('novedades.deletemodal');
+Route::post('/novedades/delete/{id}','NovedadesController@destroy')->name('novedades.destroy');
+Route::get('/novedades/estado/{id}/{estado}', 'NovedadesController@changeEstado')->name('novedades.cambioEstado');

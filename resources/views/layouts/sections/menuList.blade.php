@@ -6,16 +6,40 @@
     </li>
 
     <li class=" {{ strstr($item,'.',true) == '1' ? 'active font-weight-bold' : '' }} ">
-        <a href="/">
+        <a href="/novedades">
             <i class="fas fa-list-alt"></i>Novedades
         </a>
     </li>
 
-    <li class=" {{ strstr($item,'.',true) == '2' ? 'active font-weight-bold' : '' }} ">
+    @php
+        $activeMenuCuentasPadre = strstr($item,'.',true) == '2';
+    @endphp
+    <li class="has-sub @if($activeMenuCuentasPadre) active @endif">
+        <a class="js-arrow" href="#">
+            <i class="fas fa-list-ul"></i>Cuentas
+            <span class="arrow @if($activeMenuCuentasPadre) up @endif">
+                <i class="fas fa-angle-down"></i>
+            </span>
+        </a>
+        <ul class="list-unstyled navbar__sub-list js-sub-list" style="@if($activeMenuCuentasPadre) display:block @endif">
+            <li class="{{ strstr($item,':',true) == '2.0' ? 'active font-weight-bold' : '' }}">
+                <a href="/cuentas">
+                    <i class="fas fa-table"></i>Clientes
+                </a>
+            </li>
+            <li class="{{ strstr($item,':',true) == '2.1' ? 'active font-weight-bold' : '' }}">
+                <a href="/cuentas">
+                    <i class="fa fa-list-ul"></i>Ver cuentas
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    {{-- <li class=" {{ strstr($item,'.',true) == '2' ? 'active font-weight-bold' : '' }} ">
         <a href="/cuentas">
             <i class="fas fa-list-ul"></i>Cuentas
         </a>
-    </li>
+    </li> --}}
 
     <li class=" {{ strstr($item,'.',true) == '3' ? 'active font-weight-bold' : '' }} ">
         <a href="/vehiculos">
@@ -35,31 +59,6 @@
         </a>
     </li>
 
-    {{-- <li class="has-sub">
-        <a class="js-arrow" href="#">
-            <i class="fas fa-trophy"></i>Features
-            <span class="arrow">
-                <i class="fas fa-angle-down"></i>
-            </span>
-        </a>
-        <ul class="list-unstyled navbar__sub-list js-sub-list">
-            <li>
-                <a href="table.html">
-                    <i class="fas fa-table"></i>Tables</a>
-            </li>
-            <li>
-                <a href="form.html">
-                    <i class="far fa-check-square"></i>Forms</a>
-            </li>
-            <li>
-                <a href="calendar.html">
-                    <i class="fas fa-calendar-alt"></i>Calendar</a>
-            </li>
-            <li>
-                <a href="map.html">
-                    <i class="fas fa-map-marker-alt"></i>Maps</a>
-            </li>
-        </ul>
-    </li> --}}
+
 
 </ul>
