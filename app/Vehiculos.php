@@ -16,6 +16,10 @@ class Vehiculos extends Model
     // =====================================================================
     //                          FUNCIONES
     // =====================================================================
+    public function getCodLink(){
+        return '<a href="/vehiculos/show/'.code($this->id).'" class="font-weight-bold">'.$this->matricula.'</a>';
+    }
+
     public function getEstadoHTML(){
         if($this->estado == '1'){
             $html =

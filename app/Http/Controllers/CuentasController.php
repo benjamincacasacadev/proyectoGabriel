@@ -19,6 +19,7 @@ class CuentasController extends Controller
     public function show($id){
         $cuenta = Cuentas::findOrFail(decode($id));
         $contactos = ContactosCuentas::where('cuenta_id', $cuenta->id)->orderBy('id','desc')->get();
+        Session::put('item','2.1:');
         return view('cuentas.show', compact('cuenta','contactos'));
     }
 

@@ -24,7 +24,7 @@
         <ul class="list-unstyled navbar__sub-list js-sub-list" style="@if($activeMenuCuentasPadre) display:block @endif">
             <li class="{{ strstr($item,':',true) == '2.0' ? 'active font-weight-bold' : '' }}">
                 <a href="/clientes">
-                    <i class="fas fa-table"></i>Clientes
+                    <i class="fas fa-user-tie"></i>Clientes
                 </a>
             </li>
             <li class="{{ strstr($item,':',true) == '2.1' ? 'active font-weight-bold' : '' }}">
@@ -34,12 +34,6 @@
             </li>
         </ul>
     </li>
-
-    {{-- <li class=" {{ strstr($item,'.',true) == '2' ? 'active font-weight-bold' : '' }} ">
-        <a href="/cuentas">
-            <i class="fas fa-list-ul"></i>Cuentas
-        </a>
-    </li> --}}
 
     <li class=" {{ strstr($item,'.',true) == '3' ? 'active font-weight-bold' : '' }} ">
         <a href="/vehiculos">

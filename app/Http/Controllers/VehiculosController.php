@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ConductoresVehiculos;
 use App\Regionales;
 use App\Vehiculos;
 use Illuminate\Http\Request;
@@ -17,6 +18,13 @@ class VehiculosController extends Controller
         $selectDepartamento = $request->selectDepartamento ?? '';
         Session::put('item','3.');
         return view('vehiculos.index', compact('selectDepartamento'));
+    }
+
+    public function show($id){
+        $vehiculo = Vehiculos::findOrFail(decode($id));
+        $conductores = ConductoresVehiculos::where('vehiculo_id', $vehiculo->id)->orderBy('id','desc')->get();
+        Session::put('item','3.');
+        return view('vehiculos.show', compact('vehiculo','conductores'));
     }
 
     public function tableVehiculos(Request $request){
@@ -41,7 +49,7 @@ class VehiculosController extends Controller
 
         $data = array();
         foreach ($vehiculos as $vehiculo){
-            $nestedData['matricula'] = '<b>'.$vehiculo->matricula.'</b>';
+            $nestedData['matricula'] = $vehiculo->getCodLink();
             $nestedData['nombre'] = $vehiculo->nombre_vehiculo;
             $nestedData['regional'] = $vehiculo->regional->nombre_regional;
             $nestedData['departamento'] = $vehiculo->regional->nameCiudad();

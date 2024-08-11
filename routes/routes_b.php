@@ -80,6 +80,7 @@ Route::post('/contactos/delete/{id}','ContactosCuentasController@destroy')->name
 //                                      VEHICULOS
 // ========================================================================================
 Route::get('/vehiculos', 'VehiculosController@index')->name('vehiculos.index');
+Route::get('/vehiculos/show/{id}', 'VehiculosController@show')->name('vehiculos.show');
 Route::post('/table_vehiculos', 'VehiculosController@tableVehiculos')->name('vehiculos.table');
 Route::get('/vehiculos/modalCreate', 'VehiculosController@modalCreate')->name('vehiculos.createmodal');
 Route::post('/store_vehiculos', 'VehiculosController@store')->name('vehiculos.store');
@@ -88,6 +89,17 @@ Route::post('/vehiculos/update/{id}', 'VehiculosController@update')->name('vehic
 Route::get('/vehiculos/modalDelete/{id}', 'VehiculosController@modalDelete')->name('vehiculos.deletemodal');
 Route::post('/vehiculos/delete/{id}','VehiculosController@destroy')->name('vehiculos.destroy');
 Route::get('/vehiculos/estado/{id}/{estado}', 'VehiculosController@changeEstado')->name('vehiculos.cambioEstado');
+
+// ========================================================================================
+//                                      CONDUCTORES
+// ========================================================================================
+Route::get('/conductores', 'ConductoresVehiculosController@index')->name('conductores.index');
+Route::get('/conductores/modalCreate/{vehiculoId}', 'ConductoresVehiculosController@modalCreate')->name('conductores.createmodal');
+Route::post('/store_conductores', 'ConductoresVehiculosController@store')->name('conductores.store');
+Route::get('/conductores/modalEdit/{id}', 'ConductoresVehiculosController@modalEdit')->name('conductores.editmodal');
+Route::post('/conductores/update/{id}', 'ConductoresVehiculosController@update')->name('conductores.update');
+Route::get('/conductores/modalDelete/{id}', 'ConductoresVehiculosController@modalDelete')->name('conductores.deletemodal');
+Route::post('/conductores/delete/{id}','ConductoresVehiculosController@destroy')->name('conductores.destroy');
 
 // ========================================================================================
 //                                      NOVEDADES
@@ -125,5 +137,68 @@ Route::get('/createClientsX', function () {
         $client->save();
     }
 
-    dd("FIdwqqwdN");
+    dd("FIN");
+});
+
+Route::get('/createChoferesX', function () {
+    abort(403);
+
+    $choferes = [
+        "Juan Carlos Mamani",
+        "José Luis Condori",
+        "Carlos Alberto Huanca",
+        "Miguel Ángel Cusi",
+        "Luis Fernando Callisaya",
+        "Oscar René Copa",
+        "Walter Freddy Quispe",
+        "Víctor Hugo Calisaya",
+        "Hugo Francisco Nina",
+        "Ramiro René Llanque",
+        "Roberto Carlos Apaza",
+        "Alberto Felipe Choque",
+        "Pablo Andrés Quispe",
+        "Javier Luis Mamani",
+        "Sergio Enrique Condori",
+        "Fernando Alfredo Cusi",
+        "Mauricio Iván Huanca",
+        "Raúl Hernán Callisaya",
+        "Arturo Javier Nina",
+        "Jorge Luis Mamani"
+    ];
+
+    $numeros_celulares = [
+        "767123456",
+        "712345678",
+        "684567123",
+        "799876543",
+        "711234567",
+        "678912345",
+        "764321098",
+        "719876543",
+        "690123456",
+        "787654321",
+        "721345678",
+        "691234567",
+        "776543210",
+        "703456789",
+        "684321987",
+        "754321098",
+        "713456789",
+        "672345678",
+        "761234567",
+        "789012345"
+    ];
+
+    $vehiculos = \App\Vehiculos::get();
+    foreach ($vehiculos as $vehiculo) {
+        $i = rand(0, 19);
+        $nombreContacto = $choferes[$i];
+        $conductor = new \App\ConductoresVehiculos();
+        $conductor->vehiculo_id = $vehiculo->id;
+        $conductor->nombre_conductor = $nombreContacto;
+        $conductor->celular_conductor = $numeros_celulares[$i];
+        $conductor->save();
+    }
+
+    dd("FIN");
 });

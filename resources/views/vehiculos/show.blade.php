@@ -1,10 +1,10 @@
-@extends ('layouts.admin', ['title_template' => "Cuenta $cuenta->cod"])
+@extends ('layouts.admin', ['title_template' => "Vehículo $vehiculo->matricula"])
 @section('extracss')
 <style>
-    table#tablaContactos th{
+    table#tablaConductores th{
         font-size:12px;
     }
-    table#tablaContactos td{
+    table#tablaConductores td{
         font-size: 13px;
     }
 </style>
@@ -13,9 +13,9 @@
 @section ('contenidoHeader')
 <div class="col">
     <div class="overview-wrap">
-        <h2 class="title-1">Cuenta {{ $cuenta->cod }} </h2>
-        <a href="/cuentas" class="au-btn au-btn-icon btn-outline-secondary border border-secondary font-weight-bold">
-            <i class="fa fa-list-ul"></i> Ver cuentas
+        <h2 class="title-1">Vehículo {{ $vehiculo->matricula }} </h2>
+        <a href="/vehiculos" class="au-btn au-btn-icon btn-outline-secondary border border-secondary font-weight-bold">
+            <i class="fa fa-list-ul"></i> Ver vehículos
         </a>
     </div>
 </div>
@@ -36,22 +36,36 @@
                     <div class="card-body">
                         <table class="table table-borderless table-earning">
                             <tr>
-                                <th class="font-weight-bold">Nombre de cuenta</th>
-                                <td>{!! $cuenta->nombre_cuenta !!}</td>
+                                <th class="font-weight-bold">Nombre de vehículo</th>
+                                <td>{!! $vehiculo->nombre_vehiculo !!}</td>
                             </tr>
                             <tr>
-                                <th class="font-weight-bold">Cliente</th>
-                                <td>{!! $cuenta->cliente->nombre !!}</td>
+                                <th class="font-weight-bold">Matricula</th>
+                                <td>{!! $vehiculo->matricula !!}</td>
                             </tr>
                             <tr>
                                 <th class="font-weight-bold">Regional</th>
-                                <td>{!! $cuenta->regional->nombre_regional !!}</td>
+                                <td>{!! $vehiculo->regional->nombre_regional !!}</td>
                             </tr>
                             <tr>
                                 <th class="font-weight-bold">Departamento</th>
-                                <td>{!! $cuenta->regional->nameCiudad() !!}</td>
+                                <td>{!! $vehiculo->regional->nameCiudad() !!}</td>
                             </tr>
                         </table>
+
+                        @php
+                            $rutaArchivo = storage_path('app/public/vehiculos/'.$vehiculo->archivo);
+                        @endphp
+
+                        <div class="text-center" id="divImageAttach">
+                            @if (isset($vehiculo->archivo) && file_exists($rutaArchivo))
+                                <a href="/storage/vehiculos/{{$vehiculo->archivo."?".rand()}}." target="_blank">
+                                    <img src="/storage/vehiculos/{{$vehiculo->archivo."?".rand()}}." style="max-height: 200px;margin-bottom:10px" alt="Sin imagen para mostrar" >
+                                </a>
+                            @else
+                                <img src="/storage/noimage.png?{{rand()}}" style="max-height: 200px;margin-bottom:10px" >
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,9 +78,9 @@
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title ">
-                            Contactos
+                            Conductores
                             <small>
-                                <a href="/contactos/modalCreate/{{ code($cuenta->id) }}" rel="modalCreate" class="badge badge-success float-right mt-1">
+                                <a href="/conductores/modalCreate/{{ code($vehiculo->id) }}" rel="modalCreate" class="badge badge-success float-right mt-1">
                                     <i class="fa fa-plus"></i>&nbsp;
                                     NUEVO
                                 </a>
@@ -75,23 +89,23 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
-                            <table class="table table-vcenter table-center table-vcenter table-hover table-earning text-center" id="tablaContactos">
+                            <table class="table table-vcenter table-center table-vcenter table-hover table-earning text-center" id="tablaConductores">
                                 <thead class="font-weight-bold ">
                                     <tr>
-                                        <th width="20%">NOMBRE Y CARGO</th>
-                                        <th width="20%">CELULAR Y EMAIL</th>
+                                        <th width="20%">NOMBRE</th>
+                                        <th width="20%">CELULAR</th>
                                         <th width="3%">OPC.</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @forelse ($contactos as $contacto)
+                                    @forelse ($conductores as $conductor)
                                         <tr>
-                                            <td>{!! $contacto->nombre_contacto.'<br><b>'.$contacto->cargo_contacto.'</b>' !!}</td>
-                                            <td class="text-center">
-                                                {!! $contacto->celular_contacto.'<br>'.$contacto->email_contacto !!}
+                                            <td>{!! $conductor->nombre_conductor !!}</td>
+                                            <td>
+                                                {!! $conductor->celular_conductor !!}
                                             </td>
-                                            <td>{!! $contacto->getOperacionesHTML() !!}</td>
+                                            <td>{!! $conductor->getOperacionesHTML() !!}</td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -119,7 +133,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title font-weight-bold text-primarydark">
                         <i class="fa fa-plus"></i>
-                        Nuevo contacto
+                        Nuevo conductor
                     </h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
