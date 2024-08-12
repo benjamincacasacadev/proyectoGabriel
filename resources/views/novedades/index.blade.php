@@ -108,7 +108,7 @@
                                 <td></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="reportadob"/></td>
                                 <td></td>
-                                <td>1</td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,6 +140,14 @@
         </div>
     </div>
 
+    {{-- Modal Eliminar --}}
+    <div class="modal modal-danger fade" aria-hidden="true" role="dialog" id="modalEstado" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
     {{-- Modal Editar --}}
     <div class="modal  fade" aria-hidden="true" role="dialog" id="modalEditar" data-backdrop="static">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -160,6 +168,7 @@
 <script type="text/javascript">
     modalAjax("modalCreate","modalCreate","modal-body");
     modalAjax("modalEliminar","modalEliminar","modal-content");
+    modalAjax("modalEstado","modalEstado","modal-content");
     modalAjax("modalEditar","modalEditar","modal-content");
     $('.selector').select2();
 
@@ -212,6 +221,11 @@
             ],
             "drawCallback": function () {
                 restartActionsDT();
+                $('[data-toggle="tooltip"]').tooltip({
+                    html: true,
+                    "placement": "top",
+                    "container": "body",
+                });
             }
         });
 

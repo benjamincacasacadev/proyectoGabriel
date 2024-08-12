@@ -43,6 +43,16 @@ class Novedades extends Model
 
     public function nameEvento(){
         $lista = listaEventos();
+        // Si el evento es activacion de alarma
+        if($this->evento == '1'){
+            $nameEvento = $lista[$this->evento] ?? '-';
+            $tooltipContent = '<b>Datos de alarma</b>';
+            $tooltipContent .= '<br><b>Zona: </b>'.$this->zona_alarma;
+            $tooltipContent .= '<br><b>Sensor: </b>'.$this->sensor_alarma;
+            $tooltipContent .= '<br><b>Ubicación: </b>'.$this->ubicacion_alarma;
+            $verMas = '<br><i class="fa fa-info-circle fa-lg text-primarydark" data-toggle="tooltip" data-html="true" title="'.$tooltipContent.'"></i>';
+            return $nameEvento.$verMas;
+        }
         return $lista[$this->evento] ?? '-';
     }
 
@@ -79,13 +89,15 @@ class Novedades extends Model
 
     public function getEstadoHTML(){
         if($this->estado == 'C'){
+            $tooltipContent = '<b>Autorizador</b><br>'.$this->nombre_autorizador;
+
             $html =
-            '<span class="badge badge-pill bg-green text-white">
+            '<span class="badge badge-pill bg-green text-white" data-toggle="tooltip" data-html="true" title="'.$tooltipContent.'">
                 CERRADO
             </span>';
         }else{
             $html =
-            '<a href="/vehiculos/estado/'. code($this->id) .'/0" class="badge badge-pill bg-red text-white" title="Cambiar estado">
+            '<a href="/novedades/modalEstado/'. code($this->id).'" rel="modalEstado" class="badge badge-pill bg-yellow text-white" title="Cambiar estado">
                 SEGUIMIENTO
             </a>';
         }
@@ -93,15 +105,20 @@ class Novedades extends Model
     }
 
     public function getOperacionesHTML(){
-        $editarHTML =
-        '<a class="btn btn-outline-primarydark btn-sm" rel="modalEditar" href="/conductores/modalEdit/'.code($this->id).'" title="Editar">
-            <i class="fa fa-edit"></i>
-        </a>';
+        return '';
+        if($this->estado == 'C'){
+            return '';
+        }
 
-        $eliminarHTML =
-        '<a class="btn btn-outline-danger btn-sm" rel="modalEliminar" href="/conductores/modalDelete/'.code($this->id).'" title="Eliminar">
-            <i class="fa fa-trash-alt"></i>
-        </a>';
+        // $editarHTML =
+        // '<a class="btn btn-outline-primarydark btn-sm" rel="modalEditar" href="/conductores/modalEdit/'.code($this->id).'" title="Editar">
+        //     <i class="fa fa-edit"></i>
+        // </a>';
+
+        // $eliminarHTML =
+        // '<a class="btn btn-outline-danger btn-sm" rel="modalEliminar" href="/conductores/modalDelete/'.code($this->id).'" title="Eliminar">
+        //     <i class="fa fa-trash-alt"></i>
+        // </a>';
 
         return $editarHTML.'&nbsp;'.$eliminarHTML;
     }

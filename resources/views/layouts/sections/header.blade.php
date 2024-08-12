@@ -14,7 +14,7 @@
                             <i class="fa fa-power-off text-md"></i>
                         </a>
                     </div>
-                    <div class="header-button-item has-noti js-item-menu">
+                    {{-- <div class="header-button-item has-noti js-item-menu">
                         <i class="zmdi zmdi-notifications"></i>
                         <div class="notifi-dropdown js-dropdown">
                             <div class="notifi__title">
@@ -88,7 +88,7 @@
                                     <i class="zmdi zmdi-notifications"></i>Notifications</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

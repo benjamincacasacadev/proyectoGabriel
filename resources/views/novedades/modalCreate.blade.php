@@ -232,7 +232,7 @@
     $('.datetimepicker').datetimepicker({
         format: 'dd/mm/yyyy hh:ii',
         autoclose: true,
-        startDate: '{{now()}}',
+        endDate: '{{now()}}',
     });
 
     // SELECT 2 GENERAL

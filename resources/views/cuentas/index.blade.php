@@ -66,6 +66,16 @@
                             </tr>
                         </thead>
 
+                        <thead role="row">
+                            <tr class="filters">
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="codb"/></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+
                         <tbody>
                         </tbody>
                     </table>

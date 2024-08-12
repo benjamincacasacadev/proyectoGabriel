@@ -99,7 +99,7 @@ class NovedadesController extends Controller
         }else{
             // Si se marca el check autorizado
             if($request->checkAutorizado == '1'){
-                $novedad->nombre_autorizador = $request->sensor;
+                $novedad->nombre_autorizador = $request->autorizador;
                 $novedad->estado = $request->estado;
             }else{
                 $novedad->estado = 'S';
@@ -117,6 +117,31 @@ class NovedadesController extends Controller
         }
         $novedad->save();
         $flasher->addFlash('success', 'Creada con éxito', 'Novedad '.$novedad->cod);
+        return  \Response::json(['success' => '1']);
+    }
+
+    public function modalEstado($id){
+        canPassAdminJefe();
+        $novedad = Novedades::findOrFail(decode($id));
+        return view('novedades.modalState', compact('novedad'));
+    }
+
+    public function changeEstado(Request $request, FlasherInterface $flasher, $id){
+
+        $reglasGeneralArray = [
+            'autorizador' => 'required',
+        ];
+        $aliasArray = [
+            'autorizador' => '<b>Nombre de autorizador</b>',
+        ];
+        $request->validate($reglasGeneralArray, [], $aliasArray);
+
+        canPassAdminJefe();
+        $novedad = Novedades::findOrFail(decode($id));
+        $novedad->nombre_autorizador = $request->autorizador;
+        $novedad->estado = 'C';
+        $novedad->update();
+        $flasher->addFlash('success', 'Cerrada correctamente', 'Novedad '.$novedad->cod);
         return  \Response::json(['success' => '1']);
     }
 

@@ -33,7 +33,7 @@
 
         body {
             font-family: 'nunito', sans-serif;
-            background-image: url("{{ asset('/fondo.png')}}");
+            background-image: url("{{ asset('/fondo.jpg')}}");
             background-color: #2e2e2c;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -90,6 +90,17 @@
             .d-md-inline-title {
                 display: inline !important
             }
+        }
+
+        .btn-primarydark {
+            color: white;
+            background: #365cad !important;
+        }
+
+        .btn-primarydark:hover {
+            color: white;
+            background: #206bc4 !important;
+            border-color: transparent
         }
     </style>
 </head>
@@ -195,7 +206,7 @@
                                             </label>
                                         </div>
                                         <div class="form-footer text-center mt-4">
-                                            <button type="button" class="btn btn-danger w-100 btn-pill text-center font-bold btn-lg" id="BtnLogin" name="btnLogin">Iniciar sesión</button>
+                                            <button type="button" class="btn btn-primarydark w-100 btn-pill text-center font-bold btn-lg" id="BtnLogin" name="btnLogin">Iniciar sesión</button>
                                         </div>
                                         {{-- <div class="d-flex align-items-end flex-column mt-4 mb-0" >
                                             <a id="olvido" class="float-right font-bold text-yellow">Olvidé mi contraseña</a>
@@ -443,7 +454,7 @@
 
     $(function () {
         $('#remember').iCheck({
-            checkboxClass: 'icheckbox_square-red',
+            checkboxClass: 'icheckbox_square-blue',
             increaseArea: '20%'
         });
     });

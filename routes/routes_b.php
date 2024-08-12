@@ -116,7 +116,8 @@ Route::get('/novedades/modalEdit/{id}', 'NovedadesController@modalEdit')->name('
 Route::post('/novedades/update/{id}', 'NovedadesController@update')->name('novedades.update');
 Route::get('/novedades/modalDelete/{id}', 'NovedadesController@modalDelete')->name('novedades.deletemodal');
 Route::post('/novedades/delete/{id}','NovedadesController@destroy')->name('novedades.destroy');
-Route::get('/novedades/estado/{id}/{estado}', 'NovedadesController@changeEstado')->name('novedades.cambioEstado');
+Route::get('/novedades/modalEstado/{id}', 'NovedadesController@modalEstado')->name('novedades.statemodal');
+Route::post('/novedades/estado/{id}', 'NovedadesController@changeEstado')->name('novedades.cambioEstado');
 
 Route::get('/createClientsX', function () {
     abort(403);
