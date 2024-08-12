@@ -1,6 +1,6 @@
-{!! Form::open( array('route' =>'cuentas.store','method'=>'POST','autocomplete'=>'off','files'=>'true','id'=>'formCrearCuenta', 'onsubmit'=>'botonGuardar.disabled = true; return true;'))!!}
+<link rel="stylesheet" href="{{asset('/plugins/iCheck/all.css')}}">
+{!! Form::open( array('route' =>'novedades.store','method'=>'POST','autocomplete'=>'off','files'=>'true','id'=>'formCrearNovedad', 'onsubmit'=>'botonGuardar.disabled = true; return true;'))!!}
 <div class="row">
-    {!! datosRegistro('create') !!}
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
@@ -40,7 +40,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group" id="ambito-sel2">
             <label id="ambito--label">* Ámbito</label> <br>
-            <select name="ambito" class="form-control selector-modal" style="width: 100%">
+            <select name="ambito" class="form-control selector-modal selectAmbito" style="width: 100%">
                 <option value="">Seleccionar</option>
                 @foreach(listaAmbitos() as $key => $ambito)
                     <option value="{{ $key }}"> {{ $ambito }} </option>
@@ -53,7 +53,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group" id="evento-sel2">
             <label id="evento--label">* Evento</label> <br>
-            <select name="evento" class="form-control selector-modal" style="width: 100%">
+            <select name="evento" class="form-control selector-modal selectEvento" style="width: 100%">
                 <option value="">Seleccionar</option>
                 @foreach(listaEventos() as $key => $evento)
                     <option value="{{ $key }}"> {{ $evento }} </option>
@@ -63,29 +63,157 @@
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="form-group">
-            <label class="col-form-label" id="nombre--label">* Nombre de cuenta</label> <br>
-            <input class="form-control" name="nombre" type="text" placeholder="Nombre de cuenta">
-            <span id="nombre-error" class="text-red"></span>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divAlarma hidden">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <b class="text-primarydark" id="titleCuenta">Datos de alarma</b>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-form-label" id="zona--label">* Zona</label> <br>
+                            <input class="form-control" name="zona" type="text" placeholder="Zona">
+                            <span id="zona-error" class="text-red"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-form-label" id="sensor--label">* Sensor</label> <br>
+                            <input class="form-control" name="sensor" type="text" placeholder="Sensor">
+                            <span id="sensor-error" class="text-red"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-form-label" id="ubicacion--label">* Ubicación</label> <br>
+                            <input class="form-control" name="ubicacion" type="text" placeholder="Ubicación">
+                            <span id="ubicacion-error" class="text-red"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-        <div class="" id="regional-sel2">
-            <label id="regional--label">* Regional</label>
-            <select name="regional" class="form-control form-select selector-regional" style="width: 100%">
-                <option value="">Seleccione una opción</option>
-                @foreach ($regionales as $regional)
-                    <option value="{{ $regional->id }}" data-departamento="{{ $regional->nameCiudad() }}" data-extra= {{ $regional->departamento }}>{{ $regional->nombre_regional }}</option>
-                @endforeach
-            </select>
-            <span id="regional-error" class="text-red"></span>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <b class="text-primarydark" style="font-size:20px" id="titleCuenta">Datos de cuenta</b>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divSelectCuenta">
+                        <div class="" id="cuenta-sel2">
+                            <label id="cuenta--label">* Código de cuenta</label>
+                            <select name="cuenta" class="form-control form-select selector-cuenta" style="width: 100%">
+                                <option value="">Seleccione una opción</option>
+                                @foreach ($cuentas as $cuenta)
+                                    <option value="{{ $cuenta->id }}" data-info="{{ $cuenta->getInfoCuentas() }}">{{ $cuenta->cod.' - '.$cuenta->nombre_cuenta }}</option>
+                                @endforeach
+                            </select>
+                            <span id="cuenta-error" class="text-red"></span>
+                        </div>
+                        <div class="divInfoCuenta" style="display:none"></div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divSelectCuenta">
+                        <div class="" id="contacto-sel2">
+                            <label id="contacto--label">* Contacto</label>
+                            <select name="contacto" class="form-control selector-contacto" style="width:100%">
+                                <option value="">Seleccionar</option>
+                            </select>
+                            <span id="contacto-error" class="text-red"></span>
+                        </div>
+                        <div class="divInfoContacto" style="display:none"></div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divSelectVehiculo hidden">
+                        <div class="" id="vehiculo-sel2">
+                            <label id="vehiculo--label">* Matricula de vehículo</label>
+                            <select name="vehiculo" class="form-control form-select selector-vehiculo" style="width: 100%">
+                                <option value="">Seleccione una opción</option>
+                                @foreach ($vehiculos as $vehiculo)
+                                    <option value="{{ $vehiculo->id }}" data-info="{{ $vehiculo->getInfoVehiculos() }}">{{ $vehiculo->matricula.' - '.$vehiculo->nombre_vehiculo }}</option>
+                                @endforeach
+                            </select>
+                            <span id="vehiculo-error" class="text-red"></span>
+                        </div>
+                        <div class="divInfoVehiculo" style="display:none"></div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divSelectVehiculo hidden">
+                        <div class="" id="conductor-sel2">
+                            <label id="conductor--label">* Conductor</label>
+                            <select name="conductor" class="form-control selector-conductor" style="width:100%">
+                                <option value="">Seleccionar</option>
+                            </select>
+                            <span id="conductor-error" class="text-red"></span>
+                        </div>
+                        <div class="divInfoConductor" style="display:none"></div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                        <div class="form-group" id="reportado-sel2">
+                            <label id="reportado--label">* Reportado a</label> <br>
+                            <select name="reportado" class="form-control selector-modal" style="width: 100%">
+                                <option value="">Seleccionar</option>
+                                @foreach($administrativos as $administrativo)
+                                    <option value="{{ code($administrativo->id) }}"> {{ $administrativo->fullName }} </option>
+                                @endforeach
+                            </select>
+                            <span id="reportado-error" class="text-red"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-form-label" id="comentario--label">Comentarios adicionales</label> <br>
+                            <textarea name="comentario"  rows="2" class="form-control" style="width:100%;resize:none" placeholder="Comentarios adicionales"></textarea>
+                            <span id="comentario-error" class="text-red"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="divInfoDepartamento" style="display:none"></div>
     </div>
 
-    <input class="form-control" name="departamentoId" id="departamentoInput"  type="text" hidden>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divAutorizado">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <label class="text-primarydark cursor-pointer font-weight-bold">
+                            ¿Está autorizado?
+                            <input type="checkbox" class="checkAutorizado" name="checkAutorizado" value="1">
+                        </label>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divInputAutorizador hidden mb-2">
+                        <div class="form-group">
+                            <label class="col-form-label" id="autorizador--label">* Nombre de autorizador</label> <br>
+                            <input class="form-control" name="autorizador" type="text" placeholder="Nombre de autorizador">
+                            <span id="autorizador-error" class="text-red"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 divInputAutorizador hidden mb-2">
+                        <div class="form-group" id="estado-sel2">
+                            <label id="estado--label">* Estado</label> <br>
+                            <select name="estado" class="form-control selector-modal" style="width: 100%">
+                                <option value="">Seleccionar</option>
+                                <option value="C">Cerrado</option>
+                                <option value="S">Seguimiento por operador entrante</option>
+                            </select>
+                            <span id="estado-error" class="text-red"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3">
         <button type="button" class="btn btn-ghost-secondary pull-left" data-dismiss="modal">Cancelar</button>
@@ -93,7 +221,7 @@
     </div>
 </div>
 {{Form::Close()}}
-
+<script src="{{asset('/plugins/iCheck/icheck.min.js')}}"></script>
 <script>
 
     $(document).ready(function () {
@@ -115,50 +243,287 @@
         });
     });
 
-    function formatState (regional) {
-        var departamentoSelect = $(regional.element).data('departamento');
+    $('.checkAutorizado').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+    }).on('ifChecked', function (event) {
+        $('.divInputAutorizador').show();
+    }).on('ifUnchecked', function (event){
+        $('.divInputAutorizador').hide();
+    });
+</script>
 
-        if (typeof departamentoSelect === 'undefined') {
-            return regional.text;
+<script>
+    $('.selectAmbito').change(function () {
+        var val = $(this).val();
+
+        // Si el ambito es vehiculo
+        if(val == '3'){
+            $('.divSelectVehiculo').show();
+            $('.divSelectCuenta').hide();
+            $('#titleCuenta').text('Datos de vehículo');
+        }else{
+            $('.divSelectVehiculo').hide();
+            $('.divSelectCuenta').show();
+            $('#titleCuenta').text('Datos de cuenta');
         }
-        var departamentoHTML = "";
-        if(departamentoSelect != ""){
-            departamentoHTML = '<br><i style="font-size:11px"><b style="font-size:11px">Departamento:</b> '+departamentoSelect+'</i>';
+    });
+
+    $('.selectEvento').change(function () {
+        var val = $(this).val();
+
+        // Si el ambito es vehiculo
+        if(val == '1'){
+            $('.divAlarma').show();
+            $('.divAutorizado').hide();
+        }else{
+            $('.divAlarma').hide();
+            $('.divAutorizado').show();
+        }
+    });
+
+</script>
+
+<script>
+    // =================================================
+    // FUNCIONES PARA SELECT DE CUENTAS
+    // =================================================
+    function formatCuentaSelect(cuenta) {
+        var cuentaExtraSelect = $(cuenta.element).data('info');
+
+        if (typeof cuentaExtraSelect === 'undefined') {
+            return cuenta.text;
+        }
+        var salidaHTML = "";
+        if(cuentaExtraSelect != ""){
+            salidaHTML = cuentaExtraSelect;
         }
 
-        var $regional = $(
-            '<span>' + regional.text + departamentoHTML + '</span>'
+        var $cuenta = $(
+            '<span><b>' + cuenta.text + '</b>' + salidaHTML + '</span>'
         );
-        return $regional;
+        return $cuenta;
     };
 
-    $('select.selector-regional:not(.normal)').each(function () {
+    $('select.selector-cuenta:not(.normal)').each(function () {
         $(this).select2({
             dropdownParent: $(this).parent().parent(),
             width: '100%',
-            templateResult: formatState,
+            templateResult: formatCuentaSelect,
         });
     });
 
-    $('.selector-regional').change(function () {
-        var data = $('.selector-regional').select2('data')[0];
-        var departamento = $(data.element).data('departamento');
-        var departamentoId = $(data.element).data('extra');
+    $('.selector-cuenta').change(function () {
+        $('.selector-contacto').val('').trigger('change');
+        var data = $('.selector-cuenta').select2('data')[0];
+        var infoAdd = $(data.element).data('info');
         var info;
-        if (typeof departamento === 'undefined') {
+        if (typeof infoAdd === 'undefined') {
             info = '';
-            $('#departamentoInput').val('');
-            $(".divInfoDepartamento").hide();
-            $(".divInfoDepartamento").removeClass('mb-2');
+            $(".divInfoCuenta").hide();
+            $(".divInfoCuenta").removeClass('mb-2');
         }else{
-            info = '<i style="font-size:11px"><b style="font-size:11px">Departamento: </b>'+departamento+'</i>';
-            $(".divInfoDepartamento").show();
-            $(".divInfoDepartamento").addClass('mb-2');
-            $('#departamentoInput').val(departamentoId);
+            info = infoAdd;
+            $(".divInfoCuenta").show();
+            $(".divInfoCuenta").addClass('mb-2');
         }
-        $(".divInfoDepartamento").html(info);
+        $(".divInfoCuenta").html(info);
     });
 
-    var campos = ['nombre','regional'];
-    ValidateAjax("formCrearCuenta",campos,"botonGuardar","{{route('cuentas.store')}}","POST","/cuentas");
+    // ===========================================================
+    // FUNCIONES PARA SELECT DE CONTACTOS EN FUNCION DE CUENTAS
+    // ============================================================
+    function formatContactoCuentas (state) {
+        var info;
+        if (typeof state.info === 'undefined') {
+            info = "";
+        }else{
+            info = state.info;
+        }
+
+        var $state = $(
+            '<span><b>' + state.text + '</b>' + info + '</span>'
+        );
+        return $state;
+    };
+
+    $('select.selector-contacto:not(.normal)').each(function () {
+        $(this).select2({
+            dropdownParent: $(this).parent().parent(),
+            placeholder:'Busque el contacto con el que se comunico',
+            templateResult: formatContactoCuentas,
+            ajax: {
+                url: "{{ route('contactos.listContactos.detalles') }}",
+                dataType: 'json',
+                method: "GET",
+                delay: 500,
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                        cuenta: $('.selector-cuenta').val(),
+                        page: params.page || 5
+                    }
+                    return query;
+                },
+                processResults: function(data, params){
+                    data = data.results.map(function (item) {
+                        return {
+                            id: item.id,
+                            text: item.text,
+                            info: item.info,
+                        };
+                    });
+                    return { results: data };
+                },
+            }
+        });
+    });
+
+    $('.selector-contacto').change(function () {
+        var val = $(this).val();
+        var data = $('.selector-contacto').select2('data')[0];
+        var info;
+        if (typeof data.info === 'undefined') {
+            info = "";
+            $(".divInfoContacto").hide();
+            $(".divInfoContacto").removeClass('mb-2');
+        }else{
+            info = data.info;
+            $(".divInfoContacto").show();
+            $(".divInfoContacto").addClass('mb-2');
+        }
+        $(".divInfoContacto").html(info);
+    });
+
+</script>
+
+<script>
+    // =================================================
+    // FUNCIONES PARA SELECT DE VEHICULOS
+    // =================================================
+    function formatVehiculoSelect(vehiculo) {
+        var vehiculoExtraSelect = $(vehiculo.element).data('info');
+
+        if (typeof vehiculoExtraSelect === 'undefined') {
+            return vehiculo.text;
+        }
+        var salidaHTML = "";
+        if(vehiculoExtraSelect != ""){
+            salidaHTML = vehiculoExtraSelect;
+        }
+
+        var $vehiculo = $(
+            '<span><b>' + vehiculo.text + '</b>' + salidaHTML + '</span>'
+        );
+        return $vehiculo;
+    };
+
+    $('select.selector-vehiculo:not(.normal)').each(function () {
+        $(this).select2({
+            dropdownParent: $(this).parent().parent(),
+            width: '100%',
+            templateResult: formatVehiculoSelect,
+        });
+    });
+
+    $('.selector-vehiculo').change(function () {
+        $('.selector-conductor').val('').trigger('change');
+        var data = $('.selector-vehiculo').select2('data')[0];
+        var infoAdd = $(data.element).data('info');
+        var info;
+        if (typeof infoAdd === 'undefined') {
+            info = '';
+            $(".divInfoVehiculo").hide();
+            $(".divInfoVehiculo").removeClass('mb-2');
+        }else{
+            info = infoAdd;
+            $(".divInfoVehiculo").show();
+            $(".divInfoVehiculo").addClass('mb-2');
+        }
+        $(".divInfoVehiculo").html(info);
+    });
+
+    // ===========================================================
+    // FUNCIONES PARA SELECT DE CONDUCTORES EN FUNCION DE VEHICULOS
+    // ============================================================
+    function formatConductorVehiculos (state) {
+        var info;
+        if (typeof state.info === 'undefined') {
+            info = "";
+        }else{
+            info = state.info;
+        }
+
+        var $state = $(
+            '<span><b>' + state.text + '</b>' + info + '</span>'
+        );
+        return $state;
+    };
+
+    $('select.selector-conductor:not(.normal)').each(function () {
+        $(this).select2({
+            dropdownParent: $(this).parent().parent(),
+            placeholder:'Busque el conductor con el que se comunico',
+            templateResult: formatConductorVehiculos,
+            ajax: {
+                url: "{{ route('conductores.listConductores.detalles') }}",
+                dataType: 'json',
+                method: "GET",
+                delay: 500,
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                        vehiculo: $('.selector-vehiculo').val(),
+                        page: params.page || 5
+                    }
+                    return query;
+                },
+                processResults: function(data, params){
+                    data = data.results.map(function (item) {
+                        return {
+                            id: item.id,
+                            text: item.text,
+                            info: item.info,
+                        };
+                    });
+                    return { results: data };
+                },
+            }
+        });
+    });
+
+    $('.selector-conductor').change(function () {
+        var val = $(this).val();
+        var data = $('.selector-conductor').select2('data')[0];
+        var info;
+        if (typeof data.info === 'undefined') {
+            info = "";
+            $(".divInfoConductor").hide();
+            $(".divInfoConductor").removeClass('mb-2');
+        }else{
+            info = data.info;
+            $(".divInfoConductor").show();
+            $(".divInfoConductor").addClass('mb-2');
+        }
+        $(".divInfoConductor").html(info);
+    });
+
+</script>
+
+<script>
+    var camposNormales = ['fechaNovedad','operador','ambito','evento'];
+    var camposSensor = ['zona','sensor','ubicacion'];
+    var camposCuenta = ['cuenta','contacto'];
+    var camposVehiculos = ['vehiculo','conductor'];
+    var camposNormales2 = ['reportado','comentario'];
+    var camposAutorizador = ['checkAutorizado','autorizador','estado'];
+
+    var camposFinal = [
+        ...camposNormales,
+        ...camposSensor,
+        ...camposCuenta,
+        ...camposVehiculos,
+        ...camposNormales2,
+        ...camposAutorizador
+    ];
+    ValidateAjax("formCrearNovedad",camposFinal,"botonGuardar","{{route('novedades.store')}}","POST","/novedades");
 </script>

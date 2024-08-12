@@ -172,4 +172,5 @@ class CuentasController extends Controller
 
         return $request->validate($reglasArray, [], $aliasArray);
     }
+
 }

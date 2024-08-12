@@ -56,7 +56,7 @@
                     <table class="table table-vcenter table-center table-hover table-earning" id="tablaVehiculos">
                         <thead>
                             <tr>
-                                <th width="10%">CÓDIGO</th>
+                                <th width="10%">MATRÍCULA</th>
                                 <th width="20%">NOMBRE DE VEHÍCULO</th>
                                 <th width="20%">REGIONAL</th>
                                 <th width="20%">DEPARTAMENTO</th>

@@ -79,4 +79,27 @@ class ConductoresVehiculosController extends Controller
 
         return $request->validate($validateArray, [], $aliasArray);
     }
+
+    public function listConductoresDetallesAjax(Request $request) {
+        $request['search'] = limpiarTexto($request->search,'s2');
+
+        $vehiculo = $request->vehiculo;
+        $contactos = ConductoresVehiculos::Nombre($request->search)
+        ->where('vehiculo_id', $vehiculo)
+        ->orderBy('id','desc')
+        ->limit(20)
+        ->get();
+
+        $array = [];
+        $array['results'][0]['id'] = "";
+        $array['results'][0]['text'] = "Seleccione una opción";
+        $array['results'][0]['info'] = "";
+        foreach ($contactos as $k => $contacto) {
+            $array['results'][$k + 1]['id'] = code($contacto->id);
+            $array['results'][$k + 1]['text'] = $contacto->nombre_conductor;
+            $array['results'][$k + 1]['info'] = $contacto->getInfoConductores();
+        }
+        $array['pagination']['more'] = false;
+        return response()->json($array);
+    }
 }

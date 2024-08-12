@@ -1,4 +1,8 @@
 <?php
+
+Route::get('/list_of_contactos_details', 'ContactosCuentasController@listContactosDetallesAjax')->name('contactos.listContactos.detalles');
+Route::get('/list_of_conductores_details', 'ConductoresVehiculosController@listConductoresDetallesAjax')->name('conductores.listConductores.detalles');
+
 // ========================================================================================
 //                                          USUARIOS
 // ========================================================================================

@@ -30,4 +30,23 @@ class ContactosCuentas extends Model
         return $editarHTML.'&nbsp;'.$eliminarHTML;
     }
 
+    public function getInfoContactos(){
+        $cargo = "<b>Cargo: </b>".$this->cargo_contacto.'<br>';
+        $celular = "<b>Celular: </b>".$this->celular_contacto.'<br>';
+        $email = "<b>Email: </b>".$this->email_contacto;
+
+        return
+        '<div class="text-sm mt-2">'
+            .$cargo.$celular.$email.
+        '</div>';
+    }
+
+    // ==========================================================================
+    // SCOPES (WHERES MYSQL)
+    // ==========================================================================
+    public function scopeNombre($query, $val){
+        if ($val != ''){
+            $query->where('nombre_contacto', 'like', "%{$val}%");
+        }
+    }
 }

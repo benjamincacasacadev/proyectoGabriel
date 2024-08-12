@@ -29,4 +29,22 @@ class ConductoresVehiculos extends Model
 
         return $editarHTML.'&nbsp;'.$eliminarHTML;
     }
+
+    public function getInfoConductores(){
+        $celular = "<b>Celular: </b>".$this->celular_conductor.'<br>';
+
+        return
+        '<div class="text-sm mt-2">'
+            .$celular.
+        '</div>';
+    }
+
+    // ==========================================================================
+    // SCOPES (WHERES MYSQL)
+    // ==========================================================================
+    public function scopeNombre($query, $val){
+        if ($val != ''){
+            $query->where('nombre_conductor', 'like', "%{$val}%");
+        }
+    }
 }

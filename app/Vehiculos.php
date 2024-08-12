@@ -57,6 +57,17 @@ class Vehiculos extends Model
         return $imagenHTML.$editarHTML.'&nbsp;'.$eliminarHTML;
     }
 
+    public function getInfoVehiculos(){
+        $nombre = "<b>Vehículo: </b>".$this->nombre_vehiculo.'<br>';
+        $regional = "<b>Regional: </b>".$this->regional->nombre_regional.'<br>';
+        $departamento = "<b>Departamento: </b>".$this->regional->nameCiudad();
+
+        return
+        '<div class="text-sm mt-2">'
+            .$nombre.$regional.$departamento.
+        '</div>';
+    }
+
     // ==========================================================================
     // SCOPES (WHERES MYSQL)
     // ==========================================================================

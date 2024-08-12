@@ -53,6 +53,18 @@ class Cuentas extends Model
         return $editarHTML.'&nbsp;'.$eliminarHTML;
     }
 
+    public function getInfoCuentas(){
+        $nombre = "<b>Nombre de cuenta: </b>".$this->nombre_cuenta.'<br>';
+        $cliente = "<b>Cliente: </b>".$this->cliente->nombre.'<br>';
+        $regional = "<b>Regional: </b>".$this->regional->nombre_regional.'<br>';
+        $departamento = "<b>Departamento: </b>".$this->regional->nameCiudad();
+
+        return
+        '<div class="text-sm mt-2">'
+            .$nombre.$cliente.$regional.$departamento.
+        '</div>';
+    }
+
     // ==========================================================================
     // SCOPES (WHERES MYSQL)
     // ==========================================================================
