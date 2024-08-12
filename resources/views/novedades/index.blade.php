@@ -7,6 +7,30 @@
     table#tablaNovedades td{
         font-size: 13px;
     }
+    .table {
+        table-layout: auto !important;
+        width: 100% !important;
+    }
+
+    .table-earning-large thead th {
+        background: #333;
+        font-size: 16px;
+        color: #fff;
+        vertical-align: middle;
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 1;
+        padding: 20px 0px 20px 0px;
+    }
+
+    .table-earning-large tbody td {
+        color: #808080;
+        padding: 20px 5px;
+    }
+
+    .whiteSpace{
+        white-space: nowrap !important;
+    }
 </style>
 @endsection
 
@@ -52,29 +76,41 @@
                 {{ Form::close() }}
 
                 {{-- TABLA DE DATOS --}}
-                <div class="table-responsive ">
-                    <table class="table table-vcenter table-center table-hover table-earning" id="tablaNovedades">
+                {{-- <div class="table-responsive"> --}}
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-center table-hover table-earning-large table-sm text-center" id="tablaNovedades">
                         <thead>
                             <tr>
-                                <th width="10%">CÓDIGO</th>
-                                <th width="20%">NOMBRE DE NOVEDAD</th>
-                                <th width="20%">REGIONAL</th>
-                                <th width="20%">DEPARTAMENTO</th>
-                                <th width="10%">ESTADO</th>
-                                <th width="3%">OPC.</th>
+                                <th width="5%">CÓDIGO</th>
+                                <th width="9%">FECHA</th>
+                                <th width="5%">OPERADOR</th>
+                                <th width="8%">ÁMBITO</th>
+                                <th width="8%">EVENTO</th>
+                                <th width="5%">CUENTA/MATRICULA</th>
+                                <th width="7%">REGIONAL</th>
+                                <th width="7%">DEPARTAMENTO</th>
+                                <th width="12%">COMENTARIOS</th>
+                                <th width="5%">REPORTADO A</th>
+                                <th width="5%">ESTADO</th>
+                                <th width="2%">OPC.</th>
                             </tr>
                         </thead>
-
                         <thead role="row">
                             <tr class="filters">
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="codb"/></td>
-                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="fechab"/></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="operadorb"/></td>
+                                <td></td>
+                                <td></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="cuentab"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
                                 <td></td>
                                 <td></td>
+                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="reportadob"/></td>
+                                <td></td>
+                                <td>1</td>
                             </tr>
                         </thead>
-
                         <tbody>
                         </tbody>
                     </table>
@@ -138,8 +174,7 @@
             'searching': true,
             'ordering': false,
             'info': true,
-            'autoWidth': false,
-            "order": [['0', 'desc']],
+            'autoWidth': true,
             'mark': "true",
             'dom': 'lrtip',
             "stateSave": false,
@@ -151,7 +186,7 @@
                 "targets": ["_all"]
             }],
             "ajax": {
-                "url": "{{ route('cuentas.table') }}",
+                "url": "{{ route('novedades.table') }}",
                 'dataType': 'json',
                 'type': 'post',
                 'data': {
@@ -161,12 +196,18 @@
             },
             "columns": [
                 {"data": "cod"},
-                {"data": "nombre"},
+                {"data": "fecha"},
+                {"data": "operador"},
+                {"data": "ambito"},
+                {"data": "evento"},
+                {"data": "cuentaMatricula"},
                 {"data": "regional"},
                 {"data": "departamento"},
+                {"data": "comentarios", "class": "text-sm"},
+                {"data": "reportado"},
                 {"data": "estado"},
                 @if (permisoAdministrador())
-                    {"data": "operations"},
+                    {"data": "operations", "class": 'whiteSpace'},
                 @endif
             ],
             "drawCallback": function () {

@@ -19,6 +19,48 @@ class NovedadesController extends Controller
         return view('novedades.index', compact('selectDepartamento'));
     }
 
+    public function tableNovedades(Request $request){
+        $totalData = Novedades::count();
+        $totalFiltered = $totalData;
+
+        $limit = empty($request->input('length')) ? 10 : $request->input('length');
+        $start = empty($request->input('start')) ? 0 :  $request->input('start');
+
+        $novedades = Novedades::
+        Cod($request->input('columns.0.search.value'));
+
+        $totalFiltered = $novedades->count();
+        $novedades = $novedades
+        ->offset($start)
+        ->limit($limit)
+        ->orderBy('id','desc')
+        ->get();
+
+        $data = array();
+        foreach ($novedades as $novedad){
+            $nestedData['cod'] = $novedad->cod;
+            $nestedData['fecha'] = $novedad->infoFecha();
+            $nestedData['operador'] = $novedad->operador->fullName;
+            $nestedData['ambito'] = $novedad->nameAmbito();
+            $nestedData['evento'] = $novedad->nameEvento();
+            $nestedData['cuentaMatricula'] = $novedad->getCuentaMatricula();
+            $nestedData['regional'] = $novedad->getRegional();
+            $nestedData['departamento'] = $novedad->getDepartamento();
+            $nestedData['comentarios'] = $novedad->getComentarios();
+            $nestedData['reportado'] = $novedad->reportado->fullName;
+            $nestedData['estado'] = $novedad->getEstadoHTML();
+            $nestedData['operations'] = $novedad->getOperacionesHTML();
+            $data[] = $nestedData;
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+        echo json_encode($json_data);
+    }
+
     public function modalCreate(){
         // canPassAdminJefe();
         $regionales = Regionales::where('estado', 1)->orderBy('nombre_regional')->get();
