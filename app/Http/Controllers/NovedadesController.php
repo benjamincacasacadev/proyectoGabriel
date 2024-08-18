@@ -15,8 +15,10 @@ class NovedadesController extends Controller
 {
     public function index(Request $request){
         $selectDepartamento = $request->selectDepartamento ?? '';
+        $selectEstado = $request->selectEstado ?? '';
+
         Session::put('item','1.');
-        return view('novedades.index', compact('selectDepartamento'));
+        return view('novedades.index', compact('selectDepartamento','selectEstado'));
     }
 
     public function tableNovedades(Request $request){
@@ -26,8 +28,20 @@ class NovedadesController extends Controller
         $limit = empty($request->input('length')) ? 10 : $request->input('length');
         $start = empty($request->input('start')) ? 0 :  $request->input('start');
 
+        $departamento = $request->departamento ?? '';
+        $estado = $request->estado ?? '';
+
         $novedades = Novedades::
-        Cod($request->input('columns.0.search.value'));
+        Cod($request->input('columns.0.search.value'))
+        ->Fecha($request->input('columns.1.search.value'))
+        ->Operador($request->input('columns.2.search.value'))
+        ->Ambito($request->input('columns.3.search.value'))
+        ->Evento($request->input('columns.4.search.value'))
+        ->CuentaMatricula($request->input('columns.5.search.value'))
+        ->Regional($request->input('columns.6.search.value'))
+        ->Reportado($request->input('columns.7.search.value'))
+        ->Estado($estado)
+        ->Departamento($departamento);
 
         $totalFiltered = $novedades->count();
         $novedades = $novedades
@@ -188,7 +202,6 @@ class NovedadesController extends Controller
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $novedad = Novedades::findOrFail(decode($id));
-        $cantAsociados = 0;
         if($novedad->estado == 'C'){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar la novedad '.$novedad->cod);
             return redirect()->route('novedades.index');

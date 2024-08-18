@@ -147,4 +147,81 @@ class Novedades extends Model
             $query->where('cod', 'like', "%{$val}%");
         }
     }
+
+    public function scopeFecha($query, $val){
+        if ($val != '') {
+            $query->where(\DB::raw('DATE_FORMAT(fecha_novedad, "%d/%m/%Y %H:%i")'), 'like', "%{$val}%");
+        }
+    }
+
+    public function scopeOperador($query, $user){
+        if ($user != ""){
+            $query->whereHas('operador', function($q) use ($user){
+                $q->where(\DB::raw("CONCAT(COALESCE(name,''), ' ', COALESCE(ap_paterno,''), ' ', COALESCE(ap_materno,''))"), 'like', "%{$user}%");
+            });
+        }
+    }
+
+    public function scopeAmbito($query, $val){
+        if ($val != ''){
+            $query->where('ambito', $val);
+        }
+    }
+
+    public function scopeEvento($query, $val){
+        if ($val != ''){
+            $query->where('evento', $val);
+        }
+    }
+
+    public function scopeCuentaMatricula($query, $val){
+        if ($val != '') {
+            $query->where(function($q) use ($val) {
+                $q->whereHas('contacto.cuenta', function ($q1) use ($val) {
+                    $q1->where('cod', 'like', "%{$val}%");
+                })->orWhereHas('conductor.vehiculo', function ($q2) use ($val) {
+                    $q2->where('matricula', 'like', "%{$val}%");
+                });
+            });
+        }
+    }
+
+
+    public function scopeRegional($query, $val){
+        if ($val != '') {
+            $query->where(function($q) use ($val) {
+                $q->whereHas('contacto.cuenta.regional', function ($q1) use ($val) {
+                    $q1->where('nombre_regional', 'like', "%{$val}%");
+                })->orWhereHas('conductor.vehiculo.regional', function ($q2) use ($val) {
+                    $q2->where('nombre_regional', 'like', "%{$val}%");
+                });
+            });
+        }
+    }
+
+    public function scopeReportado($query, $user){
+        if ($user != ""){
+            $query->whereHas('reportado', function($q) use ($user){
+                $q->where(\DB::raw("CONCAT(COALESCE(name,''), ' ', COALESCE(ap_paterno,''), ' ', COALESCE(ap_materno,''))"), 'like', "%{$user}%");
+            });
+        }
+    }
+
+    public function scopeEstado($query, $val){
+        if ($val != ''){
+            $query->where('estado', $val);
+        }
+    }
+
+    public function scopeDepartamento($query, $val){
+        if ($val != '') {
+            $query->where(function($q) use ($val) {
+                $q->whereHas('contacto.cuenta.regional', function ($q1) use ($val) {
+                    $q1->where('departamento', $val);
+                })->orWhereHas('conductor.vehiculo.regional', function ($q2) use ($val) {
+                    $q2->where('departamento', $val);
+                });
+            });
+        }
+    }
 }

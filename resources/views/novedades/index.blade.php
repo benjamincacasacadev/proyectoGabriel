@@ -72,6 +72,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                        <div class="pull-right">
+                            <div class="form-inline"  >
+                                <div class="form-group">
+                                    <div class="divEstado pull-right" >
+                                        <select class="form-control selectEstado" name="selectEstado" style=" margin-right:-10px; width:192px;">
+                                            <option @if($selectEstado == '') selected @endif value="">Todos</option>
+                                            <option @if($selectEstado == 'C') selected @endif value="C">Cerrado</option>
+                                            <option @if($selectEstado == 'S') selected @endif value="S">En seguimiento</option>
+                                        </select>
+                                    </div>
+                                    <span class="pull-right font-weight-bold" style="margin-top: 8px;">Estado:&nbsp;&nbsp; </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {{ Form::close() }}
 
@@ -100,8 +116,22 @@
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="codb"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="fechab"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="operadorb"/></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <select class="selector" name="ambitob">
+                                        <option value="" selected>Todos</option>
+                                        @foreach (listaAmbitos() as $keyAmbito => $ambito)
+                                            <option value="{{ $keyAmbito }}">{{ $ambito }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="selector" name="ambitob">
+                                        <option value="" selected>Todos</option>
+                                        @foreach (listaEventos() as $keyEvento => $evento)
+                                            <option value="{{ $keyEvento }}">{{ $evento }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="cuentab"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
                                 <td></td>
@@ -175,7 +205,13 @@
     $('.selectDepartamento').on('change', function () {
         $('#formFilterNovedades').submit();
     });
+    $('.selectEstado').on('change', function () {
+        $('#formFilterNovedades').submit();
+    });
+
+
     var departamento = '{{ $selectDepartamento }}';
+    var estado = '{{ $selectEstado }}';
     $(function () {
         var table = $('#tablaNovedades').DataTable({
             'paging': true,
@@ -201,6 +237,7 @@
                 'data': {
                     "_token": "{{ csrf_token() }}",
                     departamento: departamento,
+                    estado: estado,
                 },
             },
             "columns": [
