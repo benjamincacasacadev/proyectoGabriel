@@ -179,6 +179,25 @@ class NovedadesController extends Controller
         return  \Response::json(['success' => '1']);
     }
 
+    public function modalDelete($id){
+        canPassAdminJefe();
+        $novedad = Novedades::findOrFail(decode($id));
+        return view('novedades.modalDelete', compact('novedad'));
+    }
+
+    public function destroy(FlasherInterface $flasher, $id){
+        canPassAdminJefe();
+        $novedad = Novedades::findOrFail(decode($id));
+        $cantAsociados = 0;
+        if($novedad->estado == 'C'){
+            $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar la novedad '.$novedad->cod);
+            return redirect()->route('novedades.index');
+        }
+        $novedad->delete();
+        $flasher->addFlash('error', 'Eliminada correctamente', 'Novedad '.$novedad->cod);
+        return redirect()->route('novedades.index');
+    }
+
     public function modalEstado($id){
         canPassAdminJefe();
         $novedad = Novedades::findOrFail(decode($id));
