@@ -36,9 +36,26 @@ class Novedades extends Model
         return $fechaFormateada;
     }
 
-    public function nameAmbito(){
+    public function nameAmbito($html = false){
         $lista = listaAmbitos();
-        return $lista[$this->ambito] ?? '-';
+        $ambito = $lista[$this->ambito] ?? '-';
+        switch ($this->ambito) {
+            case '1':
+                $textColor = '<b class="text-azure">'.$ambito.'</b>';
+            break;
+            case '2':
+                $textColor = '<b class="text-teal">'.$ambito.'</b>';
+            break;
+            case '3':
+                $textColor = '<b class="text-pink">'.$ambito.'</b>';
+            break;
+
+            default:
+                $textColor = $ambito;
+            break;
+        }
+
+        return $html ? $textColor : $ambito;
     }
 
     public function nameEvento(){
@@ -105,20 +122,19 @@ class Novedades extends Model
     }
 
     public function getOperacionesHTML(){
-        return '';
         if($this->estado == 'C'){
             return '';
         }
 
-        // $editarHTML =
-        // '<a class="btn btn-outline-primarydark btn-sm" rel="modalEditar" href="/conductores/modalEdit/'.code($this->id).'" title="Editar">
-        //     <i class="fa fa-edit"></i>
-        // </a>';
+        $editarHTML =
+        '<a class="btn btn-outline-primarydark btn-sm" rel="modalEditar" href="/novedades/modalEdit/'.code($this->id).'" title="Editar">
+            <i class="fa fa-edit"></i>
+        </a>';
 
-        // $eliminarHTML =
-        // '<a class="btn btn-outline-danger btn-sm" rel="modalEliminar" href="/conductores/modalDelete/'.code($this->id).'" title="Eliminar">
-        //     <i class="fa fa-trash-alt"></i>
-        // </a>';
+        $eliminarHTML =
+        '<a class="btn btn-outline-danger btn-sm" rel="modalEliminar" href="/novedades/modalDelete/'.code($this->id).'" title="Eliminar">
+            <i class="fa fa-trash-alt"></i>
+        </a>';
 
         return $editarHTML.'&nbsp;'.$eliminarHTML;
     }

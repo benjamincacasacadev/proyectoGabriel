@@ -41,7 +41,7 @@ class NovedadesController extends Controller
             $nestedData['cod'] = $novedad->cod;
             $nestedData['fecha'] = $novedad->infoFecha();
             $nestedData['operador'] = $novedad->operador->fullName;
-            $nestedData['ambito'] = $novedad->nameAmbito();
+            $nestedData['ambito'] = $novedad->nameAmbito(true);
             $nestedData['evento'] = $novedad->nameEvento();
             $nestedData['cuentaMatricula'] = $novedad->getCuentaMatricula();
             $nestedData['regional'] = $novedad->getRegional();
@@ -95,7 +95,8 @@ class NovedadesController extends Controller
             $novedad->zona_alarma = $request->zona;
             $novedad->sensor_alarma = $request->sensor;
             $novedad->ubicacion_alarma = $request->ubicacion;
-            $novedad->estado = 'S';
+            $novedad->nombre_autorizador = 'Via alarma';
+            $novedad->estado = 'C';
         }else{
             // Si se marca el check autorizado
             if($request->checkAutorizado == '1'){
@@ -117,6 +118,64 @@ class NovedadesController extends Controller
         }
         $novedad->save();
         $flasher->addFlash('success', 'Creada con éxito', 'Novedad '.$novedad->cod);
+        return  \Response::json(['success' => '1']);
+    }
+
+    public function modalEdit($id){
+        $novedad = Novedades::findOrFail(decode($id));
+        // canPassAdminJefe();
+        $regionales = Regionales::where('estado', 1)->orderBy('nombre_regional')->get();
+        // $operadores = User::where('active', 1)->where('role_id', 2)->orderBy('ap_paterno')->get();
+        $operadores = User::where('active', 1)->orderBy('ap_paterno')->get();
+        $administrativos = User::where('active', 1)->where('role_id', 1)->orderBy('ap_paterno')->get();
+        $cuentas = Cuentas::where('estado', 1)->get();
+        $vehiculos = Vehiculos::where('estado', 1)->get();
+        return view('novedades.modalEdit', compact('novedad','regionales','operadores','administrativos','cuentas','vehiculos'));
+    }
+
+    public function update(Request $request, FlasherInterface $flasher, $id){
+        canPassAdminJefe();
+        $this->validarFormulario($request, $id);
+
+        $novedad = Novedades::findOrFail(decode($id));
+
+        $fechaSave = Carbon::createFromFormat('d/m/Y H:i', $request->fechaNovedadedit);
+        // Guardar nueva novedad en base de datos
+        $novedad->fecha_novedad = $fechaSave;
+        $novedad->operador_id = decode($request->operadoredit);
+        $novedad->ambito = $request->ambitoedit;
+        $novedad->evento = $request->eventoedit;
+        $novedad->reportado_id = decode($request->reportadoedit);
+        $novedad->comentarios = $request->comentarioedit;
+
+        // Si el evento es activacion de alarma guardar datos de sensor
+        if($request->eventoedit == '1'){
+            $novedad->zona_alarma = $request->zonaedit;
+            $novedad->sensor_alarma = $request->sensoredit;
+            $novedad->ubicacion_alarma = $request->ubicacionedit;
+            $novedad->nombre_autorizador = 'Via alarma';
+            $novedad->estado = 'C';
+        }else{
+            // Si se marca el check autorizado
+            if($request->checkAutorizado == '1'){
+                $novedad->nombre_autorizador = $request->autorizadoredit;
+                $novedad->estado = $request->estadoedit;
+            }else{
+                $novedad->estado = 'S';
+            }
+        }
+
+        // Si el ambito es de vehiculos guardar datos de vehiculos
+        if($request->ambitoedit == '3'){
+            $novedad->conductor_vehiculo_id = decode($request->conductoredit);
+            $novedad->contacto_cuenta_id = null;
+        }else{
+            // Si no adicionar validaciones de cuentas
+            $novedad->contacto_cuenta_id = decode($request->contactoedit);
+            $novedad->conductor_vehiculo_id = null;
+        }
+        $novedad->update();
+        $flasher->addFlash('info', 'Modificada con éxito', 'Novedad '.$novedad->cod);
         return  \Response::json(['success' => '1']);
     }
 

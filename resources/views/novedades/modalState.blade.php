@@ -13,7 +13,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left mt-2">
             <div class="form-group">
                 <label class="col-form-label" id="autorizador--label">* Nombre de autorizador</label> <br>
-                <input class="form-control" name="autorizador" type="text" placeholder="Nombre de autorizador" >
+                <input class="form-control" name="autorizador" type="text" placeholder="Nombre de autorizador" value="{{ $novedad->nombre_autorizador }}">
                 <span id="autorizador-error" class="text-red"></span>
             </div>
         </div>
