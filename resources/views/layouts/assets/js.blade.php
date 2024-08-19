@@ -149,6 +149,24 @@
             $(".dataTables_length").children().show();
             $(".dataTables_paginate").children().show();
         }
+
+        $(document).ready(function() {
+            function toggleSidebarButton() {
+                if ($(window).width() < 991) {
+                    $('.js-sidebar-btn').show();
+                } else {
+                    $('.js-sidebar-btn').hide();
+                }
+            }
+
+            // Ejecutar al cargar la página
+            toggleSidebarButton();
+
+            // Ejecutar cada vez que la ventana cambie de tamaño
+            $(window).resize(function() {
+                toggleSidebarButton();
+            });
+        });
     </script>
 
     {{-- ===========================================================================================
