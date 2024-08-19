@@ -4,8 +4,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="U.E. Rep. Federal de Alemania" />
-    <meta name="description" content="Unidad Educativa República Federal de Alemania" />
+    <meta name="keywords" content="Proyecto Gabriel" />
+    <meta name="description" content="Proyecto Gabriel" />
     <meta name="author" content="Benjamin Cacasaca" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -127,10 +127,8 @@
                                 <form id="loginsubmit" method="POST" action="{{ route('login') }}" style="border-radius: 30px" onsubmit="btnLogin.disabled = true; return true;">
                                     @csrf
                                     <div class="text-center" style="margin-top: 2rem !important">
-                                        {{-- <img src="{{asset('logo.png')}}" style="height: 11rem !important;" > <br>
-                                        <b style="font-size:25px; font-weight-bolder">Unidad Educativa República Federal de Alemania</b> --}}
                                         <img src="{{asset('logo.png')}}" style="height: 6rem !important;"> <br><br>
-                                        <b style="font-size:25px; font-weight-bolder">Sistema de gestión de mantenimiento computarizado</b>
+                                        <b style="font-size:25px; font-weight-bolder">Sistema de control de novedades</b>
                                     </div>
                                     <div class="card-body">
                                         @if($reset==1)
