@@ -31,6 +31,9 @@
     .whiteSpace{
         white-space: nowrap !important;
     }
+    .dt-buttons{
+        width: 100% !important;
+    }
 </style>
 @endsection
 
@@ -92,20 +95,19 @@
                 {{ Form::close() }}
 
                 {{-- TABLA DE DATOS --}}
-                {{-- <div class="table-responsive"> --}}
+                {!! Form::open(['route'=>'novedades.export','method'=>'POST', 'role'=>'search', 'id'=>'formExport', 'onsubmit'=>'btnExportBoton.disabled = true; return true;']) !!}
                 <div class="table-responsive">
                     <table class="table table-vcenter table-center table-hover table-earning-large table-sm text-center" id="tablaNovedades">
                         <thead>
                             <tr>
                                 <th width="5%">CÓDIGO</th>
-                                <th width="9%">FECHA</th>
+                                <th width="7%">FECHA</th>
                                 <th width="5%">OPERADOR</th>
                                 <th width="8%">ÁMBITO</th>
                                 <th width="8%">EVENTO</th>
                                 <th width="5%">CUENTA/MATRICULA</th>
                                 <th width="7%">REGIONAL</th>
                                 <th width="7%">DEPARTAMENTO</th>
-                                <th width="12%">COMENTARIOS</th>
                                 <th width="5%">REPORTADO A</th>
                                 <th width="5%">ESTADO</th>
                                 <th width="2%">OPC.</th>
@@ -125,7 +127,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="selector" name="ambitob">
+                                    <select class="selector" name="eventob">
                                         <option value="" selected>Todos</option>
                                         @foreach (listaEventos() as $keyEvento => $evento)
                                             <option value="{{ $keyEvento }}">{{ $evento }}</option>
@@ -134,7 +136,6 @@
                                 </td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="cuentab"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
-                                <td></td>
                                 <td></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="reportadob"/></td>
                                 <td></td>
@@ -145,6 +146,9 @@
                         </tbody>
                     </table>
                 </div>
+                <input class="hidden" type="text" name="estadob" value="{{ $selectEstado }}"/>
+                <input class="hidden" type="text" name="departamentob" value="{{ $selectDepartamento }}"/>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -193,6 +197,14 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal Comentarios --}}
+    <div class="modal modal-danger fade" aria-hidden="true" role="dialog" id="modalComentarios" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
 <script type="text/javascript">
@@ -200,6 +212,7 @@
     modalAjax("modalEliminar","modalEliminar","modal-content");
     modalAjax("modalEstado","modalEstado","modal-content");
     modalAjax("modalEditar","modalEditar","modal-content");
+    modalAjax("modalComentarios","modalComentarios","modal-content");
     $('.selector').select2();
 
     $('.selectDepartamento').on('change', function () {
@@ -213,6 +226,10 @@
     var departamento = '{{ $selectDepartamento }}';
     var estado = '{{ $selectEstado }}';
     $(function () {
+        $('#tablaNovedades').on('init.dt', function() {
+            $(".exportBoton").attr('name','btnExportBoton');
+        });
+
         var table = $('#tablaNovedades').DataTable({
             'paging': true,
             'lengthChange': true,
@@ -221,11 +238,83 @@
             'info': true,
             'autoWidth': true,
             'mark': "true",
-            'dom': 'lrtip',
+            'dom': 'lBrtip',
             "stateSave": false,
             "pageLength": 25,
             processing: true,
             serverSide: true,
+            'buttons': [
+                {
+                    text: '<i class="fa fa-file-excel text-success fa-lg"></i>',
+                    className: 'border border-success pull-right exportBoton',
+                    titleAttr: 'Exportar en excel',
+                    action: function ( e, dt, node, config ) {
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "progressBar": true,
+                        };
+                        toastr.info('No cierre la ventana actual hasta que termine el proceso','Generando archivo', { timeOut: 90000 });
+                        $(".exportBoton").attr('disabled',true);
+                        $(".exportBoton").addClass('cursor-wait');
+                        $(".exportBoton").attr('title','Espere un momento');
+                        $("#tipoExport").val('excel');
+                        var registerForm = $("#formExport");
+                        var formData = registerForm.serialize();
+                        $.ajax({
+                            url: "{{route('novedades.export')}}",
+                            type:'POST',
+                            data:formData,
+                            xhrFields: {
+                                responseType: 'blob'
+                            },
+                            success:function(response) {
+                                window.toastr.clear();
+                                if(response){
+                                    let date = new Date()
+                                    let day = date.getDate()
+                                    let month = date.getMonth() + 1
+                                    let year = date.getFullYear()
+                                    var fecha = '';
+                                    var nameModulo = "novedades";
+                                    var langUsuario = "{!! App::getLocale() !!}";
+
+                                    day = day < 10 ? `0${day}` : `${day}`;
+                                    month = month < 10 ? `0${month}` : `${month}`;
+                                    if(langUsuario == 'es'){
+                                        fecha = `${day}-${month}-${year}`;
+                                    }else{
+                                        fecha = `${month}-${day}-${year}`;
+                                    }
+
+                                    var a = document.createElement('a');
+                                    var url = window.URL.createObjectURL(response);
+                                    a.href = url;
+                                    a.download = nameModulo+'_'+fecha+'.xlsx';
+                                    document.body.append(a);
+                                    a.click();
+                                    a.remove();
+                                    window.URL.revokeObjectURL(url);
+                                }
+                            },
+                            error: function(data){
+                                window.toastr.clear();
+                                if(data.status == 202){
+                                    window.location.reload();
+                                }
+                                if(data.status == 201){
+                                    toastr.warning( '{!! trans("invent.records_available_export") !!}','{!! trans("invent.no_data") !!}');
+                                }
+                                setTimeout( function(){
+                                    $(".exportBoton").attr('disabled',false);
+                                    $(".exportBoton").attr('title','{!! trans("invent.export_to_excel") !!}');
+                                    $(".exportBoton").removeClass('cursor-wait');
+                                },2000);
+                            }
+                        });
+
+                    }
+                },
+            ],
             "columnDefs": [{
                 "orderable": false,
                 "targets": ["_all"]
@@ -249,7 +338,6 @@
                 {"data": "cuentaMatricula"},
                 {"data": "regional"},
                 {"data": "departamento"},
-                {"data": "comentarios", "class": "text-sm"},
                 {"data": "reportado"},
                 {"data": "estado"},
                 @if (permisoAdministrador())

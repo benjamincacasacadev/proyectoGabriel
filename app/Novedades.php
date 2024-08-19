@@ -28,7 +28,15 @@ class Novedades extends Model
     // =====================================================================
     //                          FUNCIONES
     // =====================================================================
+    public function getCod(){
 
+        $comentariosHTML =
+        '<a class="btn btn-outline-info btn-sm" rel="modalComentarios" href="/novedades/modalComentarios/'.code($this->id).'" title="Ver comentarios">
+            <i class="fa fa-comment-dots"></i>
+        </a>';
+
+        return '<b>'.$this->cod.'</b><br>'.$comentariosHTML;
+    }
 
     public function infoFecha(){
         $fecha = Carbon::parse($this->fecha_novedad);
@@ -58,10 +66,10 @@ class Novedades extends Model
         return $html ? $textColor : $ambito;
     }
 
-    public function nameEvento(){
+    public function nameEvento($html = true){
         $lista = listaEventos();
         // Si el evento es activacion de alarma
-        if($this->evento == '1'){
+        if($this->evento == '1' && $html){
             $nameEvento = $lista[$this->evento] ?? '-';
             $tooltipContent = '<b>Datos de alarma</b>';
             $tooltipContent .= '<br><b>Zona: </b>'.$this->zona_alarma;
@@ -73,12 +81,14 @@ class Novedades extends Model
         return $lista[$this->evento] ?? '-';
     }
 
-    public function getCuentaMatricula(){
+    public function getCuentaMatricula($html = true){
         if(isset($this->contacto_cuenta_id)){
-            return $this->contacto->cuenta->getCodLink();
+            $cuenta = $this->contacto->cuenta;
+            return $html ? $cuenta->getCodLink() : $cuenta->cod;
         }
         if(isset($this->conductor_vehiculo_id)){
-            return $this->conductor->vehiculo->getCodLink();
+            $vehiculo = $this->conductor->vehiculo;
+            return $html ? $vehiculo->getCodLink() : $vehiculo->matricula;
         }
     }
 
@@ -136,7 +146,7 @@ class Novedades extends Model
             <i class="fa fa-trash-alt"></i>
         </a>';
 
-        return $editarHTML.'&nbsp;'.$eliminarHTML;
+        return $editarHTML.' '.$eliminarHTML;
     }
 
     // ==========================================================================

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cuentas;
+use App\Exports\NovedadesExport;
 use App\Novedades;
 use App\Regionales;
 use App\User;
@@ -11,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 use Flasher\Prime\FlasherInterface;
+use Maatwebsite\Excel\Facades\Excel;
 class NovedadesController extends Controller
 {
     public function index(Request $request){
@@ -52,7 +54,7 @@ class NovedadesController extends Controller
 
         $data = array();
         foreach ($novedades as $novedad){
-            $nestedData['cod'] = $novedad->cod;
+            $nestedData['cod'] = $novedad->getCod();
             $nestedData['fecha'] = $novedad->infoFecha();
             $nestedData['operador'] = $novedad->operador->fullName;
             $nestedData['ambito'] = $novedad->nameAmbito(true);
@@ -60,7 +62,6 @@ class NovedadesController extends Controller
             $nestedData['cuentaMatricula'] = $novedad->getCuentaMatricula();
             $nestedData['regional'] = $novedad->getRegional();
             $nestedData['departamento'] = $novedad->getDepartamento();
-            $nestedData['comentarios'] = $novedad->getComentarios();
             $nestedData['reportado'] = $novedad->reportado->fullName;
             $nestedData['estado'] = $novedad->getEstadoHTML();
             $nestedData['operations'] = $novedad->getOperacionesHTML();
@@ -324,5 +325,47 @@ class NovedadesController extends Controller
         ];
 
         return $request->validate($reglasGeneralArray, [], $aliasArray);
+    }
+
+    public function modalComentarios($id){
+        $novedad = Novedades::findOrFail(decode($id));
+        return view('novedades.modalComentarios', compact('novedad'));
+    }
+
+    public function export(Request $request){
+
+        $codb = $request->codb;
+        $fechab = $request->fechab;
+        $operadorb = $request->operadorb;
+        $operadorb = $operadorb != "" ? decode($operadorb) : '';
+        $ambitob = $request->ambitob;
+        $eventob = $request->eventob;
+        $cuentab = $request->cuentab;
+        $regionalb = $request->regionalb;
+        $reportadob = $request->reportadob;
+        $reportadob = $reportadob != "" ? decode($reportadob) : '';
+        $estadob = $request->estadob;
+        $departamentob = $request->departamentob;
+
+        $novedades = Novedades::
+        Cod($codb)
+        ->Fecha($fechab)
+        ->Operador($operadorb)
+        ->Ambito($ambitob)
+        ->Evento($eventob)
+        ->CuentaMatricula($cuentab)
+        ->Regional($regionalb)
+        ->Reportado($reportadob)
+        ->Estado($estadob)
+        ->Departamento($departamentob)
+        ->orderBy('cod','desc')->get();
+
+        if($novedades->count() == 0){
+            return  \Response::json(['success' => '3'], 201);
+        }
+
+        libxml_use_internal_errors(true);
+        return Excel::download((new NovedadesExport())->parametros($novedades),'novedades_'.date("d-m-Y").'.xlsx');
+
     }
 }

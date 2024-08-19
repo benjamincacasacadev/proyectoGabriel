@@ -118,6 +118,8 @@ Route::get('/novedades/modalDelete/{id}', 'NovedadesController@modalDelete')->na
 Route::post('/novedades/delete/{id}','NovedadesController@destroy')->name('novedades.destroy');
 Route::get('/novedades/modalEstado/{id}', 'NovedadesController@modalEstado')->name('novedades.statemodal');
 Route::post('/novedades/estado/{id}', 'NovedadesController@changeEstado')->name('novedades.cambioEstado');
+Route::post('/novedades/export', 'NovedadesController@export')->name('novedades.export');
+Route::get('/novedades/modalComentarios/{id}', 'NovedadesController@modalComentarios')->name('novedades.comentariosmodal');
 
 Route::get('/createClientsX', function () {
     abort(403);
