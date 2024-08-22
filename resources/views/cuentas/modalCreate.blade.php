@@ -2,11 +2,24 @@
 <div class="row">
     {!! datosRegistro('create') !!}
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="form-group">
             <label class="col-form-label" id="nombre--label">* Nombre de cuenta</label> <br>
             <input class="form-control" name="nombre" type="text" placeholder="Nombre de cuenta">
             <span id="nombre-error" class="text-red"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+        <div class="" id="cliente-sel2">
+            <label id="cliente--label">* Cliente</label>
+            <select name="cliente" class="form-control form-select selector-modal" style="width: 100%">
+                <option value="">Seleccione una opción</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                @endforeach
+            </select>
+            <span id="cliente-error" class="text-red"></span>
         </div>
     </div>
 
@@ -84,6 +97,6 @@
         $(".divInfoDepartamento").html(info);
     });
 
-    var campos = ['nombre','regional'];
+    var campos = ['cliente','nombre','regional'];
     ValidateAjax("formCrearCuenta",campos,"botonGuardar","{{route('cuentas.store')}}","POST","/cuentas");
 </script>

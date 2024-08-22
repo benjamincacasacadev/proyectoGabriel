@@ -10,11 +10,30 @@
     <div class="row">
         {!! datosRegistro('edit') !!}
 
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="col-form-label" id="nombreedit--label">* Nombre de cuenta</label> <br>
                 <input class="form-control" name="nombreedit" type="text" placeholder="Nombre de cuenta" value="{{ $cuenta->nombre_cuenta }}">
                 <span id="nombreedit-error" class="text-red"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <div class="" id="clienteedit-sel2">
+                <label id="clienteedit--label">* Cliente</label>
+                <select name="clienteedit" class="form-control form-select selector-modal-edit" style="width: 100%">
+                    <option value="">Seleccione una opción</option>
+                    @foreach ($clientes as $cliente)
+                        @php
+                            $isSelected = '';
+                            if($cliente->id == $cuenta->cliente_id){
+                                $isSelected = 'selected';
+                            }
+                        @endphp
+                        <option value="{{ $cliente->id }}" {{ $isSelected }}>{{ $cliente->nombre }}</option>
+                    @endforeach
+                </select>
+                <span id="clienteedit-error" class="text-red"></span>
             </div>
         </div>
 
@@ -113,6 +132,6 @@
         $(".divInfoDepartamentoEdit").html(info);
     });
 
-    var campos = ['nombreedit','regionaledit'];
+    var campos = ['nombreedit','clienteedit','regionaledit'];
     ValidateAjax("formEditarCuenta",campos,"botonEditar","{{ route('cuentas.update',code($cuenta->id) )}}","POST","/cuentas");
 </script>

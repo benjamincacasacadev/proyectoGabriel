@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clientes;
 use App\ContactosCuentas;
 use App\Cuentas;
 use App\Regionales;
@@ -66,7 +67,8 @@ class CuentasController extends Controller
     public function modalCreate(){
         canPassAdminJefe();
         $regionales = Regionales::where('estado', 1)->orderBy('nombre_regional')->get();
-        return view('cuentas.modalCreate', compact('regionales'));
+        $clientes = Clientes::where('estado', 1)->orderBy('nombre')->get();
+        return view('cuentas.modalCreate', compact('regionales','clientes'));
     }
 
     public function store(Request $request, FlasherInterface $flasher) {
@@ -83,6 +85,7 @@ class CuentasController extends Controller
         $cuenta->cod = $cod;
         $cuenta->nombre_cuenta = $request->nombre;
         $cuenta->regional_id = $request->regional;
+        $cuenta->cliente_id = $request->cliente;
         $cuenta->estado = 1;
         $cuenta->save();
 
@@ -94,7 +97,8 @@ class CuentasController extends Controller
         canPassAdminJefe();
         $cuenta = Cuentas::findOrFail(decode($id));
         $regionales = Regionales::where('estado', 1)->orderBy('nombre_regional')->get();
-        return view('cuentas.modalEdit', compact('cuenta','regionales'));
+        $clientes = Clientes::where('estado', 1)->orderBy('nombre')->get();
+        return view('cuentas.modalEdit', compact('cuenta','regionales','clientes'));
     }
 
     public function update(Request $request, FlasherInterface $flasher, $id){
@@ -114,6 +118,7 @@ class CuentasController extends Controller
 
         $cuenta->nombre_cuenta = $request->nombreedit;
         $cuenta->regional_id = $request->regionaledit;
+        $cuenta->cliente_id = $request->clienteedit;
         $cuenta->update();
 
         $flasher->addFlash('info', 'Modificada con éxito', 'Cuenta '.$cuenta->nombre_cuenta);
@@ -158,16 +163,19 @@ class CuentasController extends Controller
         $edit = $id != '' ? 'edit' : '';
 
         $nombre = 'nombre'.$edit;
+        $cliente = 'cliente'.$edit;
         $regional = 'regional'.$edit;
 
         $reglasArray = [
             $nombre => 'bail|required|min:2|max:100',
             $regional => 'required',
+            $cliente => 'required',
         ];
 
         $aliasArray = [
             $nombre => '<b>Nombre de cuenta</b>',
             $regional => '<b>Departamento</b>',
+            $cliente => '<b>Cliente</b>',
         ];
 
         return $request->validate($reglasArray, [], $aliasArray);
