@@ -1,4 +1,4 @@
-@extends ('layouts.admin', ['title_template' => "GABRIEL"])
+@extends ('layouts.admin', ['title_template' => "Inicio"])
 @section('extracss')
 <style>
     .highcharts-figure, .highcharts-data-table table {

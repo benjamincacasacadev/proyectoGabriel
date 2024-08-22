@@ -48,6 +48,10 @@
     .select2-container{
         width: 100% !important;
     }
+
+    .blue-image{
+        filter: invert(32%) sepia(44%) saturate(1344%) hue-rotate(192deg) brightness(91%) contrast(91%);
+    }
 </style>
 
 <style>

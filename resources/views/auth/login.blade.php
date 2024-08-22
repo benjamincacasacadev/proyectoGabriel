@@ -127,7 +127,7 @@
                                 <form id="loginsubmit" method="POST" action="{{ route('login') }}" style="border-radius: 30px" onsubmit="btnLogin.disabled = true; return true;">
                                     @csrf
                                     <div class="text-center" style="margin-top: 2rem !important">
-                                        <img src="{{asset('logo.png')}}" style="height: 6rem !important;"> <br><br>
+                                        <img src="{{asset('logo2.png')}}?1" style="height: 6rem !important; filter: invert(32%) sepia(44%) saturate(1344%) hue-rotate(192deg) brightness(91%) contrast(91%);"> <br><br>
                                         <b style="font-size:25px; font-weight-bolder">Sistema de control de novedades</b>
                                     </div>
                                     <div class="card-body">
@@ -217,7 +217,7 @@
                                 <form id="formEnviarPass" method="POST" action="{{ route('password.email') }}" onsubmit="enviar.disabled = true; return true;">
                                     @csrf
                                     <div class="text-center mt-3 mb-3">
-                                        <img src="{{asset('logo.png')}}" style="height: 8rem !important;" >
+                                        <img src="{{asset('logo.png')}}?1" style="height: 8rem !important;" >
                                     </div>
                                     @if ($msg==0)
                                         <div class="card-body">

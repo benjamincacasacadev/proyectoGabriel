@@ -1,6 +1,8 @@
 <aside class="menu-sidebar2">
-    <div class="logo">
-        <img src="{{ asset('logo-white.png') }}" alt="Cool Admin" />
+    <div class="logo text-center">
+        <center>
+        <img src="{{ asset('logo2.png') }}" alt="Cool Admin" class="w-75" />
+    </center>
     </div>
     <div class="menu-sidebar2__content js-scrollbar1">
         <div class="account2">

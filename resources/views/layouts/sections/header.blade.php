@@ -4,9 +4,9 @@
         <div class="container-fluid">
             <div class="header-wrap2">
                 <div class="logo d-block d-lg-none">
-                    <a href="#">
-                        <img src="{{ asset('logo-white.png') }}" class="w-50" alt="CoolAdmin" />
-                    </a>
+                    <center>
+                        <img src="{{ asset('logo2.png') }}" class="w-50" alt="CoolAdmin" />
+                    </center>
                 </div>
                 <div class="header-button2">
                     <div class="header-button-item">
@@ -27,7 +27,7 @@
 <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
     <div class="logo">
         <a href="#">
-            <img src="{{ asset('logo-white.png') }}" alt="Cool Admin" />
+            <img src="{{ asset('logo2.png') }}" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar2__content js-scrollbar2">
