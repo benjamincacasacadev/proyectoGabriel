@@ -50,7 +50,9 @@
 </div>
 
 @endsection
-
+@php
+    $selectEventos = isset($_GET['selectEventos']) ? $_GET['selectEventos'] : '';
+@endphp
 @section ('contenido')
 <div class="row">
     <div class="col-12">
@@ -130,7 +132,13 @@
                                     <select class="selector" name="eventob">
                                         <option value="" selected>Todos</option>
                                         @foreach (listaEventos() as $keyEvento => $evento)
-                                            <option value="{{ $keyEvento }}">{{ $evento }}</option>
+                                            @php
+                                                $selected = '';
+                                                if($selectEventos == $keyEvento){
+                                                    $selected = 'selected';
+                                                }
+                                            @endphp
+                                            <option value="{{ $keyEvento }}" {{ $selected }}>{{ $keyEvento}} - {{ $evento }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -353,7 +361,10 @@
                 });
             }
         });
-
+        // FILTRAR DESDE EL INICIO
+        @if($selectEventos != '')
+            table.column(4).search('{{$selectEventos}}').draw();
+        @endif
         // BUSCAR Filtros de DataTable
         filterInputDT(table);
     });

@@ -364,14 +364,17 @@ function listaEventos(){
     $ambitos = [
         '1' => 'Activación de alarma',
         '2' => 'Movimiento fuera de horario',
-        '3' => 'Cierre remoto',
-        '4' => 'Asignación de llaves',
-        '5' => 'Control remoto de vehículo',
-        '6' => 'Movimiento de vehículo fuera de horario',
+        '3' => 'Apertura remota',
+        '4' => 'Cierre remoto',
+        '5' => 'Asignación de llaves',
+        '6' => 'Control remoto de vehículo',
+        '7' => 'Salida de vehículo fuera de horario',
+        '8' => 'Pernocte diferente',
+        '9' => 'Vehiculo en taller de mantenimiento',
+        '10' => 'Vehiculo sin comunicación',
     ];
 
     asort($ambitos);
-
     return $ambitos;
 }
 

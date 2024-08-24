@@ -3190,6 +3190,42 @@ section {
     background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
 }
 
+.overview-item--c5 {
+    background-image: -moz-linear-gradient(90deg, #f953c6 0%, #b91d73 100%);
+    background-image: -webkit-linear-gradient(90deg, #f953c6 0%, #b91d73 100%);
+    background-image: -ms-linear-gradient(90deg, #f953c6 0%, #b91d73 100%);
+}
+
+.overview-item--c6 {
+    background-image: -moz-linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+    background-image: -webkit-linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+    background-image: -ms-linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+}
+
+.overview-item--c7 {
+    background-image: -moz-linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+    background-image: -webkit-linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+    background-image: -ms-linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+}
+
+.overview-item--c8 {
+    background-image: -moz-linear-gradient(90deg, #02aab0 0%, #00cdac 100%);
+    background-image: -webkit-linear-gradient(90deg, #02aab0 0%, #00cdac 100%);
+    background-image: -ms-linear-gradient(90deg, #02aab0 0%, #00cdac 100%);
+}
+
+.overview-item--c9 {
+    background-image: -moz-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
+    background-image: -webkit-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
+    background-image: -ms-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
+}
+
+.overview-item--c10 {
+    background-image: -moz-linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
+    background-image: -webkit-linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
+    background-image: -ms-linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
+}
+
 .overview-box .icon {
     display: inline-block;
     vertical-align: top;
