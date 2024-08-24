@@ -361,7 +361,7 @@ function listaAmbitos(){
 }
 
 function listaEventos(){
-    $ambitos = [
+    $eventos = [
         '1' => 'Activación de alarma',
         '2' => 'Movimiento fuera de horario',
         '3' => 'Apertura remota',
@@ -374,8 +374,8 @@ function listaEventos(){
         '10' => 'Vehiculo sin comunicación',
     ];
 
-    asort($ambitos);
-    return $ambitos;
+    asort($eventos);
+    return $eventos;
 }
 
 

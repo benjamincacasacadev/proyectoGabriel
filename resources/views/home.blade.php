@@ -41,9 +41,9 @@
 @section('contenidoHeader')
 <div class="overview-wrap">
     <h2 class="title-1">Bienvenido {{ userFullName( auth()->user()->id )}}</h2>
-    <button class="au-btn au-btn-icon au-btn--blue text-right">
-        <i class="zmdi zmdi-plus"></i>add item
-    </button>
+    <a class="au-btn au-btn-icon au-btn--blue text-right" href="/novedades?selectEstado=S">
+        Novedades pendientes de cierre
+    </a>
 </div>
 @endsection
 @section('contenido')
@@ -202,7 +202,11 @@
                         <span>Novedades</span>
                     </div>
                 </div>
-
+                {{-- <div class="chart-info-right">
+                        <a class="au-btn au-btn-icon au-btn--blue text-right" href="/novedades?selectEstado=S">
+                            Novedades pendientes de cierre
+                        </a>
+                </div> --}}
             </div>
             <div class="recent-report__chart">
                 <canvas id="recent-rep2-chart"></canvas>
@@ -213,36 +217,35 @@
     <div class="col-xl-4">
         <!-- TASK PROGRESS-->
         <div class="task-progress">
-            <h3 class="title-3">task progress</h3>
+            <h2 class="title-2">Ambitos</h2>
+            <b >Total de registros: {{ $ambitos->total }}</b>
             <div class="au-skill-container">
+                @php
+                    $total = $ambitos->total ?? 0;
+                    $porcFisica = $ambitos->fisica/$total * 100;
+                    $porcElectronica = $ambitos->electronica/$total * 100;
+                    $porcVehiculos = $ambitos->vehiculos/$total * 100;
+                @endphp
                 <div class="au-progress">
-                    <span class="au-progress__title">Web Design</span>
+                    <span class="au-progress__title">Seguridad fisica ({{$ambitos->fisica}}) </span><br><br>
                     <div class="au-progress__bar">
-                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="90">
+                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="{{ $porcFisica }}">
                             <span class="au-progress__value js-value"></span>
                         </div>
                     </div>
                 </div>
                 <div class="au-progress">
-                    <span class="au-progress__title">HTML5/CSS3</span>
+                    <span class="au-progress__title">Seguridad electronica ({{$ambitos->electronica}})</span><br><br>
                     <div class="au-progress__bar">
-                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="85">
+                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="{{ $porcElectronica }}">
                             <span class="au-progress__value js-value"></span>
                         </div>
                     </div>
                 </div>
                 <div class="au-progress">
-                    <span class="au-progress__title">WordPress</span>
+                    <span class="au-progress__title">Vehiculos ({{$ambitos->vehiculos}})</span> <br><br>
                     <div class="au-progress__bar">
-                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="95">
-                            <span class="au-progress__value js-value"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="au-progress">
-                    <span class="au-progress__title">Support</span>
-                    <div class="au-progress__bar">
-                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="95">
+                        <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="{{ $porcVehiculos }}">
                             <span class="au-progress__value js-value"></span>
                         </div>
                     </div>

@@ -53,8 +53,14 @@ class HomeController extends Controller
         foreach ($fechasGraf as $fecha) {
             $fechaE .= '"'.$fecha.'",';
         }
-        // dd($cantE);
+
+        // AMBITOS
+        $ambitos = Novedades::selectRaw('COUNT(id) as total,
+        sum(case when ambito = "1" then 1 else 0 end) AS fisica,
+        sum(case when ambito = "2" then 1 else 0 end) AS electronica,
+        sum(case when ambito = "3" then 1 else 0 end) AS vehiculos')
+        ->first();
         Session::put('item','0.');
-        return view('home',compact('novedad','fechaE','cantE'));
+        return view('home',compact('novedad','ambitos','fechaE','cantE'));
     }
 }
