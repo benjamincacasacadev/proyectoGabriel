@@ -302,6 +302,9 @@
                                     a.click();
                                     a.remove();
                                     window.URL.revokeObjectURL(url);
+                                    $(".exportBoton").attr('disabled',false);
+                                    $(".exportBoton").removeClass('cursor-wait');
+                                    $(".exportBoton").attr('title','Exportar en excel');
                                 }
                             },
                             error: function(data){

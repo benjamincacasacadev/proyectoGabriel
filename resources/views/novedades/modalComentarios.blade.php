@@ -12,6 +12,7 @@
             @if (isset($novedad->contacto_cuenta_id))
                 <b>Cliente: </b> {{ $novedad->contacto->cuenta->cliente->nombre }}
                 <br><b>Cuenta: </b> {{ $novedad->contacto->cuenta->nombre_cuenta }}
+                <br><b>Asignación: </b> {{ $novedad->contacto->getInfoAsignacion() }}
                 <br><b>Contacto: </b> {{ $novedad->contacto->nombre_contacto }}
                 <br><b>Cargo: </b> {{ $novedad->contacto->cargo_contacto }}
                 <br><b>Celular: </b> {{ $novedad->contacto->celular_contacto }}

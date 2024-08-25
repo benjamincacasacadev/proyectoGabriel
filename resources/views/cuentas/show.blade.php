@@ -7,6 +7,21 @@
     table#tablaContactos td{
         font-size: 13px;
     }
+    .table-earning-large thead th {
+        background: #333;
+        font-size: 16px;
+        color: #fff;
+        vertical-align: middle;
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 1;
+        padding: 20px 0px 20px 0px;
+    }
+
+    .table-earning-large tbody td {
+        color: #808080;
+        padding: 20px 5px;
+    }
 </style>
 @endsection
 
@@ -34,7 +49,7 @@
                         </strong>
                     </div>
                     <div class="card-body">
-                        <table class="table table-borderless table-earning">
+                        <table class="table table-borderless table-earning-large">
                             <tr>
                                 <th class="font-weight-bold">Nombre de cuenta</th>
                                 <td>{!! $cuenta->nombre_cuenta !!}</td>
@@ -75,12 +90,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
-                            <table class="table table-vcenter table-center table-vcenter table-hover table-earning text-center" id="tablaContactos">
+                            <table class="table table-vcenter table-center table-vcenter table-hover table-earning-large text-center" id="tablaContactos">
                                 <thead class="font-weight-bold ">
                                     <tr>
-                                        <th width="20%">NOMBRE Y CARGO</th>
-                                        <th width="20%">CELULAR Y EMAIL</th>
-                                        <th width="3%">OPC.</th>
+                                        <th width="30%">NOMBRE Y CARGO</th>
+                                        <th width="20%">ASIGNACIÓN</th>
+                                        <th width="30%">CELULAR Y EMAIL</th>
+                                        <th width="10%">OPC.</th>
                                     </tr>
                                 </thead>
 
@@ -88,6 +104,7 @@
                                     @forelse ($contactos as $contacto)
                                         <tr>
                                             <td>{!! $contacto->nombre_contacto.'<br><b>'.$contacto->cargo_contacto.'</b>' !!}</td>
+                                            <td>{{ $contacto->getInfoAsignacion() }}</td>
                                             <td class="text-center">
                                                 {!! $contacto->celular_contacto.'<br>'.$contacto->email_contacto !!}
                                             </td>

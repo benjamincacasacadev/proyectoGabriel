@@ -10,12 +10,25 @@
         </div>
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label id="cargo--label">* Cargo</label>
             <input class="form-control" type="text" name="cargo" placeholder="Cargo">
             <span id="cargo-error" class="text-red"></span>
         </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+        <div class="" id="asignacion-sel2">
+            <label id="asignacion--label">* Asignación</label>
+            <select name="asignacion" class="form-control form-select selector-modal" style="width: 100%">
+                <option value="">Seleccione una opción</option>
+                <option value="L">Llave</option>
+                <option value="C">Clave</option>
+            </select>
+            <span id="asignacion-error" class="text-red"></span>
+        </div>
+        <div class="divInfoDepartamento" style="display:none"></div>
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -50,6 +63,6 @@
         $(".select2-selection--single").addClass('form-selectcont');
     });
 
-    var campos = ['nombreContacto', 'cargo', 'celular', 'email', 'cuentaId'];
+    var campos = ['nombreContacto', 'cargo', 'asignacion', 'celular', 'email', 'cuentaId'];
     ValidateAjax("formCrearContacto",campos,"botonGuardar","{{route('contactos.store')}}","POST","/cuentas/show/{{ $cuentaId }}");
 </script>

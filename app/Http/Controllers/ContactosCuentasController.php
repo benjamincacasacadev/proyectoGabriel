@@ -21,6 +21,7 @@ class ContactosCuentasController extends Controller
         $contacto->cargo_contacto = $request->cargo;
         $contacto->celular_contacto = $request->celular;
         $contacto->email_contacto = $request->email;
+        $contacto->asignacion = $request->asignacion;
         $contacto->save();
 
         $flasher->addFlash('success', 'Creado con éxito', 'Contacto '.$contacto->nombre_contacto);
@@ -40,6 +41,7 @@ class ContactosCuentasController extends Controller
         $contacto->cargo_contacto = $request->cargoedit;
         $contacto->celular_contacto = $request->celularedit;
         $contacto->email_contacto = $request->emailedit;
+        $contacto->asignacion = $request->asignacionedit;
         $contacto->update();
 
         $flasher->addFlash('info', 'Modificado con éxito', 'Contacto '.$contacto->nombre_contacto);
@@ -73,12 +75,14 @@ class ContactosCuentasController extends Controller
         $cargo = 'cargo'.$edit;
         $celular = 'celular'.$edit;
         $email = 'email'.$edit;
+        $asignacion = 'asignacion'.$edit;
 
         $validateArray = [
             $nombreContacto => 'bail|required|min:3|max:100',
             $cargo => 'bail|required|min:3|max:100',
             $celular => 'bail|required|min:3|max:20',
             $email => 'bail|required|max:20|email:filter',
+            $asignacion => 'required',
         ];
 
         $aliasArray = [
@@ -86,6 +90,7 @@ class ContactosCuentasController extends Controller
             $cargo => '<b>Cargo</b>',
             $celular => '<b>Celular</b>',
             $email => '<b>Email</b>',
+            $asignacion => '<b>Asignación</b>',
         ];
 
         return $request->validate($validateArray, [], $aliasArray);

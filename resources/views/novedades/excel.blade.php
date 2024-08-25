@@ -42,6 +42,7 @@
                     if (isset($novedad->contacto_cuenta_id)){
                         $comentariosHTML .= 'CLIENTE: '. $novedad->contacto->cuenta->cliente->nombre;
                         $comentariosHTML .= '<br>CONTACTO: '. $novedad->contacto->nombre_contacto;
+                        $comentariosHTML .= '<br>ASIGNACIÓN: '. $novedad->contacto->getInfoAsignacion();
                         $comentariosHTML .= '<br>CARGO: '. $novedad->contacto->cargo_contacto;
                         $comentariosHTML .= '<br>CELULAR: '. $novedad->contacto->celular_contacto;
                         $comentariosHTML .= '<br>EMAIL: '. $novedad->contacto->email_contacto;

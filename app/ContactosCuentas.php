@@ -27,18 +27,29 @@ class ContactosCuentas extends Model
             <i class="fa fa-trash-alt"></i>
         </a>';
 
-        return $editarHTML.'&nbsp;'.$eliminarHTML;
+        return $editarHTML.' '.$eliminarHTML;
     }
 
     public function getInfoContactos(){
         $cargo = "<b>Cargo: </b>".$this->cargo_contacto.'<br>';
         $celular = "<b>Celular: </b>".$this->celular_contacto.'<br>';
-        $email = "<b>Email: </b>".$this->email_contacto;
+        $email = "<b>Email: </b>".$this->email_contacto.'<br>';
+        $asignacion = "<b>Asignación: </b>".$this->getInfoAsignacion();
 
         return
         '<div class="text-sm mt-2">'
-            .$cargo.$celular.$email.
+            .$cargo.$celular.$email.$asignacion.
         '</div>';
+    }
+
+    public function getInfoAsignacion(){
+        if($this->asignacion == 'L'){
+            return 'Llave';
+        }
+        if($this->asignacion == 'C'){
+            return 'Clave';
+        }
+        return '-';
     }
 
     // ==========================================================================
