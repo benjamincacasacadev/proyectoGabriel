@@ -18,11 +18,23 @@
             </div>
         </div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label id="cargoedit--label">* Cargo</label>
                 <input class="form-control" type="text" name="cargoedit" placeholder="Cargo" value="{{ $contacto->cargo_contacto }}">
                 <span id="cargoedit-error" class="text-red"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <div class="" id="asignacionedit-sel2">
+                <label id="asignacionedit--label">* Asignación</label>
+                <select name="asignacionedit" class="form-control form-select selector-modal" style="width: 100%">
+                    <option value="">Seleccione una opción</option>
+                    <option value="L" @if($contacto->asignacion == 'L') selected @endif>Llave</option>
+                    <option value="C" @if($contacto->asignacion == 'C') selected @endif>Clave</option>
+                </select>
+                <span id="asignacionedit-error" class="text-red"></span>
             </div>
         </div>
 
@@ -51,6 +63,6 @@
 </div>
 
 <script>
-    var campos = ['nombreContactoedit', 'cargoedit', 'celularedit', 'emailedit'];
+    var campos = ['nombreContactoedit', 'cargoedit','asignacionedit','celularedit', 'emailedit'];
     ValidateAjax("formEditarCuenta",campos,"botonEditar","{{ route('contactos.update',code($contacto->id) )}}","POST","/cuentas/show/{{ code($contacto->cuenta_id) }}");
 </script>

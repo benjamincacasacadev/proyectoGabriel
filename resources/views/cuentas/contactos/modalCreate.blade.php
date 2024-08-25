@@ -28,7 +28,6 @@
             </select>
             <span id="asignacion-error" class="text-red"></span>
         </div>
-        <div class="divInfoDepartamento" style="display:none"></div>
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">

@@ -42,7 +42,7 @@
 <div class="overview-wrap">
     <h2 class="title-1">Bienvenido {{ userFullName( auth()->user()->id )}}</h2>
     <a class="au-btn au-btn-icon au-btn--blue text-right" href="/novedades?selectEstado=S">
-        Novedades pendientes de cierre
+        Ver pendientes de cierre
     </a>
 </div>
 @endsection
