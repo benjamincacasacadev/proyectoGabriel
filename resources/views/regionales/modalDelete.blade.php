@@ -8,7 +8,12 @@
             </svg>
             <h6>No puede eliminar la regional <b>{{ $regional->nombre_regional }}</b> </h6>
             <div class="text-muted">
-                La regional tiene {{ $cantAsociados }} registro(s) asociados.
+                @if ($cantCuentas > 0)
+                    La regional tiene {{ $cantAsociados }} cuentas(s) asociadas.
+                @endif
+                @if ($cantVehiculos > 0)
+                    <br>La regional tiene {{ $cantAsociados }} vehículo(s) asociados.
+                @endif
             </div>
         @else
             <svg class="icon mb-2 text-danger icon-lg" style="" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ContactosCuentas;
+use App\Novedades;
 use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
 class ContactosCuentasController extends Controller
@@ -48,14 +49,14 @@ class ContactosCuentasController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $contacto = ContactosCuentas::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = Novedades::where('contacto_cuenta_id', $contacto->id)->count();
         return view('cuentas.contactos.modalDelete', compact('contacto','cantAsociados'));
     }
 
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $contacto = ContactosCuentas::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = Novedades::where('contacto_cuenta_id', $contacto->id)->count();
         if($cantAsociados > 0){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar el contacto '.$contacto->nombre_contacto);
             return redirect()->route('cuentas.show', code($contacto->cuenta_id));

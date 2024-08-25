@@ -179,14 +179,16 @@ class VehiculosController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $vehiculo = Vehiculos::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantConductores = ConductoresVehiculos::where('vehiculo_id', $vehiculo->id)->count();
+        $cantAsociados = $cantConductores;
         return view('vehiculos.modalDelete', compact('vehiculo','cantAsociados'));
     }
 
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $vehiculo = Vehiculos::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantConductores = ConductoresVehiculos::where('vehiculo_id', $vehiculo->id)->count();
+        $cantAsociados = $cantConductores;
         if($cantAsociados > 0){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar el vehículo '.$vehiculo->nombre_cuenta);
             return redirect()->route('vehiculos.index');

@@ -128,14 +128,14 @@ class CuentasController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $cuenta = Cuentas::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = ContactosCuentas::where('cuenta_id', $cuenta->id)->count();
         return view('cuentas.modalDelete', compact('cuenta','cantAsociados'));
     }
 
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $cuenta = Cuentas::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = ContactosCuentas::where('cuenta_id', $cuenta->id)->count();
         if($cantAsociados > 0){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar la cuenta '.$cuenta->nombre_cuenta);
             return redirect()->route('cuentas.index');

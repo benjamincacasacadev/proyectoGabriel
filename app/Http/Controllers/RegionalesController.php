@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cuentas;
 use App\Regionales;
+use App\Vehiculos;
 use Illuminate\Http\Request;
 use Session;
 use Flasher\Prime\FlasherInterface;
@@ -56,14 +58,18 @@ class RegionalesController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $regional = Regionales::findOrFail(decode($id));
-        $cantAsociados = 0;
-        return view('regionales.modalDelete', compact('regional', 'cantAsociados'));
+        $cantCuentas = Cuentas::where('regional_id', $regional->id)->count();
+        $cantVehiculos = Vehiculos::where('regional_id', $regional->id)->count();
+        $cantAsociados = $cantCuentas + $cantVehiculos;
+        return view('regionales.modalDelete', compact('regional', 'cantAsociados','cantCuentas','cantVehiculos'));
     }
 
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $regional = Regionales::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantCuentas = Cuentas::where('regional_id', $regional->id)->count();
+        $cantVehiculos = Vehiculos::where('regional_id', $regional->id)->count();
+        $cantAsociados = $cantCuentas + $cantVehiculos;
         if($cantAsociados > 0){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar la regional '.$regional->nombre_regional);
             return redirect()->route('regionales.index');

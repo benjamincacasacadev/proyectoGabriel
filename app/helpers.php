@@ -367,7 +367,7 @@ function listaEventos(){
         '3' => 'Apertura remota',
         '4' => 'Cierre remoto',
         '5' => 'Asignación de llaves',
-        '6' => 'Control remoto de vehículo',
+        '6' => 'Control retorno de vehículo',
         '7' => 'Salida de vehículo fuera de horario',
         '8' => 'Pernocte diferente',
         '9' => 'Vehiculo en taller de mantenimiento',

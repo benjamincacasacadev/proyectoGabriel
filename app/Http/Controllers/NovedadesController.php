@@ -204,7 +204,7 @@ class NovedadesController extends Controller
         canPassAdminJefe();
         $novedad = Novedades::findOrFail(decode($id));
         if($novedad->estado == 'C'){
-            $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar la novedad '.$novedad->cod);
+            $flasher->addFlash('warning', 'La solicitud ya esta cerrada', 'No se puede eliminar la novedad '.$novedad->cod);
             return redirect()->route('novedades.index');
         }
         $novedad->delete();

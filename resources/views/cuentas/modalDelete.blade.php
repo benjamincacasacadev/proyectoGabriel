@@ -8,7 +8,7 @@
             </svg>
             <h6>No puede eliminar la cuenta <b>{{ $cuenta->nombre_cuenta }}</b> </h6>
             <div class="text-muted">
-                La cuenta tiene {{ $cantAsociados }} registro(s) asociados.
+                La cuenta tiene {{ $cantAsociados }} contacto(s) asociados.
             </div>
         @else
             <svg class="icon mb-2 text-danger icon-lg" style="" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

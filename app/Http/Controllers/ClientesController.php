@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Validation\Rule;
 use App\Clientes;
+use App\Cuentas;
 use Session;
 class ClientesController extends Controller
 {
@@ -89,14 +90,14 @@ class ClientesController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $cliente = Clientes::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = Cuentas::where('cliente_id', $cliente->id)->count();
         return view('clientes.modalDelete', compact('cliente','cantAsociados'));
     }
 
     public function destroy(FlasherInterface $flasher, $id){
         canPassAdminJefe();
         $cliente = Clientes::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = Cuentas::where('cliente_id', $cliente->id)->count();
         if($cantAsociados > 0){
             $flasher->addFlash('warning', 'Tiene registros asociados', 'No se puede eliminar el cliente '.$cliente->nombre);
             return redirect()->route('clientes.index');

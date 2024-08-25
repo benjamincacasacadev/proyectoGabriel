@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ConductoresVehiculos;
+use App\Novedades;
 use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
 
@@ -45,7 +46,7 @@ class ConductoresVehiculosController extends Controller
     public function modalDelete($id){
         canPassAdminJefe();
         $conductor = ConductoresVehiculos::findOrFail(decode($id));
-        $cantAsociados = 0;
+        $cantAsociados = Novedades::where('conductor_vehiculo_id', $conductor->id)->count();
         return view('vehiculos.conductores.modalDelete', compact('conductor','cantAsociados'));
     }
 
