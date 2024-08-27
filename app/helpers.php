@@ -4,7 +4,7 @@ use App\User;
 use Flasher\Prime\FlasherInterface;
 use Spatie\Permission\Models\Role;
 function nameEmpresa(){
-    return "PROYECTO UAB";
+    return "C4O SEGURIDAD";
 }
 
 function userId(){

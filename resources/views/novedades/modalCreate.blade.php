@@ -19,19 +19,24 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group" id="operador-sel2">
             <label id="operador--label">* Operador</label> <br>
-            <select name="operador" class="form-control selector-modal" style="width: 100%">
-                <option value="">Seleccionar</option>
-                @foreach($operadores as $operador)
-                    @php
-                        // SELECCIONAR EL USUARIO LOGEADO POR DEFECTO
-                        $selected = '';
-                        if($operador->id == userId()){
-                            $selected = 'selected';
-                        }
-                    @endphp
-                    <option value="{{ code($operador->id) }}" {{ $selected }}> {{ $operador->fullName }} </option>
-                @endforeach
-            </select>
+            @if (permisoAdministrador())
+                <select name="operador" class="form-control selector-modal" style="width: 100%">
+                    <option value="">Seleccionar</option>
+                    @foreach($operadores as $operador)
+                        @php
+                            // SELECCIONAR EL USUARIO LOGEADO POR DEFECTO
+                            $selected = '';
+                            if($operador->id == userId()){
+                                $selected = 'selected';
+                            }
+                        @endphp
+                        <option value="{{ code($operador->id) }}" {{ $selected }}> {{ $operador->fullName }} </option>
+                    @endforeach
+                </select>
+            @else
+                <input class="form-control" type="text" value="{{ userFullName(userId()) }}" disabled>
+                <input type="text" name="operador" value="{{ code(userId()) }}" hidden>
+            @endif
             <span id="operador-error" class="text-red"></span>
         </div>
     </div>

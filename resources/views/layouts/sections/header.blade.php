@@ -36,6 +36,7 @@
                 <img src="{{ imageRouteAvatar(Auth::user()->avatar, 1) }}" alt="{{ Auth::user()->name." ".Auth::user()->ap_paterno }} " />
             </div>
             <h4 class="name text-center">{{ Auth::user()->name." ".Auth::user()->ap_paterno }}</h4>
+            <h4 class="name text-center">{{ Auth::user()->cargo }}</h4>
             <a href="/perfil_usuario" class="cursor-pointer font-weight-bold text-primary">Ver perfil de usuario</a>
         </div>
         <nav class="navbar-sidebar2">

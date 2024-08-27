@@ -41,17 +41,21 @@
         </a>
     </li>
 
-    <li class=" {{ strstr($item,'.',true) == '4' ? 'active font-weight-bold' : '' }} ">
-        <a href="/regionales">
-            <i class="fas fa-city"></i>Regionales
-        </a>
-    </li>
+    @if (permisoAdministrador())
+        <li class=" {{ strstr($item,'.',true) == '4' ? 'active font-weight-bold' : '' }} ">
+            <a href="/regionales">
+                <i class="fas fa-city"></i>Regionales
+            </a>
+        </li>
+    @endif
 
-    <li class=" {{ strstr($item,'.',true) == '5' ? 'active font-weight-bold' : '' }} ">
-        <a href="/users">
-            <i class="fas fa-user"></i>Usuarios
-        </a>
-    </li>
+    @if (permisoAdministrador())
+        <li class=" {{ strstr($item,'.',true) == '5' ? 'active font-weight-bold' : '' }} ">
+            <a href="/users">
+                <i class="fas fa-user"></i>Usuarios
+            </a>
+        </li>
+    @endif
 
 
 

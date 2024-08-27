@@ -132,7 +132,12 @@ class Novedades extends Model
     }
 
     public function getOperacionesHTML(){
-        if($this->estado == 'C'){
+
+        if(!permisoAdministrador() && $this->operador_id != userId()){
+            return '';
+        }
+
+        if(!permisoAdministrador() && $this->estado == 'C'){
             return '';
         }
 
@@ -164,11 +169,17 @@ class Novedades extends Model
         }
     }
 
-    public function scopeOperador($query, $user){
-        if ($user != ""){
-            $query->whereHas('operador', function($q) use ($user){
-                $q->where(\DB::raw("CONCAT(COALESCE(name,''), ' ', COALESCE(ap_paterno,''), ' ', COALESCE(ap_materno,''))"), 'like', "%{$user}%");
-            });
+    // public function scopeOperador($query, $user){
+    //     if ($user != ""){
+    //         $query->whereHas('operador', function($q) use ($user){
+    //             $q->where(\DB::raw("CONCAT(COALESCE(name,''), ' ', COALESCE(ap_paterno,''), ' ', COALESCE(ap_materno,''))"), 'like', "%{$user}%");
+    //         });
+    //     }
+    // }
+
+    public function scopeOperador($query, $val){
+        if ($val != ''){
+            $query->where('operador_id', decode($val));
         }
     }
 

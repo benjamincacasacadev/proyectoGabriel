@@ -26,18 +26,23 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group" id="operadoredit-sel2">
                 <label id="operadoredit--label">* Operador</label> <br>
-                <select name="operadoredit" class="form-control selector-modal-edit" style="width: 100%">
-                    <option value="">Seleccionar</option>
-                    @foreach($operadores as $operador)
-                        @php
-                            $selected = '';
-                            if($operador->id == $novedad->operador_id){
-                                $selected = 'selected';
-                            }
-                        @endphp
-                        <option value="{{ code($operador->id) }}" {{ $selected }}> {{ $operador->fullName }} </option>
-                    @endforeach
-                </select>
+                @if (permisoAdministrador())
+                    <select name="operadoredit" class="form-control selector-modal-edit" style="width: 100%">
+                        <option value="">Seleccionar</option>
+                        @foreach($operadores as $operador)
+                            @php
+                                $selected = '';
+                                if($operador->id == $novedad->operador_id){
+                                    $selected = 'selected';
+                                }
+                            @endphp
+                            <option value="{{ code($operador->id) }}" {{ $selected }}> {{ $operador->fullName }} </option>
+                        @endforeach
+                    </select>
+                @else
+                    <input class="form-control" type="text" value="{{ userFullName(userId()) }}" disabled>
+                    <input type="text" name="operadoredit" value="{{ code(userId()) }}" hidden>
+                @endif
                 <span id="operadoredit-error" class="text-red"></span>
             </div>
         </div>

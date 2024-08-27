@@ -18,9 +18,10 @@ class NovedadesController extends Controller
     public function index(Request $request){
         $selectDepartamento = $request->selectDepartamento ?? '';
         $selectEstado = $request->selectEstado ?? '';
-
+        $selectUsuario = $request->selectUsuario ?? '';
+        $operadores = User::where('active', 1)->orderBy('ap_paterno')->get();
         Session::put('item','1.');
-        return view('novedades.index', compact('selectDepartamento','selectEstado'));
+        return view('novedades.index', compact('selectDepartamento','selectEstado','selectUsuario','operadores'));
     }
 
     public function tableNovedades(Request $request){
@@ -172,11 +173,9 @@ class NovedadesController extends Controller
             $novedad->estado = 'C';
         }else{
             // Si se marca el check autorizado
-            if($request->checkAutorizado == '1'){
+            if($request->checkAutorizadoedit == '1'){
                 $novedad->nombre_autorizador = $request->autorizadoredit;
                 $novedad->estado = $request->estadoedit;
-            }else{
-                $novedad->estado = 'S';
             }
         }
 
@@ -337,7 +336,6 @@ class NovedadesController extends Controller
         $codb = $request->codb;
         $fechab = $request->fechab;
         $operadorb = $request->operadorb;
-        $operadorb = $operadorb != "" ? decode($operadorb) : '';
         $ambitob = $request->ambitob;
         $eventob = $request->eventob;
         $cuentab = $request->cuentab;

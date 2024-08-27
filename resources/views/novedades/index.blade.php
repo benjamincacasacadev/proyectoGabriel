@@ -41,17 +41,16 @@
 <div class="col">
     <div class="overview-wrap">
         <h2 class="title-1">Novedades</h2>
-        @if (permisoAdministrador())
-            <a href="/novedades/modalCreate" rel="modalCreate" title="Nueva novedad" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
-                <i class="fa fa-plus"></i> NOVEDAD
-            </a>
-        @endif
+        <a href="/novedades/modalCreate" rel="modalCreate" title="Nueva novedad" class="au-btn au-btn-icon au-btn--blue font-weight-bold">
+            <i class="fa fa-plus"></i> NOVEDAD
+        </a>
     </div>
 </div>
 
 @endsection
 @php
     $selectEventos = isset($_GET['selectEventos']) ? $_GET['selectEventos'] : '';
+    $selectUsuario = isset($_GET['selectUsuario']) ? $_GET['selectUsuario'] : '';
 @endphp
 @section ('contenido')
 <div class="row">
@@ -59,6 +58,9 @@
         <div class="card">
             <div class="card-body">
                 {!! Form::open(['route'=>'novedades.index','method'=>'GET', 'role'=>'search', 'id'=>'formFilterNovedades']) !!}
+                @if ($selectUsuario != '')
+                    <input name="selectUsuario" value="{{ $selectUsuario }}" hidden>
+                @endif
                 <div class="row mb-3 me-1">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="pull-right">
@@ -119,7 +121,14 @@
                             <tr class="filters">
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="codb"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="fechab"/></td>
-                                <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="operadorb"/></td>
+                                <td>
+                                    <select class="selector" name="operadorb">
+                                        <option value="" selected>Todos</option>
+                                        @foreach ($operadores as $operador)
+                                            <option value="{{ code($operador->id) }}" @if($selectUsuario == code($operador->id)) selected @endif>{{ $operador->fullName }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                                 <td>
                                     <select class="selector" name="ambitob">
                                         <option value="" selected>Todos</option>
@@ -230,7 +239,6 @@
         $('#formFilterNovedades').submit();
     });
 
-
     var departamento = '{{ $selectDepartamento }}';
     var estado = '{{ $selectEstado }}';
     $(function () {
@@ -252,6 +260,25 @@
             processing: true,
             serverSide: true,
             'buttons': [
+                {
+                    text: 'Reiniciar filtros',
+                    className: 'pull-right',
+                    action: function ( e, dt, node, config ) {
+                        window.location.href = '/novedades';
+                    }
+                },
+                {
+                    text: @if($selectUsuario == code(userId())) '✅&nbsp; Mis novedades' @else 'Mis novedades' @endif,
+                    className: @if($selectUsuario == code(userId())) 'font-weight-bold pull-right' @else 'pull-right' @endif,
+                    action: function ( e, dt, node, config ) {
+                        var currentUrl = window.location.href;
+                        var url = new URL(currentUrl);
+                        var selectUsuario = @if($selectUsuario != code(userId())) '{{ code(userId()) }}' @else '' @endif;
+                        url.searchParams.set('selectUsuario', selectUsuario);
+                        var newUrl = url.toString();
+                        window.location.href = newUrl;
+                    }
+                },
                 {
                     text: '<i class="fa fa-file-excel text-success fa-lg"></i>',
                     className: 'border border-success pull-right exportBoton',
@@ -313,11 +340,11 @@
                                     window.location.reload();
                                 }
                                 if(data.status == 201){
-                                    toastr.warning( '{!! trans("invent.records_available_export") !!}','{!! trans("invent.no_data") !!}');
+                                    toastr.warning( 'Sin registros disponibles para exportar','Sin datos');
                                 }
                                 setTimeout( function(){
                                     $(".exportBoton").attr('disabled',false);
-                                    $(".exportBoton").attr('title','{!! trans("invent.export_to_excel") !!}');
+                                    $(".exportBoton").attr('title','Exportar en excel');
                                     $(".exportBoton").removeClass('cursor-wait');
                                 },2000);
                             }
@@ -351,9 +378,7 @@
                 {"data": "departamento"},
                 {"data": "reportado"},
                 {"data": "estado"},
-                @if (permisoAdministrador())
-                    {"data": "operations", "class": 'whiteSpace'},
-                @endif
+                {"data": "operations", "class": 'whiteSpace'},
             ],
             "drawCallback": function () {
                 restartActionsDT();
@@ -367,6 +392,9 @@
         // FILTRAR DESDE EL INICIO
         @if($selectEventos != '')
             table.column(4).search('{{$selectEventos}}').draw();
+        @endif
+        @if($selectUsuario != '')
+            table.column(2).search('{{$selectUsuario}}').draw();
         @endif
         // BUSCAR Filtros de DataTable
         filterInputDT(table);

@@ -62,7 +62,9 @@
                                 <th width="10%">REGIONAL</th>
                                 <th width="20%">DEPARTAMENTO</th>
                                 <th width="10%">ESTADO</th>
-                                <th width="3%">OPC.</th>
+                                @if (permisoAdministrador())
+                                    <th width="3%">OPC.</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -72,7 +74,9 @@
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="nombreb"/></td>
                                 <td><input style="width: 100%;font-size:10px" class="form-control" type="text" placeholder="🔍 &nbsp;Buscar" name="regionalb"/></td>
                                 <td></td>
-                                <td></td>
+                                @if (permisoAdministrador())
+                                    <td></td>
+                                @endif
                             </tr>
                         </thead>
 
