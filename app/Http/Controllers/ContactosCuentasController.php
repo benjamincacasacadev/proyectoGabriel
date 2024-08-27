@@ -81,7 +81,7 @@ class ContactosCuentasController extends Controller
             $nombreContacto => 'bail|required|min:3|max:100',
             $cargo => 'bail|required|min:3|max:100',
             $celular => 'bail|required|min:3|max:20',
-            $email => 'bail|required|max:20|email:filter',
+            $email => 'bail|required|email:filter',
             $asignacion => 'required',
         ];
 

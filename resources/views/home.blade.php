@@ -48,7 +48,7 @@
 @endsection
 @section('contenido')
 <div class="row m-3">
-    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=1">
+    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=1&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -62,7 +62,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=2">
+    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=2&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -76,7 +76,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=3">
+    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=3&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -90,7 +90,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=4">
+    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=4&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -104,7 +104,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=5">
+    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=5&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -118,7 +118,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=6">
+    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=6&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -132,7 +132,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=7">
+    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=7&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -146,7 +146,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=8">
+    <a class="overview-item overview-item--c8 mx-1" href="/novedades?selectEventos=8&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -160,7 +160,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=9">
+    <a class="overview-item overview-item--c10 mx-1" href="/novedades?selectEventos=9&selectEstado=C">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -174,7 +174,7 @@
         </div>
     </a>
 
-    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=10">
+    <a class="overview-item overview-item--c6 mx-1" href="/novedades?selectEventos=1&selectEstado=C0">
         <div class="overview__inner">
             <div class="overview-box clearfix">
                 <div class="icon">
@@ -218,7 +218,7 @@
         <!-- TASK PROGRESS-->
         <div class="task-progress">
             <h2 class="title-2">Ambitos</h2>
-            <b >Total de registros: {{ $ambitos->total }}</b>
+            <b >Novedades cerradas: {{ $ambitos->total }}</b>
             <div class="au-skill-container">
                 @php
                     $total = $ambitos->total ?? 0;

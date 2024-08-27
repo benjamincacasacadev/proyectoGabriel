@@ -32,6 +32,7 @@ class HomeController extends Controller
         sum(case when evento = "8" then 1 else 0 end) AS pernocte_diferente,
         sum(case when evento = "9" then 1 else 0 end) AS vehiculo_taller,
         sum(case when evento = "10" then 1 else 0 end) AS vehiculo_sin_comunicacion')
+        ->where('estado','C')
         ->first();
 
         // =============================================================================================
@@ -59,6 +60,7 @@ class HomeController extends Controller
         sum(case when ambito = "1" then 1 else 0 end) AS fisica,
         sum(case when ambito = "2" then 1 else 0 end) AS electronica,
         sum(case when ambito = "3" then 1 else 0 end) AS vehiculos')
+        ->where('estado','C')
         ->first();
         Session::put('item','0.');
         return view('home',compact('novedad','ambitos','fechaE','cantE'));
